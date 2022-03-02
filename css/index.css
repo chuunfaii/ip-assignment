@@ -100,3 +100,31 @@ table {
   color: inherit !important;
   text-decoration: none !important;
 }
+
+body.modal-open-noscroll
+{
+    margin-right: 0!important;
+    overflow: hidden;
+}
+.modal-open-noscroll .navbar-fixed-top, .modal-open .navbar-fixed-bottom
+{
+    margin-right: 0!important;
+}
+
+body.modal-open-noscroll
+{
+  margin-right: 0!important;
+  overflow: hidden;
+}
+.modal-open-noscroll .navbar-default, .modal-open .navbar-default
+{
+  margin-right: 0!important;
+}
+
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
