@@ -1,4 +1,0 @@
-RewriteEngine on
-
-RewriteCond %{REQUEST_URI} !^/artistique/(view|include|artworks|model|controller|images|css|js|php)
-RewriteRule (.*) /artistique/view/$1
