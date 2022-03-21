@@ -15,6 +15,8 @@
 
     <!--All custom css file from public/css/ directory put here-->
     <link rel="stylesheet" href="{{asset('css/index.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/myArtwork.css')}}" />
+
 
 </head>
 

@@ -20,3 +20,6 @@ Route::get('/register', function () {
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::get('/myArtwork', 'App\Http\Controllers\ArtworkController@index');
+
