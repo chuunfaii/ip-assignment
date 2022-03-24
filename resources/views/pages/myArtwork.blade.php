@@ -145,7 +145,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Upload An Artwork</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('/store-artwork') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body ">
                             <div class="row">
@@ -153,7 +153,7 @@
                                     <div class="square upload-button mx-auto mb-4" id="upload-button1">
                                         <img id="Image1" class="product-pic" />
                                     </div>
-                                    <input id="FileUpload1" class="file-upload" type="file" required/>
+                                    <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required/>
                                 </div>
                             </div>
 
@@ -162,35 +162,35 @@
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                                 <div class="col-sm-9">
-                                    <input id="txtName" class="form-control" required/>
+                                    <input id="txtName" class="form-control" name="artworkName" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                                 <div class="col-sm-9">
-                                    <input id="txtPrice" class="form-control" required/>
+                                    <input id="txtPrice" class="form-control" name="artworkPrice" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Description</label>
                                 <div class="col-sm-9">
-                                    <textarea id="txtDescription" class="form-control" row="5" required></textarea>
+                                    <textarea id="txtDescription" class="form-control" row="5" name="artworkDesc" required></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                                 <div class="col-sm-9">
-                                    <input id="txtQuantity" type="number" class="form-control" required/>
+                                    <input id="txtQuantity" type="number" class="form-control" name="artworkQtt" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Category</label>
                                 <div class="col-sm-9">
-                                    <select name="category" id="addCategory" class="form-control" required>
+                                    <select name="artworkCategory" id="addCategory" class="form-control" required>
                                         @foreach ($categories as $c)
                                             <option value="{{ $c->id }}">
                                                 {{ $c->name }}
@@ -203,7 +203,7 @@
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                                 id="cancel">Cancel</button>
-                            <button class="btn btn-primary px-4" >Add</button>
+                            <button class="btn btn-primary px-4" type="submit">Add</button>
                         </div>
                     </form>
 
