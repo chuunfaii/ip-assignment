@@ -162,14 +162,14 @@
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                                 <div class="col-sm-9">
-                                    <input id="txtName" class="form-control" name="artworkName" required/>
+                                    <input id="txtName" class="form-control" name="artworkName" type="text" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-3">
                                 <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                                 <div class="col-sm-9">
-                                    <input id="txtPrice" class="form-control" name="artworkPrice" required/>
+                                    <input id="txtPrice" class="form-control" name="artworkPrice" type="number" required/>
                                 </div>
                             </div>
 
