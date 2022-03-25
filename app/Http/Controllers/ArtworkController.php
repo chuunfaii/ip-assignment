@@ -38,7 +38,23 @@ class ArtworkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $artwork = new Artwork;
+        //$artwork -> artistId = Auth::id();
+        $artwork -> name = $request->input('artworkName');
+        $artwork -> price = $request->input('artworkPrice');
+        $artwork -> description = $request->input('artworkDesc');
+        $artwork -> quantity = $request->input('artworkQtt');
+        $artwork -> categoryId = $request->input('artworkCategory') ;
+        if($request->hasFile('artworkImage')){
+            $file = $request -> file('artworkImage');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file-> move('upload/artworks/', $filename);
+            $artwork-> image = $filename;
+        }
+        $artwork -> save();
+
+        return redirect('myArtwork')->with('status', 'Artwork Added Successfully');
     }
 
     /**
