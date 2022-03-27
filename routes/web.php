@@ -25,4 +25,7 @@ Route::get('/my-sales',function(){
     return view('pages.my-sales');
 });
 
+Route::get('/order-history',function(){
+    return view('pages.order-history');
+});
 require __DIR__ . '/auth.php';
