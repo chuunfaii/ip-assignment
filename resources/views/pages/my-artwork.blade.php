@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('css')
+
+<link rel="stylesheet" href="{{ asset('css/my-artwork.css') }}" />
+
+@endsection
+
+
 @section('content')
 
 <div class="mt-5 mx-auto container position-relative">
