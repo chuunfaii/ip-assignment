@@ -21,4 +21,8 @@ Route::get('/myArtwork', 'App\Http\Controllers\ArtworkController@index');
 
 Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
 
+Route::get('/my-sales',function(){
+    return view('pages.my-sales');
+});
+
 require __DIR__ . '/auth.php';
