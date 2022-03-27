@@ -17,7 +17,7 @@ class ArtworkController extends Controller
     {
         //$products   = Artwork::all();
         $categories = Category::all();
-        return view('pages.myArtwork', compact('categories'));
+        return view('pages.my-artwork', compact('categories'));
     }
 
     /**
