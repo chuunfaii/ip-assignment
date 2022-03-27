@@ -1,17 +1,17 @@
 <nav class="navbar navbar-light navbar-expand-lg py-3 bg-white">
-    <div class="container position-relative">
+  <div class="container position-relative">
     <!-- TODO: Replace the link later -->
     <a href="./" class="navbar-brand fw-bold fs-3">Artistique</a>
 
     <ul class="navbar-nav position-absolute top-50 start-50 translate-middle">
-        <li class="nav-item px-4">
+      <li class="nav-item px-4">
         <!-- TODO: Replace the link later -->
         <a href="artist.php" class="nav-link">Artist</a>
-        </li>
-        <li class="nav-item px-4">
+      </li>
+      <li class="nav-item px-4">
         <!-- TODO: Replace the link later -->
         <a href="artwork.php" class="nav-link">Artwork</a>
-        </li>
+      </li>
     </ul>
 
     <!--Artist Navbar-->
@@ -42,7 +42,7 @@
     </ul>-->
 
     <!--Customer Navbar-->
-        <!--<ul class="navbar-nav">
+    <!--<ul class="navbar-nav">
             <li class="nav-item dropdown px-2">
                 <a class="nav-link dropdown-toggle" id="customerDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,21 +71,21 @@
             </li>
         </ul>-->
 
-        <!--Navbar without login-->
-        <ul class="navbar-nav">
-            <li class="nav-item dropdown px-2">
-                <a class="nav-link" href="login.php">Login</a>
-            </li>
-            <li class="nav-item px-2">
-                <a class="nav-link" href="wishlist.php">
-                    <i class="bi bi-suit-heart"></i>
-                </a>
-            </li>
-            <li class="nav-item px-2">
-                <a class="nav-link" href="cart.php">
-                    <i class="bi bi-cart"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <!--Navbar without login-->
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown px-2">
+        <a class="nav-link" href="login.php">Login</a>
+      </li>
+      <li class="nav-item px-2">
+        <a class="nav-link" href="wishlist.php">
+          <i class="bi bi-suit-heart"></i>
+        </a>
+      </li>
+      <li class="nav-item px-2">
+        <a class="nav-link" href="cart.php">
+          <i class="bi bi-cart"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
