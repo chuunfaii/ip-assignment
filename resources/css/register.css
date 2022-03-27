@@ -1,0 +1,55 @@
+.text-primary {
+    color: #4056a1 !important;
+}
+
+.border-primary {
+    border-color: #4057a1 !important;
+}
+
+.border-primary:hover {
+    border-color: black !important;
+}
+
+.btn-primary {
+    background-color: #4057a1 !important;
+    border-color: #4057a1 !important;
+    transition: ease 0.3s all;
+}
+
+.btn-primary:hover {
+    background-color: #2a396a !important;
+    border-color: #2a396a !important;
+    transition: ease 0.3s all;
+}
+
+.form-radio input {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+}
+
+.form-radio input:checked + label {
+    border: 2px solid #4057a1;
+    color: #4057a1;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.form-radio input + label {
+    color: #9da4ab;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border: 2px solid #ced4da;
+    border-radius: 0.25rem;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    transition: ease 0.3s all;
+}
+
+.form-radio input:not(:checked) + label:hover {
+    border: 2px solid #8a9bd0;
+    color: #8a9bd0;
+    transition: ease 0.3s all;
+}
