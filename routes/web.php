@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('/myArtwork', 'App\Http\Controllers\ArtworkController@index');
+Route::get('/my-artwork', 'App\Http\Controllers\ArtworkController@index');
 
 Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
 
