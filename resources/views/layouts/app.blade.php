@@ -23,7 +23,7 @@
     @include('layouts.header')
   </header>
 
-  <main class="mx-auto position-relative d-flex flex-column ">
+  <main class="mx-auto position-relative d-flex flex-column h-100">
     @yield('content')
   </main>
 
