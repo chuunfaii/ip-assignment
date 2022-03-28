@@ -21,8 +21,15 @@ Route::get('/', function () {
 
 Route::redirect('/home', '/');
 
-Route::get('/myArtwork', 'App\Http\Controllers\ArtworkController@index');
+Route::get('/my-artwork', 'App\Http\Controllers\ArtworkController@index');
 
 Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
 
+Route::get('/my-sales',function(){
+    return view('pages.my-sales');
+});
+
+Route::get('/order-history',function(){
+    return view('pages.order-history');
+});
 require __DIR__ . '/auth.php';
