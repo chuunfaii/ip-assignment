@@ -83,7 +83,7 @@
         </ul>
       </li>
       <li class="nav-item px-2">
-        <a href="myArtwork.php" class="nav-link">My Artwork</a>
+        <a href="{{ url('my-artwork') }}" class="nav-link">My Artwork</a>
       </li>
       <li class="nav-item px-2">
         <a href="mySales.php" class="nav-link">My Sales</a>

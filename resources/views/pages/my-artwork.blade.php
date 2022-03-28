@@ -22,21 +22,22 @@
 </div>
 
 <div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
-
+    @foreach($artworks as $art)
     <div class="card col-3 mb-5 p-0 mt-3" style="width:25% !important;">
-        <img src="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg" class="card-img-top" style="height:250px;" />
+        <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
+                <input type="hidden" name="artId" value="{{ $art->id }}">
                 <h5 class="card-title" id="name">
-                    Artwork1
+                    {{ $art->name }}
                 </h5>
                 <p class="card-text text-muted">
-                    This is artwork 1
+                    {{ $art->description }}
                 </p>
             </div>
             <div class="mt-5 d-flex justify-content-between">
-                <p class="text-muted">Quantity : 2</p>
-                <p class="fw-bold">$ 1000.00</p>
+                <p class="text-muted">Quantity : {{ $art->quantity }}</p>
+                <p class="fw-bold">$ {{ $art->price }}</p>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-outline-danger py-2 mb-4 px-3 " data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</button>
@@ -44,7 +45,7 @@
             </div>
         </div>
     </div>
-
+    @endforeach
 
     <!--Modal Edit Artwork-->
     <div class="modal fade" id="EditArtwork" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" artwork-image="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg">
@@ -57,7 +58,7 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="modal-body ">
                         <div class="row">
-                            <div class="small-12 medium-2 large-2 columns" id='Upload<%# Eval("Id").ToString() %>'>
+                            <div class="small-12 medium-2 large-2 columns" id='UploadEditArt'>
                                 <div class="square upload-button mx-auto mb-4" id="upload-button2">
                                     <img id="Image2" class="product-pic" src='https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg' />
                                 </div>
@@ -145,7 +146,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Upload An Artwork</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/store-artwork') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/store-artwork') }}" method="post" enctype="multipart/form-data" id="uploadArtForm">
                     @csrf
                     <div class="modal-body ">
                         <div class="row">
@@ -153,7 +154,7 @@
                                 <div class="square upload-button mx-auto mb-4" id="upload-button1">
                                     <img id="Image1" class="product-pic" />
                                 </div>
-                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required />
+                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required/>
                             </div>
                         </div>
 
@@ -162,14 +163,20 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-9">
-                                <input id="txtName" class="form-control" name="artworkName" type="text" required />
+                                <input id="txtName" class="form-control" name="artworkName" type="text" required/>
                             </div>
                         </div>
+
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input id="txtPrice" class="form-control" name="artworkPrice" type="number" required />
+                                <input id="txtPrice" class="form-control" name="artworkPrice" type="number" min=0 oninput="validity.valid||(value='');" required/>
                             </div>
                         </div>
 
@@ -183,7 +190,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input id="txtQuantity" type="number" class="form-control" name="artworkQtt" required />
+                                <input id="txtQuantity" type="number" class="form-control" name="artworkQtt" min=0 oninput="validity.valid||(value='');" required/>
                             </div>
                         </div>
 
@@ -212,6 +219,15 @@
 
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+
+<script type="text/javascript">
+    @if (count($errors) > 0){
+        $('#UploadArt').modal('show');
+    }
+    @endif
+</script>
 <script>
     $(document).ready(function() {
         var readURL = function(input) {
@@ -256,6 +272,55 @@
             }
         }
     }
+    $(document).ready(function() {
+        $('#artForm').validate({
+          rules: {
+            artworkImage:{
+                required: true,
+            }
+            artworkName: {
+              required: true,
+            },
+            artworkPrice: {
+              required: true,
+            },
+            artworkDesc: {
+              required: true,
+            },
+            artworkQtt: {
+              required: true,
+            },
+          },
+          messages: {
+            artworkImage:{
+              required: "Image is required",
+            }
+            artworkName: {
+              required: "Name is required",
+            },
+            artworkPrice: {
+              required: "Price is required",
+            },
+            artworkDesc: {
+              required: "Description is required",
+            },
+            artworkQtt: {
+              required: "Quantity is required",
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
 </script>
 
 @endsection
