@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ArtistsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,7 @@ Route::get('/artists',function(){
 Route::get('/edit-artist-account',function(){
     return view('pages.edit-artist-account');
 });
+
+Route::get('artists',[ArtistsController::class,'index']);
 
 require __DIR__ . '/auth.php';
