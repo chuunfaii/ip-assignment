@@ -41,4 +41,8 @@ Route::get('/wishlist',function(){
     return view('pages.wishlist');
 });
 
+Route::get('/artists',function(){
+    return view('pages.artists');
+});
+
 require __DIR__ . '/auth.php';
