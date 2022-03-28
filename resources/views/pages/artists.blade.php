@@ -35,6 +35,7 @@
                 <div class="card-title">
                     <a href='profile.php'>
                         <label class="fw-bold">{{$artist->first_name}}</label>
+                        <label class="fw-bold">{{$artist->last_name}}</label>
                     </a>
                 </div>
             </div>
