@@ -9,12 +9,14 @@
 
 @section('content')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="mt-5 mx-auto container position-relative">
+
     <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-center align-items-center">
             <h1 class="navbar-brand fw-bold p-0 m-0">My Artwork</h1>
         </div>
-
         <button type="button" class="float-end btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#UploadArt" onclick="setImageSrc(false);">
             Upload An Artwork
         </button>
@@ -23,7 +25,7 @@
 
 <div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
     @foreach($artworks as $art)
-    <div class="card col-3 mb-5 p-0 mt-3" style="width:25% !important;">
+    <div class="card col-3 mb-5 p-0 mt-3" style="width:25% !important;" id="artCard">
         <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
@@ -40,12 +42,26 @@
                 <p class="fw-bold">$ {{ $art->price }}</p>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-outline-danger py-2 mb-4 px-3 " data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</button>
-                <button type="button" class="btn btn-primary py-2 mb-4 px-4 " data-bs-toggle="modal" data-bs-target="#EditArtwork" onclick="setImageSrc();">Edit</button>
+                <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn">Delete</buton>
+                <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
             </div>
         </div>
     </div>
     @endforeach
+
+    <script>
+    $(function () {
+        $('#artCard').on('click', 'button.deleteBtn', function(e) {
+            e.preventDefault();
+            var link = this;
+            var deleteModal = $("#DeleteArtwork");
+            // store the ID inside the modal's form
+            deleteModal.find('input[name=deleteid]').val(link.dataset.id);
+            // open modal
+            deleteModal.modal('show');
+        });
+    });
+    </script>
 
     <!--Modal Edit Artwork-->
     <div class="modal fade" id="EditArtwork" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" artwork-image="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg">
@@ -55,14 +71,14 @@
                     <h5 class="modal-title" id="titleEdit">Edit An Artwork</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="Close"></button>
                 </div>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/update-artwork') }}" method="post" enctype="multipart/form-data">
                     <div class="modal-body ">
                         <div class="row">
                             <div class="small-12 medium-2 large-2 columns" id='UploadEditArt'>
                                 <div class="square upload-button mx-auto mb-4" id="upload-button2">
-                                    <img id="Image2" class="product-pic" src='https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg' />
+                                    <div id="productImg"></div>
                                 </div>
-                                <input id="FileUpload2" class="file-upload" type="file" required />
+                                <input id="FileUpload2" class="file-upload" type="file" />
                             </div>
                         </div>
 
@@ -71,46 +87,47 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-9">
-                                <input id="txtEditName" class="form-control" required />
+                                <input id="editName" class="form-control" required name="editName"/>
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input id="txtEditPrice" class="form-control" required />
+                                <input id="editPrice" class="form-control" required name="editPrice"/>
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Description</label>
                             <div class="col-sm-9">
-                                <textarea id="txtEditDescription" class="form-control" row="5" required></textarea>
+                                <textarea id="editDesc" class="form-control" row="5" name="editDesc" required></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input id="txtEditQuantity" type="number" class="form-control" required />
+                                <input id="editQtt" type="number" class="form-control" required name="editQtt"/>
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Category</label>
                             <div class="col-sm-9">
-                                <select name="editCategory" id="editCategory" class="form-control">
-                                    <option value="1">Paintings</option>
-                                    <option value="2">Photography</option>
-                                    <option value="3">Drawings</option>
-                                    <option value="4">Sculpture</option>
+                                <select name="editCategory" id="editCategory" class="form-control" name="editCat" id="editCat">
+                                    @foreach ($categories as $c)
+                                    <option value="{{ $c->id }}">
+                                        {{ $c->name }}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="cancel">Cancel</button>
-                        <button ID="Button1" class="btn btn-primary px-4" OnClick="btnSave_Click">Save</button>
+                        <button class="btn btn-primary px-4 saveBtn" >Save</button>
                     </div>
                 </form>
             </div>
@@ -126,13 +143,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+
                     <label id="lblDeactivate">
                         Are you sure want to delete this artwork?
                     </label>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                    <button id="btnDelete" class="btn btn-primary px-4">Delete</button>
+                    <form action="{{ url('/delete-artwork') }}" method="POST">
+                        <input type="text" name="deleteid" value="" />
+                        <button type="submit" name="btnDelete" id="btnDelete" class="btn btn-primary px-4">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -146,7 +167,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Upload An Artwork</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/store-artwork') }}" method="post" enctype="multipart/form-data" id="uploadArtForm">
+                <form action="{{ url('/store-artwork') }}" method="post" id="artForm" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body ">
                         <div class="row">
@@ -154,7 +175,7 @@
                                 <div class="square upload-button mx-auto mb-4" id="upload-button1">
                                     <img id="Image1" class="product-pic" />
                                 </div>
-                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required/>
+                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" id="artworkImage" />
                             </div>
                         </div>
 
@@ -163,41 +184,36 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-9">
-                                <input id="txtName" class="form-control" name="artworkName" type="text" required/>
+                                <input class="form-control" name="artworkName" id="artworkName" type="text" />
+
                             </div>
                         </div>
-
-                        @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input id="txtPrice" class="form-control" name="artworkPrice" type="number" min=0 oninput="validity.valid||(value='');" required/>
+                                <input class="form-control" name="artworkPrice" id="artworkPrice" type="number" min=0 oninput="validity.valid||(value='');" />
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Description</label>
                             <div class="col-sm-9">
-                                <textarea id="txtDescription" class="form-control" row="5" name="artworkDesc" required></textarea>
+                                <textarea id="artworkDesc" class="form-control" row="5" name="artworkDesc"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input id="txtQuantity" type="number" class="form-control" name="artworkQtt" min=0 oninput="validity.valid||(value='');" required/>
+                                <input type="number" class="form-control" name="artworkQtt" id="artworkQtt" min=0 oninput="validity.valid||(value='');" />
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Category</label>
                             <div class="col-sm-9">
-                                <select name="artworkCategory" id="addCategory" class="form-control" required>
+                                <select name="artworkCategory" class="form-control" id="artworkCategory" >
                                     @foreach ($categories as $c)
                                     <option value="{{ $c->id }}">
                                         {{ $c->name }}
@@ -209,7 +225,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="cancel">Cancel</button>
-                        <button class="btn btn-primary px-4" type="submit">Add</button>
+                        <button class="btn btn-primary px-4" type="submit" name="btnAdd" id="btnAdd">Add</button>
                     </div>
                 </form>
             </div>
@@ -220,14 +236,11 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 
-
-<script type="text/javascript">
-    @if (count($errors) > 0){
-        $('#UploadArt').modal('show');
-    }
-    @endif
-</script>
 <script>
     $(document).ready(function() {
         var readURL = function(input) {
@@ -241,7 +254,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         $(".file-upload").on('change', function() {
             readURL(this);
         });
@@ -251,28 +263,58 @@
         $("#upload-button2").on('click', function() {
             $("#FileUpload2").click();
         });
+
+        //For validation
+        /*$('#btnAdd').click(function(){
+            var name = $('#artworkName').val()
+            var price = $('#artworkPrice').val();
+            var quantity = $('#artworkQtt').val();
+            var desc = $('#artworkDesc').html();
+
+            if(name == null){
+                alert("hello");
+            }
+        });*/
+
+        //AJAX code
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on('click', '.editBtn', function(){
+            var id = $(this).attr("id");
+            $.ajax({
+                url: "{{ url('/fetch-artwork') }}",
+                enctype: 'multipart/form-data',
+                method: "POST",
+                data: {id: id},
+                dataType: "json",
+                success: function(data){
+                    $('.saveBtn').attr("id", data.id);
+                    $('#editName').val(data.name)
+                    $('#editPrice').val(data.price);
+                    $('#editQtt').val(data.quantity);
+                    $('#editDesc').val(data.description);
+                    $('#editCategory').val(data.categoryId);
+                    var baseUrl = "{{ asset('upload/artworks') }}";
+                    var imagePath = baseUrl + '/' +data.image;
+                    $('#productImg').html(
+                        "<img id='Image2' class='product-pic' src='"+imagePath+"' />"
+                        );
+                    $("#EditArtwork").modal('show');
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    console.log(errors);
+                }
+            });
+        });
     });
 </script>
 <script>
-    function setImageSrc(ModalParentId) {
-        var isGeneric = (ModalParentId === false);
-        var ModalParent = (isGeneric) ? document.getElementById('UploadArt') : (document.getElementById('EditArtwork' + ModalParentId) ?? false);
-
-        if (ModalParent) {
-            var ModalImage = ModalParent.getElementsByClassName('product-pic')[0] ?? false;
-            var ModalFilePicker = ModalParent.getElementsByClassName('file-upload')[0] ?? false;
-            if (ModalImage) {
-
-                if (isGeneric) {
-                    ModalImage.setAttribute('src', "");
-                } else {
-                    ModalImage.setAttribute('src', ModalParent.getAttribute('artwork-image'));
-                }
-                ModalFilePicker.value = '';
-            }
-        }
-    }
-    $(document).ready(function() {
+    /*$(document).ready(function() {
         $('#artForm').validate({
           rules: {
             artworkImage:{
@@ -310,17 +352,12 @@
           },
           errorElement: 'span',
           errorPlacement: function(error, element) {
-            error.addClass('invalid-feedback');
+            error.addClass('error-message');
             element.closest('.form-group').append(error);
           },
-          highlight: function(element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-          },
-          unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-          }
         });
-      });
+      });*/
 </script>
+
 
 @endsection
