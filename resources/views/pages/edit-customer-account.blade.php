@@ -78,12 +78,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <label id="Label1" Text="Are you sure want to deactivate your account?"></label>
+          <span>Are you sure want to deactivate your account?</span>
         </div>
-        <div class="modal-footer justify-content-between">
-          <button id="btnCancel" class="btn btn-outline-danger px-4">Cancel</button>
-          <button id="btnConfirm" class="btn btn-primary px-4" OnClick="btnConfirm_Click">Confirm</button>
-        </div>
+        <form action="/account/delete" method="POST">
+          @csrf
+          @method('delete')
+          <div class="modal-footer justify-content-between">
+            <button id="btnCancel" class="btn btn-outline-danger px-4">Cancel</button>
+            <button type="submit" id="btnConfirm" class="btn btn-primary px-4">Confirm</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

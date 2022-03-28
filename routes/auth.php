@@ -17,11 +17,12 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-  
+
   Route::get('/account/edit', [UserController::class, 'create'])->name('edit-account');
 
   Route::post('/account/edit', [UserController::class, 'store']);
-  
+
+  Route::delete('/account/delete', [UserController::class, 'destroy']);
+
   Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
-

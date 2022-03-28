@@ -48,29 +48,28 @@ class ArtistArtworkController extends Controller
         $desc = $request->input('artworkDesc');
         $qtt = $request->input('artworkQtt');
         $cat = $request->input('artworkCategory');
-        $file = $request ->file('artworkImage');
+        $file = $request->file('artworkImage');
 
-        if(empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)){
-            $errorMsg="All fields is required";
+        if (empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
+            $errorMsg = "All fields is required";
             return redirect('my-artwork')->with('estatus', $errorMsg);
-        }else{
+        } else {
             $artwork = new Artwork;
-            $artwork -> artistId = auth()->user()->id;
-            $artwork -> name = $name;
-            $artwork -> price = $price;
-            $artwork -> description = $desc;
-            $artwork -> quantity = $qtt;
-            $artwork -> categoryId = $cat;
-            if($request->hasFile('artworkImage')){
+            $artwork->artistId = auth()->user()->id;
+            $artwork->name = $name;
+            $artwork->price = $price;
+            $artwork->description = $desc;
+            $artwork->quantity = $qtt;
+            $artwork->categoryId = $cat;
+            if ($request->hasFile('artworkImage')) {
                 $extension = $file->getClientOriginalExtension();
-                $filename = time().'.'.$extension;
-                $file-> move('upload/artworks/', $filename);
-                $artwork-> image = $filename;
+                $filename = time() . '.' . $extension;
+                $file->move('upload/artworks/', $filename);
+                $artwork->image = $filename;
             }
-            $artwork -> save();
+            $artwork->save();
             return redirect('my-artwork')->with('status', 'Artwork Added Successfully');
         }
-
     }
 
     /**
@@ -99,8 +98,8 @@ class ArtistArtworkController extends Controller
             'name' => $getArtwork->name,
             'quantity' => $getArtwork->quantity,
             'price' => $getArtwork->price,
-            'description' => $getArtwork -> description,
-            'image' => $getArtwork -> image,
+            'description' => $getArtwork->description,
+            'image' => $getArtwork->image,
             'categoryId' => $getArtwork->categoryId,
         );
         return json_encode($artwork);
