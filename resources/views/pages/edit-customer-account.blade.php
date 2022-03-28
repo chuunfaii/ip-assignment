@@ -2,7 +2,7 @@
 
 @section('css')
 
-<link rel="stylesheet" href="{{ asset('css/edit-account.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/edit-customer-account.css') }}" />
 
 @endsection
 

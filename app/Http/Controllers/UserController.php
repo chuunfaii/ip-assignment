@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -29,12 +24,10 @@ class UserController extends Controller
 
 
         if (auth()->user()->isCustomer()) {
-            return view('pages.edit-account', ['user' => $user]);
+            return view('pages.edit-customer-account', ['user' => $user]);
         }
-        
+
         return view('pages.edit-artist-account', ['user' => $user]);
-        
-        
     }
 
     /**
@@ -57,12 +50,12 @@ class UserController extends Controller
             'new_password' => ['nullable', 'confirmed', 'required_with:new_password_confirmation', Password::defaults()],
         ]);
 
-        if(auth()->user()->isCustomer()){
+        if (auth()->user()->isCustomer()) {
             $user->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-                
+
             ]);
 
             if ($request->filled('new_password')) {
@@ -75,13 +68,13 @@ class UserController extends Controller
 
             return redirect()->route('edit-account');
         }
-        
+
         $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'bio'=>$request->bio
-            
+            'bio' => $request->bio
+
         ]);
 
 
@@ -91,20 +84,18 @@ class UserController extends Controller
             ]);
         }
 
-        $file = $request ->file('image_URL');
+        $file = $request->file('image_URL');
 
-        if(!empty($file)){
-            if($request->hasFile('image_URL')){
+        if (!empty($file)) {
+            if ($request->hasFile('image_URL')) {
                 $filename = $request->file('image_URL')->getClientOriginalName();
-                $file-> move('upload/artists/', $filename);
-                $user-> image_URL = $filename;
+                $file->move('upload/artists/', $filename);
+                $user->image_URL = $filename;
             }
-            
         }
 
         $user->save();
 
         return redirect()->route('edit-account');
-        
     }
 }
