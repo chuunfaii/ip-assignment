@@ -58,12 +58,12 @@
       <div class="d-flex justify-content-between mb-4">
         <span class="w-100 align-self-center">Would you like to register as:</span>
         <div class="form-radio d-flex justify-content-between w-100">
-          <input type="radio" name="account_type" id="customer" checked value="customer" />
+          <input type="radio" name="type" id="customer" checked value="customer" />
           <label for="customer" class="option customer">
             <span>Customer</span>
           </label>
 
-          <input type="radio" name="account_type" id="artist" value="artist" />
+          <input type="radio" name="type" id="artist" value="artist" />
           <label for="artist" class="option artist">
             <span>Artist</span>
           </label>
@@ -76,7 +76,7 @@
 
   <div class="d-flex justify-content-center mb-4">
     <span class="text-muted">Already have an account?</span>
-    <a class="nav-link text-primary border-bottom border-primary ms-2 p-0" href="login.php">Login account</a>
+    <a class="nav-link text-primary border-bottom border-primary ms-2 p-0" href="{{ route('login') }}">Login account</a>
   </div>
 </div>
 
