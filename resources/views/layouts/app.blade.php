@@ -23,11 +23,9 @@
     @include('layouts.header')
   </header>
 
-  <div class="h-100">
-    <main class="mx-auto position-relative d-flex flex-column">
-      @yield('content')
-    </main>
-  </div>
+  <main class="position-relative d-flex flex-column h-100">
+    @yield('content')
+  </main>
 
   <footer class="footer py-3">
     @include('layouts.footer')
