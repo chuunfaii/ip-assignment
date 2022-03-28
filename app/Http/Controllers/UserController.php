@@ -27,7 +27,14 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        return view('pages.edit-account', ['user' => $user]);
+
+        if (auth()->user()->isCustomer()) {
+            return view('pages.edit-account', ['user' => $user]);
+        }
+        
+        return view('pages.edit-artist-account', ['user' => $user]);
+        
+        
     }
 
     /**
@@ -50,11 +57,33 @@ class UserController extends Controller
             'new_password' => ['nullable', 'confirmed', 'required_with:new_password_confirmation', Password::defaults()],
         ]);
 
+        if(auth()->user()->isCustomer()){
+            $user->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                
+            ]);
+
+            if ($request->filled('new_password')) {
+                $user->update([
+                    'password' => Hash::make($request->new_password),
+                ]);
+            }
+
+            $user->save();
+
+            return redirect()->route('edit-account');
+        }
+        
         $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
+            'bio'=>$request->bio
+            
         ]);
+
 
         if ($request->filled('new_password')) {
             $user->update([
@@ -62,8 +91,20 @@ class UserController extends Controller
             ]);
         }
 
+        $file = $request ->file('image_URL');
+
+        if(!empty($file)){
+            if($request->hasFile('image_URL')){
+                $filename = $request->file('image_URL')->getClientOriginalName();
+                $file-> move('upload/artists/', $filename);
+                $user-> image_URL = $filename;
+            }
+            
+        }
+
         $user->save();
 
         return redirect()->route('edit-account');
+        
     }
 }

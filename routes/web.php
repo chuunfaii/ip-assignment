@@ -46,10 +46,4 @@ Route::get('/artists',function(){
     return view('pages.artists');
 });
 
-Route::get('/edit-artist-account',function(){
-    return view('pages.edit-artist-account');
-})->name('edit-artist-account');
-
-Route::get('artists',[ArtistsController::class,'index']);
-
 require __DIR__ . '/auth.php';

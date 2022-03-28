@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterController::class, 'create'])->name('register');
 
@@ -16,9 +17,11 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+  
   Route::get('/account/edit', [UserController::class, 'create'])->name('edit-account');
 
   Route::post('/account/edit', [UserController::class, 'store']);
-
+  
   Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
+

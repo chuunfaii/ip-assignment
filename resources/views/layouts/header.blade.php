@@ -63,7 +63,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="artistDropdown">
           <li>
-            <a href="{{ route('edit-artist-account') }}" class="dropdown-item text-muted">Edit Account</a>
+            <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
           </li>
           <li>
             <a href="{{ route('profile-page') }}" class="dropdown-item text-muted">Profile Page</a>
