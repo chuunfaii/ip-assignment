@@ -22,33 +22,33 @@ Route::get('/', function () {
 
 Route::redirect('/home', '/');
 
-Route::get('/my-artwork', 'App\Http\Controllers\ArtworkController@index');
+Route::get('/my-artwork', 'App\Http\Controllers\ArtistArtworkController@index');
 
-Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
+Route::post('/store-artwork', 'App\Http\Controllers\ArtistArtworkController@store');
 
-Route::post('/fetch-artwork', 'App\Http\Controllers\ArtworkController@edit');
+Route::post('/fetch-artwork', 'App\Http\Controllers\ArtistArtworkController@edit');
 
-Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtworkController@update');
+Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtistArtworkController@update');
 
-Route::post('/delete-artwork/{id}', 'App\Http\Controllers\ArtworkController@destroy');
+Route::post('/delete-artwork/{id}', 'App\Http\Controllers\ArtistArtworkController@destroy');
 
-Route::get('/my-sales',function(){
+Route::get('/my-sales', function () {
     return view('pages.my-sales');
 })->name('my-sales');
 
-Route::get('/order-history',function(){
+Route::get('/order-history', function () {
     return view('pages.order-history');
 });
 
-Route::get('/profile-page',function(){
+Route::get('/profile-page', function () {
     return view('pages.profile-page');
 })->name('profile-page');
 
-Route::get('/wishlist',function(){
+Route::get('/wishlist', function () {
     return view('pages.wishlist');
 });
 
-Route::get('/artists',function(){
+Route::get('/artists', function () {
     return view('pages.artists');
 });
 
