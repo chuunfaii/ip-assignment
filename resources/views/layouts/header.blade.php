@@ -8,7 +8,12 @@
         <a href="artist.php" class="nav-link">Artist</a>
       </li>
       <li class="nav-item px-4">
+<<<<<<< HEAD
         <a href="{{ route('artworks') }}" class="nav-link">Artwork</a>
+=======
+        <!-- TODO: Replace the link later -->
+        <a href="artwork.php" class="nav-link">Artwork</a>
+>>>>>>> 5713ec8af3845d4e849af783fbd0e2aad55a7189
       </li>
     </ul>
 
