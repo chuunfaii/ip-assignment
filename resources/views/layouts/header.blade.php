@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="customerDropdown">
           <li>
-            <a class="dropdown-item text-muted" href="editCustomerAccount.php">Edit Account</a>
+            <a class="dropdown-item text-muted" href="{{ route('edit-account') }}">Edit Account</a>
           </li>
           <li>
             <a class="dropdown-item text-muted" href="orderHistory.php">Order History</a>

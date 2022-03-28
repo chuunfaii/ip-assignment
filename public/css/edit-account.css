@@ -5,12 +5,12 @@ body {
 }
 
 a {
-    transition: ease .3s all;
+    transition: ease 0.3s all;
 }
 
 a:hover {
     color: black !important;
-    transition: ease .3s all;
+    transition: ease 0.3s all;
 }
 
 .background {
@@ -22,7 +22,7 @@ a:hover {
 }
 
 .navbar-brand {
-    font-family: 'STIX Two Math', serif !important;
+    font-family: "STIX Two Math", serif !important;
 }
 
 .text-danger:hover {
@@ -55,19 +55,18 @@ textarea {
     width: 228px;
     height: 228px;
     border: 8px solid #dbdbdb;
-    
+
     top: 72px;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .circle:hover {
     background-color: #909090;
-    cursor: pointer
+    cursor: pointer;
 }
 img {
     max-width: 100%;
     height: auto;
     min-width: 212px;
-    min-height: 212px
+    min-height: 212px;
 }
-
