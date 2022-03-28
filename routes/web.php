@@ -32,4 +32,8 @@ Route::get('/my-sales',function(){
 Route::get('/order-history',function(){
     return view('pages.order-history');
 });
+
+Route::get('/artists',function(){
+    return view('pages.artists');
+});
 require __DIR__ . '/auth.php';
