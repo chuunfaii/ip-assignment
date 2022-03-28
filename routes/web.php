@@ -32,4 +32,9 @@ Route::get('/my-sales',function(){
 Route::get('/order-history',function(){
     return view('pages.order-history');
 });
+
+Route::get('/profile-page',function(){
+    return view('pages.profile-page');
+});
+
 require __DIR__ . '/auth.php';
