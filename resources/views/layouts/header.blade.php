@@ -63,10 +63,10 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="artistDropdown">
           <li>
-            <a href="editArtistAccount.php" class="dropdown-item text-muted">Edit Account</a>
+            <a href="{{ route('edit-artist-account') }}" class="dropdown-item text-muted">Edit Account</a>
           </li>
           <li>
-            <a href="profile.php" class="dropdown-item text-muted">Profile Page</a>
+            <a href="{{ route('profile-page') }}" class="dropdown-item text-muted">Profile Page</a>
           </li>
           <li>
             <hr class="dropdown-divider" />
@@ -86,7 +86,7 @@
         <a href="{{ url('my-artwork') }}" class="nav-link">My Artwork</a>
       </li>
       <li class="nav-item px-2">
-        <a href="mySales.php" class="nav-link">My Sales</a>
+        <a href="{{ route('my-sales') }}" class="nav-link">My Sales</a>
       </li>
     </ul>
     @endif

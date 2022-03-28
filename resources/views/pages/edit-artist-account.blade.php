@@ -23,16 +23,17 @@
 
         <div class="input-group justify-content-between">
             <div class="form-floating mb-4" style="min-width:230px;">
-                <input type="text" id="txtFName" class="form-control" placeholder="John" />
+                <input type="text" id="txtFName" class="form-control" placeholder="John" value="{{ auth()->user()->first_name }}"/>
                 <label for="txtFName">First Name</label>
+                
             </div>
             <div class="form-floating mb-4" style="min-width:230px;">
-                <input type="text" id="txtLName" class="form-control" placeholder="Doe" />
+                <input type="text" id="txtLName" class="form-control" placeholder="Doe" value="{{ auth()->user()->last_name }}"/>
                 <label for="txtLName">Last Name</label>
             </div>
         </div>
         <div class="form-floating mb-4">
-            <input type="email" id="txtEmail" class="form-control" placeholder="name@example.com" />
+            <input type="email" id="txtEmail" class="form-control" placeholder="name@example.com" value="{{ auth()->user()->email }}"/>
             <label for="txtEmail">Email address</label>
         </div>
         <div class="form-floating mb-4">

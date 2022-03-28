@@ -28,7 +28,7 @@ Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
 
 Route::get('/my-sales',function(){
     return view('pages.my-sales');
-});
+})->name('my-sales');
 
 Route::get('/order-history',function(){
     return view('pages.order-history');
@@ -36,7 +36,7 @@ Route::get('/order-history',function(){
 
 Route::get('/profile-page',function(){
     return view('pages.profile-page');
-});
+})->name('profile-page');
 
 Route::get('/wishlist',function(){
     return view('pages.wishlist');
@@ -48,7 +48,7 @@ Route::get('/artists',function(){
 
 Route::get('/edit-artist-account',function(){
     return view('pages.edit-artist-account');
-});
+})->name('edit-artist-account');
 
 Route::get('artists',[ArtistsController::class,'index']);
 
