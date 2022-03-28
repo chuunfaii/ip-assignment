@@ -33,7 +33,16 @@ Route::get('/order-history',function(){
     return view('pages.order-history');
 });
 
+Route::get('/profile-page',function(){
+    return view('pages.profile-page');
+});
+
+Route::get('/wishlist',function(){
+    return view('pages.wishlist');
+});
+
 Route::get('/artists',function(){
     return view('pages.artists');
 });
+
 require __DIR__ . '/auth.php';
