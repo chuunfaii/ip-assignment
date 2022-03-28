@@ -2,13 +2,10 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-<<<<<<< HEAD
-use App\Http\Controllers\ArtistController;
-=======
-use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\ArtworkController;
->>>>>>> 52cc1956fcf8bd50cb0af806e6ecc2d592bcebd1
+use App\Http\Controllers\Auth\ArtistController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,13 +50,7 @@ Route::get('/wishlist', function () {
     return view('pages.wishlist');
 });
 
-<<<<<<< HEAD
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index');
-=======
-Route::get('/artists', function () {
-    return view('pages.artists');
-});
->>>>>>> 52cc1956fcf8bd50cb0af806e6ecc2d592bcebd1
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
