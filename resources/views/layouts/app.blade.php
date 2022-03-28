@@ -23,7 +23,7 @@
     @include('layouts.header')
   </header>
 
-  <main class="position-relative d-flex flex-column h-100">
+  <main class="position-relative d-flex flex-column flex-grow-1">
     @yield('content')
   </main>
 
