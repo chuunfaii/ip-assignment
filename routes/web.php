@@ -37,4 +37,8 @@ Route::get('/profile-page',function(){
     return view('pages.profile-page');
 });
 
+Route::get('/wishlist',function(){
+    return view('pages.wishlist');
+});
+
 require __DIR__ . '/auth.php';
