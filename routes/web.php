@@ -26,6 +26,12 @@ Route::get('/my-artwork', 'App\Http\Controllers\ArtworkController@index');
 
 Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
 
+Route::post('/fetch-artwork', 'App\Http\Controllers\ArtworkController@edit');
+
+Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtworkController@update');
+
+Route::post('/delete-artwork/{id}', 'App\Http\Controllers\ArtworkController@destroy');
+
 Route::get('/my-sales',function(){
     return view('pages.my-sales');
 })->name('my-sales');

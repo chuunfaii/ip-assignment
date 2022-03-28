@@ -40,6 +40,7 @@ class ArtworkController extends Controller
      */
     public function store(Request $request)
     {
+
         $name = $request->input('artworkName');
         $price = $request->input('artworkPrice');
         $desc = $request->input('artworkDesc');
@@ -87,9 +88,20 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->id;
+        $getArtwork = Artwork::find($id);
+        $artwork = array(
+            'id' => $getArtwork->id,
+            'name' => $getArtwork->name,
+            'quantity' => $getArtwork->quantity,
+            'price' => $getArtwork->price,
+            'description' => $getArtwork -> description,
+            'image' => $getArtwork -> image,
+            'categoryId' => $getArtwork->categoryId,
+        );
+        return json_encode($artwork);
     }
 
     /**
