@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main class="m-auto container">
+<div class="m-auto container">
   <!-- Carousel -->
   <div class="carousel slide" id="carouselControls" data-bs-ride="carousel">
     <div class="carousel slide" id="myCarousel" data-ride="carousel">
@@ -211,6 +211,6 @@
       </tr>
     </tbody>
   </table>
-</main>
+</div>
 
 @endsection
