@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -97,5 +98,21 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('edit-account');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy()
+    {
+        $user = User::find(auth()->user()->id);
+
+        auth()->logout();
+
+        if ($user->delete()) {
+            return redirect(RouteServiceProvider::HOME);
+        }
     }
 }
