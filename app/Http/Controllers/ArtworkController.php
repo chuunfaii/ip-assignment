@@ -15,9 +15,9 @@ class ArtworkController extends Controller
      */
     public function index()
     {
-        //$products   = Artwork::all();
+        $artworks   = Artwork::all()->where('artistId', auth()->user()->id);
         $categories = Category::all();
-        return view('pages.my-artwork', compact('categories'));
+        return view('pages.my-artwork', compact('categories', 'artworks'));
     }
 
     /**
@@ -35,26 +35,39 @@ class ArtworkController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        $artwork = new Artwork;
-        //$artwork -> artistId = Auth::id();
-        $artwork -> name = $request->input('artworkName');
-        $artwork -> price = $request->input('artworkPrice');
-        $artwork -> description = $request->input('artworkDesc');
-        $artwork -> quantity = $request->input('artworkQtt');
-        $artwork -> categoryId = $request->input('artworkCategory') ;
-        if($request->hasFile('artworkImage')){
-            $file = $request -> file('artworkImage');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file-> move('upload/artworks/', $filename);
-            $artwork-> image = $filename;
-        }
-        $artwork -> save();
+        $name = $request->input('artworkName');
+        $price = $request->input('artworkPrice');
+        $desc = $request->input('artworkDesc');
+        $qtt = $request->input('artworkQtt');
+        $cat = $request->input('artworkCategory');
+        $file = $request ->file('artworkImage');
 
-        return redirect('myArtwork')->with('status', 'Artwork Added Successfully');
+        if(empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)){
+            $errorMsg="All fields is required";
+            return redirect('my-artwork')->with('estatus', $errorMsg);
+        }else{
+            $artwork = new Artwork;
+            $artwork -> artistId = auth()->user()->id;
+            $artwork -> name = $name;
+            $artwork -> price = $price;
+            $artwork -> description = $desc;
+            $artwork -> quantity = $qtt;
+            $artwork -> categoryId = $cat;
+            if($request->hasFile('artworkImage')){
+                $extension = $file->getClientOriginalExtension();
+                $filename = time().'.'.$extension;
+                $file-> move('upload/artworks/', $filename);
+                $artwork-> image = $filename;
+            }
+            $artwork -> save();
+            return redirect('my-artwork')->with('status', 'Artwork Added Successfully');
+        }
+
     }
 
     /**
