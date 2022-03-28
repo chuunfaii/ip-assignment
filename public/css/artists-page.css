@@ -18,3 +18,7 @@ h1.navbar-brand {
     color: inherit !important;
     text-decoration: none !important;
 }
+
+.card-columns{
+   column-count: 3;
+}

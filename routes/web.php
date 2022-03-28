@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ArtistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,8 +42,6 @@ Route::get('/wishlist',function(){
     return view('pages.wishlist');
 });
 
-Route::get('/artists',function(){
-    return view('pages.artists');
-});
+Route::get('/artists', 'App\Http\Controllers\ArtistController@index');
 
 require __DIR__ . '/auth.php';
