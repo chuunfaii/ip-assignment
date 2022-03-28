@@ -23,7 +23,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="customerDropdown">
           <li>
-            <a class="dropdown-item text-muted" href="editCustomerAccount.php">Edit Account</a>
+            <a class="dropdown-item text-muted" href="{{ route('edit-account') }}">Edit Account</a>
           </li>
           <li>
             <a class="dropdown-item text-muted" href="orderHistory.php">Order History</a>
@@ -63,7 +63,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="artistDropdown">
           <li>
-            <a href="editArtistAccount.php" class="dropdown-item text-muted">Edit Account</a>
+            <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
           </li>
           <li>
             <a href="profile.php" class="dropdown-item text-muted">Profile Page</a>
