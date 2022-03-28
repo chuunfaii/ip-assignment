@@ -8,8 +8,7 @@
         <a href="artist.php" class="nav-link">Artist</a>
       </li>
       <li class="nav-item px-4">
-        <!-- TODO: Replace the link later -->
-        <a href="artwork.php" class="nav-link">Artwork</a>
+        <a href="{{ route('artworks') }}" class="nav-link">Artwork</a>
       </li>
     </ul>
 
@@ -23,7 +22,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="customerDropdown">
           <li>
-            <a class="dropdown-item text-muted" href="editCustomerAccount.php">Edit Account</a>
+            <a class="dropdown-item text-muted" href="{{ route('edit-account') }}">Edit Account</a>
           </li>
           <li>
             <a class="dropdown-item text-muted" href="orderHistory.php">Order History</a>
@@ -63,10 +62,10 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="artistDropdown">
           <li>
-            <a href="editArtistAccount.php" class="dropdown-item text-muted">Edit Account</a>
+            <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
           </li>
           <li>
-            <a href="profile.php" class="dropdown-item text-muted">Profile Page</a>
+            <a href="{{ route('profile-page') }}" class="dropdown-item text-muted">Profile Page</a>
           </li>
           <li>
             <hr class="dropdown-divider" />
@@ -83,10 +82,10 @@
         </ul>
       </li>
       <li class="nav-item px-2">
-        <a href="myArtwork.php" class="nav-link">My Artwork</a>
+        <a href="{{ url('my-artwork') }}" class="nav-link">My Artwork</a>
       </li>
       <li class="nav-item px-2">
-        <a href="mySales.php" class="nav-link">My Sales</a>
+        <a href="{{ route('my-sales') }}" class="nav-link">My Sales</a>
       </li>
     </ul>
     @endif

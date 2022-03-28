@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Artwork;
 
 class ArtworkController extends Controller
 {
@@ -15,9 +13,7 @@ class ArtworkController extends Controller
      */
     public function index()
     {
-        //$products   = Artwork::all();
-        $categories = Category::all();
-        return view('pages.my-artwork', compact('categories'));
+        return view('pages.artworks');
     }
 
     /**
@@ -35,26 +31,12 @@ class ArtworkController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        $artwork = new Artwork;
-        //$artwork -> artistId = Auth::id();
-        $artwork -> name = $request->input('artworkName');
-        $artwork -> price = $request->input('artworkPrice');
-        $artwork -> description = $request->input('artworkDesc');
-        $artwork -> quantity = $request->input('artworkQtt');
-        $artwork -> categoryId = $request->input('artworkCategory') ;
-        if($request->hasFile('artworkImage')){
-            $file = $request -> file('artworkImage');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file-> move('upload/artworks/', $filename);
-            $artwork-> image = $filename;
-        }
-        $artwork -> save();
-
-        return redirect('myArtwork')->with('status', 'Artwork Added Successfully');
+        // 
     }
 
     /**
@@ -74,9 +56,9 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        // 
     }
 
     /**

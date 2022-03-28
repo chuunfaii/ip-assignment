@@ -20,11 +20,11 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <h4 class="mb-4 fw-bold">
-                                <Label id="TxtFName">FirstName</Label>
-                                <Label id="TxtLName">LastName</Label>
+                                <Label id="TxtFName">{{ auth()->user()->first_name }}</Label>
+                                <Label id="TxtLName">{{ auth()->user()->last_name }}</Label>
                             </h4>
                             <p class="mb-5">
-                                <Label id="TxtEmail">Email</Label>
+                                <Label id="TxtEmail">{{ auth()->user()->email }}</Label>
                             </p>
                         </div>
                         <div class="w-50">

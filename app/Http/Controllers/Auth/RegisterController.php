@@ -36,7 +36,7 @@ class RegisterController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->whereNull('deleted_at')],
             'password' => ['required', 'confirmed', Password::defaults()],
             'type' => ['required', Rule::in(['customer', 'artist'])],
         ]);
