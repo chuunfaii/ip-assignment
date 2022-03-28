@@ -22,15 +22,15 @@ Route::get('/', function () {
 
 Route::redirect('/home', '/');
 
-Route::get('/my-artwork', 'App\Http\Controllers\ArtworkController@index');
+Route::get('/my-artwork', 'App\Http\Controllers\ArtistArtworkController@index');
 
-Route::post('/store-artwork', 'App\Http\Controllers\ArtworkController@store');
+Route::post('/store-artwork', 'App\Http\Controllers\ArtistArtworkController@store');
 
-Route::post('/fetch-artwork', 'App\Http\Controllers\ArtworkController@edit');
+Route::post('/fetch-artwork', 'App\Http\Controllers\ArtistArtworkController@edit');
 
-Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtworkController@update');
+Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtistArtworkController@update');
 
-Route::post('/delete-artwork/{id}', 'App\Http\Controllers\ArtworkController@destroy');
+Route::post('/delete-artwork', 'App\Http\Controllers\ArtistArtworkController@destroy');
 
 Route::get('/my-sales',function(){
     return view('pages.my-sales');

@@ -42,26 +42,12 @@
                 <p class="fw-bold">$ {{ $art->price }}</p>
             </div>
             <div class="d-flex justify-content-between">
-                <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn">Delete</buton>
+                <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
                 <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
             </div>
         </div>
     </div>
     @endforeach
-
-    <script>
-    $(function () {
-        $('#artCard').on('click', 'button.deleteBtn', function(e) {
-            e.preventDefault();
-            var link = this;
-            var deleteModal = $("#DeleteArtwork");
-            // store the ID inside the modal's form
-            deleteModal.find('input[name=deleteid]').val(link.dataset.id);
-            // open modal
-            deleteModal.modal('show');
-        });
-    });
-    </script>
 
     <!--Modal Edit Artwork-->
     <div class="modal fade" id="EditArtwork" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" artwork-image="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg">
@@ -151,7 +137,8 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                     <form action="{{ url('/delete-artwork') }}" method="POST">
-                        <input type="text" name="deleteid" value="" />
+                        @csrf
+                        <input type="hidden" name="deleteid" id="deleteid"/>
                         <button type="submit" name="btnDelete" id="btnDelete" class="btn btn-primary px-4">Delete</button>
                     </form>
                 </div>
@@ -225,7 +212,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="cancel">Cancel</button>
-                        <button class="btn btn-primary px-4" type="submit" name="btnAdd" id="btnAdd">Add</button>
+                        <button class="btn btn-primary px-4 btnAdd" type="submit" name="btnAdd" id="btnAdd">Add</button>
                     </div>
                 </form>
             </div>
@@ -265,56 +252,24 @@
         });
 
         //For validation
-        /*$('#btnAdd').click(function(){
+        $('.btnAdd').click(function(){
             var name = $('#artworkName').val()
             var price = $('#artworkPrice').val();
             var quantity = $('#artworkQtt').val();
-            var desc = $('#artworkDesc').html();
+            var desc = $('#artworkDesc').val();
+            var image=$('#artworkImage').val();
 
-            if(name == null){
-                alert("hello");
-            }
-        });*/
+            var array = array[name, price, quantity, desc, image];
 
-        //AJAX code
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $(document).on('click', '.editBtn', function(){
-            var id = $(this).attr("id");
-            $.ajax({
-                url: "{{ url('/fetch-artwork') }}",
-                enctype: 'multipart/form-data',
-                method: "POST",
-                data: {id: id},
-                dataType: "json",
-                success: function(data){
-                    $('.saveBtn').attr("id", data.id);
-                    $('#editName').val(data.name)
-                    $('#editPrice').val(data.price);
-                    $('#editQtt').val(data.quantity);
-                    $('#editDesc').val(data.description);
-                    $('#editCategory').val(data.categoryId);
-                    var baseUrl = "{{ asset('upload/artworks') }}";
-                    var imagePath = baseUrl + '/' +data.image;
-                    $('#productImg').html(
-                        "<img id='Image2' class='product-pic' src='"+imagePath+"' />"
-                        );
-                    $("#EditArtwork").modal('show');
-                },
-                error: function(data) {
-                    var errors = data.responseJSON;
-                    console.log(errors);
+            for (var i = 0; i < array.length; i++){
+                if(array[i] == ""){
+                    alert(array[i] + 'is required');
                 }
-            });
+            }
+
         });
-    });
-</script>
-<script>
-    /*$(document).ready(function() {
+
+        /*$(document).ready(function() {
         $('#artForm').validate({
           rules: {
             artworkImage:{
@@ -357,6 +312,50 @@
           },
         });
       });*/
+
+        //AJAX code
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on('click', '.editBtn', function(){
+            var id = $(this).attr("id");
+            $.ajax({
+                url: "{{ url('/fetch-artwork') }}",
+                enctype: 'multipart/form-data',
+                method: "POST",
+                data: {id: id},
+                dataType: "json",
+                success: function(data){
+
+                    $('.saveBtn').attr("id", data.id);
+                    $('#editName').val(data.name)
+                    $('#editPrice').val(data.price);
+                    $('#editQtt').val(data.quantity);
+                    $('#editDesc').val(data.description);
+                    $('#editCategory').val(data.categoryId);
+
+                    var baseUrl = "{{ asset('upload/artworks') }}";
+                    var imagePath = baseUrl + '/' +data.image;
+                    $('#productImg').html("<img id='Image2' class='product-pic' src='"+imagePath+"' />");
+
+                    $("#EditArtwork").modal('show');
+                },
+                error: function(data) {
+                    var errors = data.responseJSON;
+                    console.log(errors);
+                }
+            });
+        });
+    });
+
+    //Pass artwork id to modal
+    $(document).on('click','.deleteBtn',function(){
+         let id = $(this).attr('data-id');
+         $('#deleteid').val(id);
+    });
 </script>
 
 

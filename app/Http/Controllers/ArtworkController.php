@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Artwork;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
-class ArtworkController extends Controller
+class ArtistArtworkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -122,8 +124,15 @@ class ArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('deleteid');
+        $artwork = Artwork::find($id);
+        $imagePath = 'upload/artworks/'.$artwork->image;
+        if(File::exists($imagePath)){
+            File::delete($imagePath);
+        }
+        $artwork->delete();
+        return redirect('/my-artwork')->with('status', 'Artwork Deleted Successfully');
     }
 }
