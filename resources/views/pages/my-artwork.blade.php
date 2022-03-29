@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
+<div class="container">
     <div class="row">
         @foreach($artworks as $art)
         <!--<div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
