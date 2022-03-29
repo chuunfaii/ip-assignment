@@ -29,7 +29,8 @@
         
         <div class="card m-5" style="width: 15rem;min-height:18rem !important;">
             <a href=#'>
-                <img src="https://i.pinimg.com/736x/6a/1b/73/6a1b7352740dfcaf1d8999e347d5b053.jpg" class="card-img-top">
+                {{-- <img src="https://i.pinimg.com/736x/6a/1b/73/6a1b7352740dfcaf1d8999e347d5b053.jpg" class="card-img-top"> --}}
+                <img class="card-img-top" src="{{ asset('upload/artists/'.$artist->image_URL) }}">
             </a>
             <div class="card-body">
                 <div class="card-title">
