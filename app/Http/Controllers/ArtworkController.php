@@ -50,12 +50,21 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        $artworks   = Artwork::get($id);
-        $categories = Category::get($name);
-        $artist = User::get($first_name,$last_name);
-        return view('pages.artwork-detail', compact('categories', 'artworks','artist'));
+        //this filled cannot work yet 
+        if(filled($id)){
+            $artwork = Artwork::all()->find($id); 
+            if($id == 'id'){
+                $category = Category::all()->find($artwork->categoryId); 
+                $artist = User::all()->find($artwork->artistId);
 
-        
+                return view('pages.artwork-detail', compact('category', 'artwork','artist'));
+            }else{
+                //Testing purpose
+                echo("The id does not exist.");
+            }
+        }else{
+            echo("No such file.");
+        }
     }
 
     /**

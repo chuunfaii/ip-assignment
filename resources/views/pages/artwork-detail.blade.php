@@ -8,33 +8,35 @@
 
 @section('content')
 
+
 <div class="container d-flex" style="min-height: 500px;">
     <div class="d-flex justify-content-center" style="flex: 1;">
-        <img style="max-width: 80%;" src="upload/artworks/Artwork2.jpg" />
+        <img style="max-width: 80%;" src="{{ asset('upload/artworks/' . $artwork->image) }}" />
     </div>
     <div class="h-100" style="flex: 1;">
         <div class="h-75">
             <div class="mb-5">
                 <h2 class="display-5 mb-4">
-                    Artwork Name
+                    {{ $artwork->name }}
                 </h2>
                 <p class="text-muted">
-                    ArtWork Description
+                    {{ $artwork->description }}
                 </p>
             </div>
 
             <div class="d-flex justify-content-between mb-5">
                 <span class="text-muted">
-                    Art
+                    {{ $category->name }}
                 </span>
                 <span class="text-muted fw-bold">
-                    Artist Name
+                    {{ $artist->first_name}}
+                    {{ $artist->last_name}}
                 </span>
             </div>
 
             <div>
                 <p class="fw-bold">
-                    10 more available
+                    {{ $artwork->quantity }} Quantity Available
                 </p>
 
                 <div class="d-flex justify-content-between align-items-end">
@@ -44,7 +46,7 @@
 
                     </div>
 
-                    <span class="display-6">$ 1000 </span>
+                    <span class="display-6">$ {{ $artwork->price}} </span>
                 </div>
             </div>
         </div>

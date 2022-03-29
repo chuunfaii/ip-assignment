@@ -53,11 +53,6 @@ Route::get('/artists', 'App\Http\Controllers\ArtistController@index');
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
-Route::get('/artwork-detail/{id}',function(){
-    $artworks   = Artwork::get($id);
-    $categories = Category::get($name);
-    $artist = User::get($first_name,$last_name);
-    return view('pages.artwork-detail', compact('categories', 'artworks','artist'));
-});
+Route::get('/artwork/{id}',[ArtworkController::class,'show']);
 
 require __DIR__ . '/auth.php';
