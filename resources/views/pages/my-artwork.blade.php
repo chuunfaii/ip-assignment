@@ -24,30 +24,54 @@
 </div>
 
 <div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
-    @foreach($artworks as $art)
-    <div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
-        <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
-        <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-                <input type="hidden" name="artId" value="{{ $art->id }}">
-                <h5 class="card-title" id="name">
-                    {{ $art->name }}
-                </h5>
-                <p class="card-text text-muted">
-                    {{ $art->description }}
-                </p>
+    <div class="row">
+        @foreach($artworks as $art)
+        <!--<div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
+            <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <input type="hidden" name="artId" value="{{ $art->id }}">
+                    <h5 class="card-title" id="name">
+                        {{ $art->name }}
+                    </h5>
+                    <p class="card-text text-muted">
+                        {{ $art->description }}
+                    </p>
+                </div>
+                <div class="mt-5 d-flex justify-content-between">
+                    <p class="text-muted">Quantity : {{ $art->quantity }}</p>
+                    <p class="fw-bold">$ {{ $art->price }}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                    <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
+                </div>
             </div>
-            <div class="mt-5 d-flex justify-content-between">
-                <p class="text-muted">Quantity : {{ $art->quantity }}</p>
-                <p class="fw-bold">$ {{ $art->price }}</p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
+        </div>-->
+        <div class="col-4">
+            <div class="card m-5" style="min-height:18rem !important;">
+                <span>
+                    <img class="card-img-top" src="{{ asset('upload/artworks/' . $art->image) }}">
+                </span>
+                <div class="card-body">
+                    <div class="card-title">
+                        <span>
+                            <label class="fw-bold">{{ $art->name }}</label>
+                        </span>
+                        <div class="mt-5 d-flex justify-content-between">
+                            <p class="text-muted">Quantity : {{ $art->quantity }}</p>
+                            <p class="fw-bold">$ {{ $art->price }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                            <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
 
     <!--Modal Edit Artwork-->
     <div class="modal fade" id="EditArtwork" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" artwork-image="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg">
