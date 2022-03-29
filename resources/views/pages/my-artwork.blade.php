@@ -25,7 +25,7 @@
 
 <div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
     @foreach($artworks as $art)
-    <div class="card col-3 p-0 mt-5" style="width:25% !important;" id="artCard">
+    <div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
         <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
         <div class="card-body d-flex flex-column justify-content-between">
             <div>

@@ -142,8 +142,8 @@ class ArtistArtworkController extends Controller
         $artwork->description = $desc;
         $artwork->quantity = $qtt;
         $artwork->categoryId = $cat;
-        if($request->hasFile('artworkImage')){
-            $imagaPath = 'upload/artworks/'.$artwork->image;
+        if($request->hasFile('editImage')){
+            $imagePath = 'upload/artworks/'.$artwork->image;
             if(File::exists($imagePath)){
                 File::delete($imagePath);
             }
@@ -152,7 +152,7 @@ class ArtistArtworkController extends Controller
             $file-> move('upload/artworks/', $filename);
             $artwork-> image = $filename;
         }
-        $artwork->update();
+        $artwork->save();
         return redirect('my-artwork')->with('status', 'Artwork Updated Successfully');
     }
 
