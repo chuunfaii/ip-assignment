@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Artwork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class ArtistArtworkController extends Controller
 {
@@ -33,6 +34,17 @@ class ArtistArtworkController extends Controller
     }
 
     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function validator(Request $request)
+    {
+
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,7 +54,6 @@ class ArtistArtworkController extends Controller
      */
     public function store(Request $request)
     {
-
         $name = $request->input('artworkName');
         $price = $request->input('artworkPrice');
         $desc = $request->input('artworkDesc');
@@ -51,7 +62,7 @@ class ArtistArtworkController extends Controller
         $file = $request->file('artworkImage');
 
         if (empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
-            $errorMsg = "All fields is required";
+            $errorMsg = "All fields is required. Please try again.";
             return redirect('my-artwork')->with('estatus', $errorMsg);
         } else {
             $artwork = new Artwork;
@@ -69,6 +80,7 @@ class ArtistArtworkController extends Controller
             }
             $artwork->save();
             return redirect('my-artwork')->with('status', 'Artwork Added Successfully');
+
         }
     }
 
@@ -112,9 +124,36 @@ class ArtistArtworkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('artworkId');
+        $artwork = Artwork::find($id);
+
+        $name = $request->input('editName');
+        $price = $request->input('editPrice');
+        $desc = $request->input('editDesc');
+        $qtt = $request->input('editQtt');
+        $cat = $request->input('editCategory');
+        $file = $request->file('editImage');
+
+        //$artwork->artistId = auth()->user()->id;
+        $artwork->name = $name;
+        $artwork->price = $price;
+        $artwork->description = $desc;
+        $artwork->quantity = $qtt;
+        $artwork->categoryId = $cat;
+        if($request->hasFile('artworkImage')){
+            $imagaPath = 'upload/artworks/'.$artwork->image;
+            if(File::exists($imagePath)){
+                File::delete($imagePath);
+            }
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file-> move('upload/artworks/', $filename);
+            $artwork-> image = $filename;
+        }
+        $artwork->update();
+        return redirect('my-artwork')->with('status', 'Artwork Updated Successfully');
     }
 
     /**

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\ArtistController;
+use App\Http\Controllers\ArtistArtworkController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,15 +25,12 @@ Route::get('/', function () {
 
 Route::redirect('/home', '/');
 
-Route::get('/my-artwork', 'App\Http\Controllers\ArtistArtworkController@index');
-
-Route::post('/store-artwork', 'App\Http\Controllers\ArtistArtworkController@store');
-
-Route::post('/fetch-artwork', 'App\Http\Controllers\ArtistArtworkController@edit');
-
-Route::post('/update-artwork/{id}', 'App\Http\Controllers\ArtistArtworkController@update');
-
-Route::post('/delete-artwork/{id}', 'App\Http\Controllers\ArtistArtworkController@destroy');
+//Artist Add, Update, Delete & Retrieve Artworks
+Route::get('/my-artwork', [ArtistArtworkController::class, 'index']);
+Route::post('/store-artwork', [ArtistArtworkController::class, 'store']);
+Route::post('/fetch-artwork', [ArtistArtworkController::class, 'edit']);
+Route::post('/update-artwork', [ArtistArtworkController::class, 'update']);
+Route::post('/delete-artwork', [ArtistArtworkController::class, 'destroy']);
 
 Route::get('/my-sales', function () {
     return view('pages.my-sales');
