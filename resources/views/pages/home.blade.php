@@ -79,7 +79,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork1.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork1.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -101,7 +101,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork2.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork2.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -123,7 +123,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork3.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork3.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -146,7 +146,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork4.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork4.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -168,7 +168,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork5.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork5.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
@@ -190,7 +190,7 @@
         <td>
           <div class="card mx-5 p-0 h-100 mt-5">
             <a href="./">
-              <img src="artworks/Artwork6.jpg" alt="" class="card-img-top">
+              <img src="upload/artworks/Artwork6.jpg" alt="" class="card-img-top">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <div>

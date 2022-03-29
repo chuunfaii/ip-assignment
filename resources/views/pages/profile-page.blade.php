@@ -14,10 +14,10 @@
         <div class="profile-header">
             <div class="profile-header-cover"></div>
             <div class="profile-header-content container">
-                <img id="Image1" class="profile-header-img"/>
+                <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_URL) }}"/>
 
                 <div class="profile-header-info">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mt-3">
                         <div>
                             <h4 class="mb-4 fw-bold">
                                 <Label id="TxtFName">{{ auth()->user()->first_name }}</Label>
@@ -30,7 +30,7 @@
                         <div class="w-50">
                             <h5 class="mb-4 fw-bold">Bio</h5>
                             <p>
-                                <label id="TxtBio">Bio Content</label>
+                                <label id="TxtBio">{{ auth()->user()->bio }}</label>
                             </p>
                         </div>
                     </div>
@@ -48,23 +48,25 @@
 <hr />
 
 <div class="row row-cols-4">
-    <div class="card col ms-5 mb-5 p-0 mt-3" style="width:21% !important;">
-        <a href="">
-            <img src="" class="card-img-top" style="height:250px;"/>
-        </a>
-        <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-                <a href="">
-                    <h5 class="card-title" >Handsome KG</h5>
-                </a>    
-                <p class="card-text text-muted">KG The Most Handsome</p>
-            </div>
-            <div class="mt-5 d-flex justify-content-between">
-                <p class="text-muted">Quantity : 1</p>
-                <p class="fw-bold">RM1000000000</p>
+    @foreach($artworks as $art)
+        <div class="card col ms-5 mb-5 p-0 mt-3" style="width:21% !important;">
+            <a href="">
+                <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
+            </a>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <a href="">
+                        <h5 class="card-title" >{{ $art->name }}</h5>
+                    </a>
+                    <p class="card-text text-muted">{{ $art->description }}</p>
+                </div>
+                <div class="mt-5 d-flex justify-content-between">
+                    <p class="text-muted">Quantity : {{ $art->quantity }}</p>
+                    <p class="fw-bold">$ {{ $art->price }}</p>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
 </div>
 
 

@@ -8,8 +8,7 @@
         <a href="artist.php" class="nav-link">Artist</a>
       </li>
       <li class="nav-item px-4">
-        <!-- TODO: Replace the link later -->
-        <a href="artwork.php" class="nav-link">Artwork</a>
+        <a href="{{ route('artworks') }}" class="nav-link">Artwork</a>
       </li>
     </ul>
 
