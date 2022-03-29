@@ -5,7 +5,8 @@
     <ul class="navbar-nav position-absolute top-50 start-50 translate-middle">
       <li class="nav-item px-4">
         <!-- TODO: Replace the link later -->
-        <a href="artist.php" class="nav-link">Artist</a>
+        {{-- <a href="artist.php" class="nav-link">Artist</a> --}}
+        <a href="{{ route('artists') }}" class="nav-link">Artists</a>
       </li>
       <li class="nav-item px-4">
         <a href="{{ route('artworks') }}" class="nav-link">Artwork</a>
