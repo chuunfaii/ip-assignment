@@ -168,7 +168,7 @@
                             </div>
                         </div>
 
-                        <div style="text-align:center;"><span class="text-danger error-text image-error"></span></div>
+                        <div class="mb-2" style="text-align:center;"><span class="text-danger error-text image-error"></span></div>
                         <div class=" mb-4" style="text-align:center;">Upload Product Image</div>
 
                         <div class="form-group row mb-3">
@@ -232,6 +232,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 
 <script>
+    function success() {
+        var name = document.getElementById('artworkName');
+        var price = document.getElementById$('artworkPrice');
+        var quantity = document.getElementById('artworkQtt');
+        var desc = document.getElementById('artworkDesc');
+        var image= document.getElementById('FileUpload2');
+
+        if(image == "" || name == "" || price == "" || desc == "" || quantity== ""){
+            document.getElementById('btnAdd').disabled = true;
+        } else {
+            document.getElementById('btnAdd').disabled = false;
+        }
+    }
     $(document).ready(function() {
         var readURL = function(input) {
             if (input.files && input.files[0]) {
@@ -262,16 +275,10 @@
             var desc = $('#artworkDesc').val();
             var image=$('#FileUpload2').val();
 
-            if(image == ""){
-                $("span.image-error").text("Image is required");
-            }else if(name == ""){
-                $("span.name-error").text("Name is required");
-            }else if(price == ""){
-                $("span.price-error").text("Price is required");
-            }else if(desc == ""){
-                $("span.description-error").text("Description is required");
-            }else if(quantity== ""){
-                $("span.quantity-error").text("Quantity is required");
+            if(image == "" || name == "" || price == "" || desc == "" || quantity== ""){
+                $(".btnAdd").prop('disabled', true);
+            }else{
+                $(".btnAdd").prop('disabled', false);
             }
         });*/
 

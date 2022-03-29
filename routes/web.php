@@ -6,7 +6,7 @@ use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Artwork;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +41,8 @@ Route::get('/order-history', function () {
 });
 
 Route::get('/profile-page', function () {
-    return view('pages.profile-page');
+    $artworks   = Artwork::all()->where('artistId', auth()->user()->id);
+    return view('pages.profile-page', compact('artworks'));
 })->name('profile-page');
 
 Route::get('/wishlist', function () {
