@@ -55,7 +55,7 @@
                 </span>
                 <div class="card-body">
                     <div class="card-title">
-                        <span>
+                        <span class="card-text h5">
                             <label class="fw-bold">{{ $art->name }}</label>
                         </span>
                         <div class="mt-5 d-flex justify-content-between">
