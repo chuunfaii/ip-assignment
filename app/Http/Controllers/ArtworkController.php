@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Artwork;
+use App\Models\User;
 
 class ArtworkController extends Controller
 {
@@ -47,7 +50,12 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        //
+        $artworks   = Artwork::get($id);
+        $categories = Category::get($name);
+        $artist = User::get($first_name,$last_name);
+        return view('pages.artwork-detail', compact('categories', 'artworks','artist'));
+
+        
     }
 
     /**
