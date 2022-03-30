@@ -25,52 +25,36 @@
 
 <div class="container">
     <div class="row">
-        @foreach($artworks as $artwork)
-        <!--<div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
-            <img src="{{ asset('upload/artworks/'.$artwork->image).'' }}" class="card-img-top" style="height:250px;" />
-            <div class="card-body d-flex flex-column justify-content-between">
-                <div>
-                    <input type="hidden" name="artId" value="{{ $artwork->id }}">
-                    <h5 class="card-title" id="name">
-                        {{ $artwork->name }}
-                    </h5>
-                    <p class="card-text text-muted">
-                        {{ $artwork->description }}
-                    </p>
-                </div>
-                <div class="mt-5 d-flex justify-content-between">
-                    <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
-                    <p class="fw-bold">$ {{ $artwork->price }}</p>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                    <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
-                </div>
-            </div>
-        </div>-->
-        <div class="col-4">
-            <div class="card m-5" style="min-height:18rem !important;">
-                <span>
-                    <img class="card-img-top" src="{{ asset('upload/artworks/' . $artwork->image_url) }}">
-                </span>
-                <div class="card-body">
-                    <div class="card-title">
-                        <span class="card-text h5">
-                            <label class="fw-bold">{{ $artwork->name }}</label>
-                        </span>
-                        <div class="mt-5 d-flex justify-content-between">
-                            <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
-                            <p class="fw-bold">$ {{ $artwork->price }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                                <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
+        @if($artworks != null)
+            @foreach($artworks as $artwork)
+            <div class="col-4">
+                <div class="card m-5" style="min-height:18rem !important;">
+                    <span>
+                        <img class="card-img-top" src="{{ asset('upload/artworks/' . $artwork->image_url) }}">
+                    </span>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <span class="card-text h5">
+                                <label class="fw-bold">{{ $artwork->name }}</label>
+                            </span>
+                            <div class="mt-5 d-flex justify-content-between">
+                                <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
+                                <p class="fw-bold">$ {{ $artwork->price }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                                    <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @endforeach
+            @endforeach
+            @else
+            <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
+                <h1 class="display-6 mb-5">Your artwork is empty right now.</h1>
+            </div>
+        @endif
     </div>
 
     <!--Modal Edit Artwork-->
@@ -139,7 +123,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="cancel">Cancel</button>
-                        <button class="btn btn-primary px-4 saveBtn" type="submit">Save</button>
+                        <button class="btn btn-primary px-4 saveBtn" type="submit">Update</button>
                     </div>
                 </form>
             </div>
