@@ -19,7 +19,7 @@ class ArtworkController extends Controller
             $artworks = Artwork::where('name', 'like', "%$query%")->get();
         }
 
-        return view('pages.artworks')->with('artworks', $artworks);
+        return view('pages.artworks')->with(compact('artworks'));
     }
 
     /**

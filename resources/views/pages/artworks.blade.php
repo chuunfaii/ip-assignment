@@ -51,9 +51,8 @@
             </div>
             <div class="mt-5 d-flex justify-content-between">
               <span class="text-muted">
-                <!-- {{ App\Models\User::all()->find($artwork->artistId)->first_name }}
-                {{ App\Models\User::all()->find($artwork->artistId)->last_name }} -->
-                {{ $artwork }}
+                {{ $artwork->artist->first_name }}
+                {{ $artwork->artist->last_name }}
               </span>
               <span class="fw-bold">$ {{ $artwork->price }}</span>
             </div>
