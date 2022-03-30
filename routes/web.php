@@ -49,8 +49,10 @@ Route::get('/wishlist', function () {
     return view('pages.wishlist');
 });
 
-Route::get('/artists', 'App\Http\Controllers\ArtistController@index');
+Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
+
+Route::get('/artwork/{id}',[ArtworkController::class,'show']);
 
 require __DIR__ . '/auth.php';

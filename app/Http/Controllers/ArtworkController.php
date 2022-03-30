@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
@@ -18,5 +20,64 @@ class ArtworkController extends Controller
         }
 
         return view('pages.artworks')->with('artworks', $artworks);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //this filled cannot work yet 
+        if (filled($id)) {
+            $artwork = Artwork::all()->find($id);
+            if ($id == 'id') {
+                $category = Category::all()->find($artwork->categoryId);
+                $artist = User::all()->find($artwork->artistId);
+
+                return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+            } else {
+                //Testing purpose
+                echo ("The id does not exist.");
+            }
+        } else {
+            echo ("No such file.");
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request)
+    {
+        // 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
