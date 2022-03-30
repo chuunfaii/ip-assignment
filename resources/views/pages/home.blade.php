@@ -7,7 +7,7 @@
   <div class="carousel slide" id="carouselControls" data-bs-ride="carousel">
     <div class="carousel slide" id="myCarousel" data-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active position-relative" style="background-image: url(images/slide1.jpg)">
+        <div class="carousel-item active position-relative" style="background-image: url({{ asset('images/slide1.jpg') }})">
           <div class="card-img-overlay overlay-dark">
             <div class="carousel-caption d-none d-md-block position-absolute top-50 start-50 translate-middle">
               <h1 class="w-100">
@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <div class="carousel-item position-relative" style="background-image: url(images/slide2.jpg); background-position: center;">
+        <div class="carousel-item position-relative" style="background-image: url({{ asset('images/slide2.jpg') }}); background-position: center;">
           <div class="card-img-overlay overlay-dark">
             <div class="carousel-caption d-none d-md-block position-absolute top-50 start-50 translate-middle">
               <h1 class="w-100">Browse by Artwork</h1>
@@ -27,13 +27,12 @@
                 Curated collections of works ready for purchase, from iconic
                 artist series to emerging trends.
               </p>
-              <!-- TODO: Replace the link later -->
-              <a href="#" class="mt-3 px-5 btn btn-lg btn-light">Browse Now</a>
+              <a href="{{ route('artworks') }}" class="mt-3 px-5 btn btn-lg btn-light">Browse Now</a>
             </div>
           </div>
         </div>
 
-        <div class="carousel-item position-relative" style="background-image: url(images/slide3.jpg); background-position: center;">
+        <div class="carousel-item position-relative" style="background-image: url({{ asset('images/slide3.jpg') }}); background-position: center;">
           <div class="card-img-overlay overlay-dark">
             <div class="carousel-caption d-none d-md-block position-absolute top-50 start-50 translate-middle">
               <h1 class="w-100">Sell Works from Your Collection</h1>
@@ -42,7 +41,7 @@
                 your works on consignment. It's simple and free to submit.
               </p>
               <!-- TODO: Replace the link later -->
-              <a href="{{ route('register') }}" class="mt-3 px-5 btn btn-lg btn-light">Submit Now</a>
+              <a href="{{ route('my-artwork') }}" class="mt-3 px-5 btn btn-lg btn-light">Submit Now</a>
             </div>
           </div>
         </div>
@@ -71,146 +70,39 @@
   </div>
 
   <!-- Featured Artworks -->
-  <h2 class="text-center navbar-brand fs-1 mt-5 p-0 m-0">Featured Artworks</h2>
+  <h2 class="text-center navbar-brand fs-1 my-5 p-0 m-0">Featured Artworks</h2>
   <!-- TODO: Dynamically generate random artworks -->
-  <table class="w-100 mb-5" cellspacing="0" style="border-collapse: collapse;">
-    <tbody>
-      <tr>
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork1.jpg" alt="" class="card-img-top">
-            </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Red on Red Painting</h5>
-                </a>
-                <p class="card-text text-muted">
-                  The artwork was painted during the lock down this year, the title RED ON RED is related to the situation.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 1120.00</span>
-              </div>
-            </div>
-          </div>
-        </td>
 
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork2.jpg" alt="" class="card-img-top">
+  <div class="row row-cols-3">
+    @foreach ($artworks as $artwork)
+    <div class="col mb-5">
+      <div class="card mx-5" style="width: 20rem !important;">
+        <a href='/artwork/{{ $artwork->id }}'>
+          <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
+        </a>
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <a href='/artwork/{{ $artwork->id }}'>
+              <h5 class="card-title">
+                {{ $artwork->name }}
+              </h5>
             </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Blue Vision Painting</h5>
-                </a>
-                <p class="card-text text-muted">
-                  Painted on canvas, inspiration form architecture and Industrial design. Shades of blue is essential in this artwork.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 1120.00</span>
-              </div>
-            </div>
+            <p class="card-text text-muted">
+              {{ $artwork->description }}
+            </p>
           </div>
-        </td>
-
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork3.jpg" alt="" class="card-img-top">
-            </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Construction in Red, Blue & Yellow Drawing</h5>
-                </a>
-                <p class="card-text text-muted">
-                  Drawing on quality acid-free paper, inspiration from modern architecture and Industrial design, use of ink marker, permanent colour, coloured paper glued on to the paper.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 1120.00</span>
-              </div>
-            </div>
+          <div class="mt-5 d-flex justify-content-between">
+            <span class="text-muted">
+              {{ $artwork->artist->first_name }}
+              {{ $artwork->artist->last_name }}
+            </span>
+            <span class="fw-bold">$ {{ $artwork->price }}</span>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork4.jpg" alt="" class="card-img-top">
-            </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Composition in Blue & Green Painting</h5>
-                </a>
-                <p class="card-text text-muted">
-                  Composition in Blue & Green is one of my latest work this year, a painting with a mixed media style on panel board, use of painted paper and drawing into the paint.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 2740.00</span>
-              </div>
-            </div>
-          </div>
-        </td>
-
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork5.jpg" alt="" class="card-img-top">
-            </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Constructive Movement Painting</h5>
-                </a>
-                <p class="card-text text-muted">
-                  A feeling of a place, constructive elements crossing, lines meets lines in different ways, an abstract view of an industrial design.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 1430.00</span>
-              </div>
-            </div>
-          </div>
-        </td>
-
-        <td>
-          <div class="card mx-5 p-0 h-100 mt-5">
-            <a href="./">
-              <img src="upload/artworks/Artwork6.jpg" alt="" class="card-img-top">
-            </a>
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <a href="./">
-                  <h5 class="card-title">Day 362 Drawing</h5>
-                </a>
-                <p class="card-text text-muted">
-                  Drawing on paper ( acid free) One drawing a day in 2017 based on architecture and observation.
-                </p>
-              </div>
-              <div class="mt-5 d-flex justify-content-between">
-                <span class="text-muted">Karin White</span>
-                <span class="fw-bold">$ 330.00</span>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </div>
 </div>
 
 @endsection
