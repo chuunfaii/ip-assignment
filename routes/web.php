@@ -44,12 +44,14 @@ Route::get('/profile-page', function () {
 
 Route::get('/wishlist', function () {
     return view('pages.wishlist');
-});
+})->name('wishlist');
 
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
+
+Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
 
 require __DIR__ . '/auth.php';

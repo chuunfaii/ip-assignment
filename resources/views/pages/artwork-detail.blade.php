@@ -8,6 +8,8 @@
 
 @section('content')
 
+<form action="" method="POST">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="m-auto container d-flex" style="min-height: 500px;">
     <div class="d-flex justify-content-center" style="flex: 1;">
@@ -34,37 +36,39 @@
                 </span>
             </div>
 
-            <div>
-                <p class="fw-bold">
-                    {{ $artwork->quantity }} Quantity Available
-                </p>
+                <div>
+                    <p class="fw-bold">
+                        {{ $artwork->quantity }} Quantity Available
+                    </p>
 
-                <div class="d-flex justify-content-between align-items-end">
-                    <div>
-                        <span class="me-3">Quantity:</span>
-                        <input id='txtQuantity' type='number' min=1 value=1 />
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <span class="me-3">Quantity:</span>
+                            <input id='txtQuantity' name="quantity" type='number' min=1 value=1 />
 
+                        </div>
+
+                        <span class="display-6">$ {{ $artwork->price}} </span>
                     </div>
+                </div>
+            </div>
 
-                    <span class="display-6">$ {{ $artwork->price}} </span>
+            <div class="d-flex justify-content-between align-items-end h-25">
+                <a class="fs-5 text-muted text-decoration-none" href="{{ route('artworks') }}">
+                    <i class="bi bi-caret-left-fill"></i> Back to Artworks
+                </a>
+                
+                <div>
+                    <button id="btnWishlist" class="btn btn-outline-secondary px-4 py-3 me-3 "
+                        name="action" value="wishlist">
+                        <i class="bi bi-heart-fill"></i>
+                    </button>
+                    <button id="btnCart" class="btn btn-primary px-5 py-3" name="action" value="cart">Add to
+                        Cart</button>
                 </div>
             </div>
         </div>
-
-        <div class="d-flex justify-content-between align-items-end h-25">
-            <a class="fs-5 text-muted text-decoration-none" href="{{ route('artworks') }}">
-                <i class="bi bi-caret-left-fill"></i> Back to Artworks
-            </a>
-
-            <div>
-                <button id="btnWishlist" class="btn btn-outline-secondary px-4 py-3 me-3" onclick="btnWishlist_Click">
-                    <i class="bi bi-heart-fill"></i>
-                </button>
-                <button id="btnCart" class="btn btn-primary px-5 py-3" onclick="btnCart_Click">Add to
-                    Cart</button>
-            </div>
-        </div>
     </div>
-</div>
+</form>
 
 @endsection
