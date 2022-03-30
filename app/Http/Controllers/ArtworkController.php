@@ -13,10 +13,20 @@ class ArtworkController extends Controller
     {
         $artworks = Artwork::all();
 
-        if ($request->input('query')) {
-            $query = $request->input('query');
-
+        if ($query = $request->input('query')) {
             $artworks = Artwork::where('name', 'like', "%$query%")->get();
+        }
+
+        if ($sort = $request->input('sort')) {
+            if ($sort == 'asc') {
+                $artworks = $artworks->sortBy('name');
+            } else if ($sort == 'desc') {
+                $artworks = $artworks->sortByDesc('name');
+            } else if ($sort == 'low') {
+                $artworks = $artworks->sortBy('price');
+            } else if ($sort == 'high') {
+                $artworks = $artworks->sortByDesc('price');
+            }
         }
 
         return view('pages.artworks')->with(compact('artworks'));
