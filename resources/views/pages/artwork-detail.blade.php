@@ -9,9 +9,9 @@
 @section('content')
 
 
-<div class="container d-flex" style="min-height: 500px;">
+<div class="m-auto container d-flex" style="min-height: 500px;">
     <div class="d-flex justify-content-center" style="flex: 1;">
-        <img style="max-width: 80%;" src="{{ asset('upload/artworks/' . $artwork->image) }}" />
+        <img style="max-width: 80%;" src="{{ asset('upload/artworks/' . $artwork->image_url) }}" />
     </div>
     <div class="h-100" style="flex: 1;">
         <div class="h-75">
@@ -26,11 +26,11 @@
 
             <div class="d-flex justify-content-between mb-5">
                 <span class="text-muted">
-                    {{ $category->name }}
+                    {{ $artwork->category->name }}
                 </span>
                 <span class="text-muted fw-bold">
-                    {{ $artist->first_name}}
-                    {{ $artist->last_name}}
+                    {{ $artwork->artist->first_name}}
+                    {{ $artwork->artist->last_name}}
                 </span>
             </div>
 
@@ -57,8 +57,7 @@
             </a>
 
             <div>
-                <button id="btnWishlist" class="btn btn-outline-secondary px-4 py-3 me-3"
-                    onclick="btnWishlist_Click">
+                <button id="btnWishlist" class="btn btn-outline-secondary px-4 py-3 me-3" onclick="btnWishlist_Click">
                     <i class="bi bi-heart-fill"></i>
                 </button>
                 <button id="btnCart" class="btn btn-primary px-5 py-3" onclick="btnCart_Click">Add to

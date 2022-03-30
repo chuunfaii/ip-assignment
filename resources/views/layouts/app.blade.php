@@ -56,7 +56,6 @@
         $('body').removeClass("modal-open-noscroll");
       });
     });
-
   </script>
 </body>
 
