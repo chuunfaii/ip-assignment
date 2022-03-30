@@ -8,9 +8,9 @@
 
 @section('content')
 
-<form action="" method="POST">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<form action="{{ route('wishlist_and_cart', $artwork->id) }}" method="POST">
+@csrf
 <div class="m-auto container d-flex" style="min-height: 500px;">
     <div class="d-flex justify-content-center" style="flex: 1;">
         <img style="max-width: 80%;" src="{{ asset('upload/artworks/' . $artwork->image_url) }}" />
