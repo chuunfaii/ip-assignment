@@ -49,7 +49,7 @@
       </li>
 
       <li class="nav-item px-2">
-        <a class="nav-link" href="cart.php">
+        <a class="nav-link" href="{{ route('cart') }}">
           <i class="bi bi-cart"></i>
         </a>
       </li>
