@@ -23,7 +23,7 @@
                 <div class="col-2">
                     <div class="d-flex justify-content-center">
                         <a href="./">
-                            <img src="artworks/Artwork1.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
+                            <img src="upload/artworks/Artwork1.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
                         </a>
                     </div>
                 </div>
@@ -51,137 +51,13 @@
                 </div>
             </div>
 
-            <div class="row my-5" id="2">
-                <span id="lblArtworkId" style="display: none;">2</span>
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <a href="./">
-                            <img src="artworks/Artwork2.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="h-100 d-flex flex-column justify-content-between">
-                        <span>
-                            <a href="./" class="text-decoration-none text-muted fs-4">
-                                Blue Vision Painting
-                            </a>
-                        </span>
-                        <hr>
-                        <p class="m-0">Artist: Karin White</p>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold">$ 1120.00</span>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-between">
-                        <button id="btnRemove" class="btn btn-outline-danger">Remove</button>
-                        <button id="btnCart" class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+           
 
-            <div class="row my-5" id="3">
-                <span id="lblArtworkId" style="display: none;">3</span>
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <a href="./">
-                            <img src="artworks/Artwork3.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="h-100 d-flex flex-column justify-content-between">
-                        <span>
-                            <a href="./" class="text-decoration-none text-muted fs-4">
-                                Construction in Red, Blue & Yellow Drawing
-                            </a>
-                        </span>
-                        <hr>
-                        <p class="m-0">Artist: Karin White</p>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold">$ 1120.00</span>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-between">
-                        <button id="btnRemove" class="btn btn-outline-danger">Remove</button>
-                        <button id="btnCart" class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+           
 
-            <div class="row my-5" id="4">
-                <span id="lblArtworkId" style="display: none;">3</span>
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <a href="./">
-                            <img src="artworks/Artwork4.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="h-100 d-flex flex-column justify-content-between">
-                        <span>
-                            <a href="./" class="text-decoration-none text-muted fs-4">
-                                Composition in Blue & Green Painting
-                            </a>
-                        </span>
-                        <hr>
-                        <p class="m-0">Artist: Karin White</p>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold">$ 2740.00</span>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-between">
-                        <button id="btnRemove" class="btn btn-outline-danger">Remove</button>
-                        <button id="btnCart" class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+          
 
-            <div class="row my-5" id="5">
-                <span id="lblArtworkId" style="display: none;">3</span>
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <a href="./">
-                            <img src="artworks/Artwork5.jpg" alt="" class="card-img-top" style="max-height: 8rem;">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="h-100 d-flex flex-column justify-content-between">
-                        <span>
-                            <a href="./" class="text-decoration-none text-muted fs-4">
-                                Constructive Movement Painting
-                            </a>
-                        </span>
-                        <hr>
-                        <p class="m-0">Artist: Karin White</p>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold">$ 1430.00</span>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="h-100 d-flex align-items-center justify-content-between">
-                        <button id="btnRemove" class="btn btn-outline-danger">Remove</button>
-                        <button id="btnCart" class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 @endsection
