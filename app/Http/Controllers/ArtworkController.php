@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use App\Models\Category;
-use App\Models\User;
+use App\Models\User;  
+use App\Models\wishlist;
 use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
@@ -33,19 +34,46 @@ class ArtworkController extends Controller
         //this filled cannot work yet 
         if (filled($id)) {
             $artwork = Artwork::all()->find($id);
-            if ($id == 'id') {
-                $category = Category::all()->find($artwork->categoryId);
-                $artist = User::all()->find($artwork->artistId);
+            //if ($id == 'id') {
+                $category = Category::all()->find($artwork->category_id);
+                $artist = User::all()->find($artwork->user_id);
 
                 return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
-            } else {
+
+            //} else {
                 //Testing purpose
-                echo ("The id does not exist.");
-            }
+                //echo ("The id does not exist.");
+            //}
         } else {
             echo ("No such file.");
         }
     }
+
+    public function add_wishlist(Request $request,$id){
+            switch($request->input('action')){
+                    case 'wishlist':
+                        $artwork = Artwork::all()->find($id);
+                        $category = Category::all()->find($artwork->category_id);
+                        $artist = User::all()->find($artwork->user_id);
+                        
+                        return view('pages.wishlist', compact('category', 'artwork', 'artist'));
+                        
+                        $wishlist = new Wishlist();
+                        $wishlist->user_id = auth()->user()->id;
+                        $wishlist->artwork_id = $artworkid;
+
+                        $wishlist->save();
+                
+                    return redirect('artwork')->with('status','Artwork has been added to wishlist.');
+                    break;
+                case 'cart':
+                    
+                    break;
+            }
+        
+        
+    }
+
 
     /**
      * Show the form for editing the specified resource.
