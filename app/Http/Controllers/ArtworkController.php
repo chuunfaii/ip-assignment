@@ -19,7 +19,7 @@ class ArtworkController extends Controller
             $artworks = Artwork::where('name', 'like', "%$query%")->get();
         }
 
-        return view('pages.artworks')->with('artworks', $artworks);
+        return view('pages.artworks')->with(compact('artworks'));
     }
 
     /**
@@ -30,21 +30,28 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        //this filled cannot work yet 
-        if (filled($id)) {
-            $artwork = Artwork::all()->find($id);
-            if ($id == 'id') {
-                $category = Category::all()->find($artwork->categoryId);
-                $artist = User::all()->find($artwork->artistId);
-
-                return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
-            } else {
-                //Testing purpose
-                echo ("The id does not exist.");
-            }
+        if ($artwork = Artwork::find($id)) {
+            return view('pages.artwork-detail', compact('artwork'));
         } else {
-            echo ("No such file.");
+            // TODO: Change it to something better.
+            echo "No such file.";
         }
+
+        // //this filled cannot work yet 
+        // if (filled($id)) {
+        //     $artwork = Artwork::find($id);
+        //     if ($id == 'id') {
+        //         $category = Category::all()->find($artwork->categoryId);
+        //         $artist = User::all()->find($artwork->artistId);
+
+        //         return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+        //     } else {
+        //         //Testing purpose
+        //         echo ("The id does not exist.");
+        //     }
+        // } else {
+        //     echo ("No such file.");
+        // }
     }
 
     /**

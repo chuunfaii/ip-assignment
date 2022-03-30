@@ -36,7 +36,7 @@
       <div class="col">
         <div class="card mx-5" style="width: 20rem !important;">
           <a href='/artwork/{{ $artwork->id }}'>
-            <img src="upload/artworks/{{ $artwork->image }}" class="card-img-top">
+            <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
           </a>
           <div class="card-body d-flex flex-column justify-content-between">
             <div>
@@ -51,9 +51,8 @@
             </div>
             <div class="mt-5 d-flex justify-content-between">
               <span class="text-muted">
-                <!-- {{ App\Models\User::all()->find($artwork->artistId)->first_name }}
-                {{ App\Models\User::all()->find($artwork->artistId)->last_name }} -->
-                {{ $artwork }}
+                {{ $artwork->artist->first_name }}
+                {{ $artwork->artist->last_name }}
               </span>
               <span class="fw-bold">$ {{ $artwork->price }}</span>
             </div>

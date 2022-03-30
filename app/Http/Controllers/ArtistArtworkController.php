@@ -21,6 +21,8 @@ class ArtistArtworkController extends Controller
     {
         $id = auth()->user()->id;
 
+        // $artworks = Artwork::all();
+
         $artworks = Artist::find($id)->artworks;
 
         $categories = Category::all();
