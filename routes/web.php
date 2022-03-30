@@ -41,7 +41,7 @@ Route::get('/order-history', function () {
 });
 
 Route::get('/profile-page', function () {
-    $artworks   = Artwork::all()->where('artistId', auth()->user()->id);
+    $artworks   = Artwork::all()->where('user_id', auth()->user()->id);
     return view('pages.profile-page', compact('artworks'));
 })->name('profile-page');
 

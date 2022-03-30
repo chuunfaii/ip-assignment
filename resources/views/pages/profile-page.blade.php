@@ -14,7 +14,7 @@
         <div class="profile-header">
             <div class="profile-header-cover"></div>
             <div class="profile-header-content container">
-                <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_URL) }}"/>
+                <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_url) }}"/>
 
                 <div class="profile-header-info">
                     <div class="d-flex justify-content-between mt-3">
@@ -51,7 +51,7 @@
     @foreach($artworks as $art)
         <div class="card col ms-5 mb-5 p-0 mt-3" style="width:21% !important;">
             <a href="">
-                <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
+                <img src="{{ asset('upload/artworks/'.$art->image_url).'' }}" class="card-img-top" style="height:250px;" />
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>

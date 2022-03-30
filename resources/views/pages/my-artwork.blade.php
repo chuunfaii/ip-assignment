@@ -331,10 +331,10 @@
                     $('#editPrice').val(data.price);
                     $('#editQtt').val(data.quantity);
                     $('#editDesc').val(data.description);
-                    $('#editCategory').val(data.categoryId);
+                    $('#editCategory').val(data.category_id);
 
                     var baseUrl = "{{ asset('upload/artworks') }}";
-                    var imagePath = baseUrl + '/' + data.image;
+                    var imagePath = baseUrl + '/' + data.image_url;
                     $('#productImg').html("<img id='Image2' class='product-pic' src='" + imagePath + "' />");
 
                     $("#EditArtwork").modal('show');
