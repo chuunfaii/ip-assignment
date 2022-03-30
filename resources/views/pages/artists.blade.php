@@ -7,14 +7,15 @@
 @section('content')
     <h1 class="navbar-brand fw-bold text-center my-4">View All Artists</h1>
 
-
+    <form action="{{ route('artists') }}" method="GET">
     <div class="mb-5 d-flex position-relative">
         <div class="input-group w-50 mx-auto">
-            <input id="txtSearch" class="form-control py-2" placeholder="Enter your search query here..." />
-            <button id="btnSearch" class="btn btn-secondary text-muted">Search</button>
+            <input id="txtSearch" class="form-control py-2" placeholder="Enter your search query here..."name="query" value="{{ request()->input('query') }}"/>
+            <button id="btnSearch" type="submit" class="btn btn-secondary text-muted">Search</button>
         </div>
 
     </div>
+    </form>
 
     <div class="container">
 
