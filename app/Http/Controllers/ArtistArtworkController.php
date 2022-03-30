@@ -69,7 +69,7 @@ class ArtistArtworkController extends Controller
 
         if (empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
             $errorMsg = "All fields is required. Please try again.";
-            return redirect('my-artwork')->with('estatus', $errorMsg);
+            return redirect('my-artwork')->with('error', $errorMsg);
         } else {
             $artwork = new Artwork;
             $artwork->user_id = auth()->user()->id;
@@ -85,7 +85,7 @@ class ArtistArtworkController extends Controller
                 $artwork->image_url = $filename;
             }
             $artwork->save();
-            return redirect('my-artwork')->with('status', 'Artwork Added Successfully');
+            return redirect('my-artwork')->with('message', 'Artwork Added Successfully');
         }
     }
 
@@ -158,7 +158,7 @@ class ArtistArtworkController extends Controller
             $artwork->image_url = $filename;
         }
         $artwork->save();
-        return redirect('my-artwork')->with('status', 'Artwork Updated Successfully');
+        return redirect('my-artwork')->with('message', 'Artwork Updated Successfully');
     }
 
     /**
@@ -176,6 +176,6 @@ class ArtistArtworkController extends Controller
             File::delete($imagePath);
         }
         $artwork->delete();
-        return redirect('/my-artwork')->with('status', 'Artwork Deleted Successfully');
+        return redirect('/my-artwork')->with('message', 'Artwork Deleted Successfully');
     }
 }

@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME)->with('message', 'Login Successfully');
     }
 
     /**
@@ -49,6 +49,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with('message', 'Logout Successfully');
     }
 }
