@@ -36,7 +36,7 @@
       <div class="col">
         <div class="card mx-5" style="width: 20rem !important;">
           <a href='/artwork/{{ $artwork->id }}'>
-            <img src="upload/artworks/{{ $artwork->image }}" class="card-img-top">
+            <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
           </a>
           <div class="card-body d-flex flex-column justify-content-between">
             <div>
