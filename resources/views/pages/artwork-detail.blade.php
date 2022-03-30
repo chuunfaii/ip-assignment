@@ -11,11 +11,11 @@
 
 <form action="{{ route('wishlist_and_cart', $artwork->id) }}" method="POST">
 @csrf
-<div class="m-auto container d-flex" style="min-height: 500px;">
+<div class="mt-5 container d-flex" style="min-height: 500px;">
     <div class="d-flex justify-content-center" style="flex: 1;">
         <img style="max-width: 80%;" src="{{ asset('upload/artworks/' . $artwork->image_url) }}" />
     </div>
-    <div class="h-100" style="flex: 1;">
+    <div style="flex: 1;">
         <div class="h-75">
             <div class="mb-5">
                 <h2 class="display-5 mb-4">
