@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artwork;
 
@@ -19,14 +21,10 @@ use App\Models\Artwork;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
-
-Route::redirect('/home', '/');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Artist Add, Update, Delete & Retrieve Artworks
-Route::get('/my-artwork', [ArtistArtworkController::class, 'index']);
+Route::get('/my-artwork', [ArtistArtworkController::class, 'index'])->name('my-artwork');
 Route::post('/store-artwork', [ArtistArtworkController::class, 'store']);
 Route::post('/fetch-artwork', [ArtistArtworkController::class, 'edit']);
 Route::post('/update-artwork', [ArtistArtworkController::class, 'update']);
@@ -49,11 +47,13 @@ Route::get('/wishlist', function () {
     return view('pages.wishlist');
 })->name('wishlist');
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
-Route::get('/artwork/{id}',[ArtworkController::class,'show']);
+Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
 
 Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
 

@@ -68,7 +68,7 @@ class ArtistArtworkController extends Controller
         $file = $request->file('artworkImage');
 
         if (empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
-            $errorMsg = "All fields is required. Please try again.";
+            $errorMsg = "Added Artwork Failed. All fields is required. Please try again.";
             return redirect('my-artwork')->with('error', $errorMsg);
         } else {
             $artwork = new Artwork;
@@ -141,24 +141,28 @@ class ArtistArtworkController extends Controller
         $cat = $request->input('editCategory');
         $file = $request->file('editImage');
 
-        //$artwork->artistId = auth()->user()->id;
-        $artwork->name = $name;
-        $artwork->price = $price;
-        $artwork->description = $desc;
-        $artwork->quantity = $qtt;
-        $artwork->category_id = $cat;
-        if ($request->hasFile('editImage')) {
-            $imagePath = 'upload/artworks/' . $artwork->image_url;
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
+        if (empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
+            $errorMsg = "Updated Artwork Failed. All fields is required. Please try again.";
+            return redirect('my-artwork')->with('error', $errorMsg);
+        } else {
+            $artwork->name = $name;
+            $artwork->price = $price;
+            $artwork->description = $desc;
+            $artwork->quantity = $qtt;
+            $artwork->category_id = $cat;
+            if ($request->hasFile('editImage')) {
+                $imagePath = 'upload/artworks/' . $artwork->image_url;
+                if (File::exists($imagePath)) {
+                    File::delete($imagePath);
+                }
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('upload/artworks/', $filename);
+                $artwork->image_url = $filename;
             }
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('upload/artworks/', $filename);
-            $artwork->image_url = $filename;
+            $artwork->save();
+            return redirect('my-artwork')->with('message', 'Artwork Updated Successfully');
         }
-        $artwork->save();
-        return redirect('my-artwork')->with('message', 'Artwork Updated Successfully');
     }
 
     /**

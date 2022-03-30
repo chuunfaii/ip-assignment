@@ -33,7 +33,7 @@
 
     <div class="row row-cols-3">
       @foreach ($artworks as $artwork)
-      <div class="col">
+      <div class="col mb-5">
         <div class="card mx-5" style="width: 20rem !important;">
           <a href='/artwork/{{ $artwork->id }}'>
             <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
