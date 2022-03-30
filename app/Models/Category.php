@@ -8,8 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $table = 'category';
+
+    protected $table = 'categories';
+
     protected $fillable = [
         'name',
     ];
+
+    public function artworks()
+    {
+        return $this->hasMany(Artwork::class);
+    }
 }

@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Parental\HasChildren;
 
 class User extends Authenticatable
 {
-    use HasFactory, SoftDeletes;
+    use HasChildren, HasFactory, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'users';
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -25,13 +23,13 @@ class User extends Authenticatable
         'type',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
+    ];
+
+    protected $childTypes = [
+        'customer' => Customer::class,
+        'artist' => Artist::class,
     ];
 
     public function isCustomer(): bool

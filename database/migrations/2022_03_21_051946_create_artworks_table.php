@@ -16,13 +16,14 @@ class CreateArtworksTable extends Migration
         Schema::create('artworks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->double('price', 10, 2);
             $table->integer('quantity');
-            $table->double('price', 10,2);
             $table->longText('description');
-            $table->string('image');
-            $table->integer('artistId');
-            $table->integer('categoryId');
+            $table->string('image_url');
+            $table->integer('user_id');
+            $table->integer('category_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

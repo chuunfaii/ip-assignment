@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Parental\HasParent;
 
-class Artist extends Model
+class Artist extends User
 {
-    use HasFactory;
+    use HasParent, HasFactory;
+
+    public function artworks()
+    {
+        return $this->hasMany(Artwork::class);
+    }
 }

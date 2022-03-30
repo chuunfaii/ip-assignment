@@ -25,46 +25,46 @@
 
 <div class="container d-flex justify-content-center" style="flex-wrap:wrap; gap:25px;">
     <div class="row">
-        @foreach($artworks as $art)
+        @foreach($artworks as $artwork)
         <!--<div class="card col-3 p-0 mt-3 mb-5" style="width:25% !important;" id="artCard">
-            <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
+            <img src="{{ asset('upload/artworks/'.$artwork->image).'' }}" class="card-img-top" style="height:250px;" />
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                    <input type="hidden" name="artId" value="{{ $art->id }}">
+                    <input type="hidden" name="artId" value="{{ $artwork->id }}">
                     <h5 class="card-title" id="name">
-                        {{ $art->name }}
+                        {{ $artwork->name }}
                     </h5>
                     <p class="card-text text-muted">
-                        {{ $art->description }}
+                        {{ $artwork->description }}
                     </p>
                 </div>
                 <div class="mt-5 d-flex justify-content-between">
-                    <p class="text-muted">Quantity : {{ $art->quantity }}</p>
-                    <p class="fw-bold">$ {{ $art->price }}</p>
+                    <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
+                    <p class="fw-bold">$ {{ $artwork->price }}</p>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                    <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
+                    <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                    <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
                 </div>
             </div>
         </div>-->
         <div class="col-4">
             <div class="card m-5" style="min-height:18rem !important;">
                 <span>
-                    <img class="card-img-top" src="{{ asset('upload/artworks/' . $art->image) }}">
+                    <img class="card-img-top" src="{{ asset('upload/artworks/' . $artwork->image_url) }}">
                 </span>
                 <div class="card-body">
                     <div class="card-title">
                         <span class="card-text h5">
-                            <label class="fw-bold">{{ $art->name }}</label>
+                            <label class="fw-bold">{{ $artwork->name }}</label>
                         </span>
                         <div class="mt-5 d-flex justify-content-between">
-                            <p class="text-muted">Quantity : {{ $art->quantity }}</p>
-                            <p class="fw-bold">$ {{ $art->price }}</p>
+                            <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
+                            <p class="fw-bold">$ {{ $artwork->price }}</p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $art->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                            <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $art->id }}">Edit</button>
+                            <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                                <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                 <div class="square upload-button mx-auto mb-4" id="upload-button2">
                                     <div id="productImg"></div>
                                 </div>
-                                <input id="FileUpload2" class="file-upload" type="file" name="editImage"/>
+                                <input id="FileUpload2" class="file-upload" type="file" name="editImage" />
                             </div>
                         </div>
 
@@ -99,14 +99,14 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-9">
-                                <input id="editName" class="form-control" name="editName" required/>
+                                <input id="editName" class="form-control" name="editName" required />
                             </div>
                         </div>
 
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input id="editPrice" class="form-control" name="editPrice" type="number" min=0 max=99999 oninput="validity.valid||(value='');"  required/>
+                                <input id="editPrice" class="form-control" name="editPrice" type="number" min=0 max=99999 oninput="validity.valid||(value='');" required />
                             </div>
                         </div>
 
@@ -120,7 +120,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input id="editQtt" type="number" class="form-control" name="editQtt" type="number" min=0 max=99 oninput="validity.valid||(value='');" required/>
+                                <input id="editQtt" type="number" class="form-control" name="editQtt" type="number" min=0 max=99 oninput="validity.valid||(value='');" required />
                             </div>
                         </div>
 
@@ -164,7 +164,7 @@
                     <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                     <form action="{{ url('/delete-artwork') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="deleteid" id="deleteid"/>
+                        <input type="hidden" name="deleteid" id="deleteid" />
                         <button type="submit" name="btnDelete" id="btnDelete" class="btn btn-primary px-4">Delete</button>
                     </form>
                 </div>
@@ -188,7 +188,7 @@
                                 <div class="square upload-button mx-auto mb-4" id="upload-button1">
                                     <img id="Image1" class="product-pic" />
                                 </div>
-                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required/>
+                                <input id="FileUpload1" class="file-upload" type="file" name="artworkImage" required />
                             </div>
                         </div>
 
@@ -198,7 +198,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-9">
-                                <input class="form-control" name="artworkName" id="artworkName" type="text" required/>
+                                <input class="form-control" name="artworkName" id="artworkName" type="text" required />
                                 <span class="text-danger error-text name-error"></span>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input class="form-control" name="artworkPrice" id="artworkPrice" type="number" min=0 max=99999 oninput="validity.valid||(value='');" required/>
+                                <input class="form-control" name="artworkPrice" id="artworkPrice" type="number" min=0 max=99999 oninput="validity.valid||(value='');" required />
                                 <span class="text-danger error-text price-error"></span>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Quantity</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="artworkQtt" id="artworkQtt" min=0 max=99 oninput="validity.valid||(value='');" required/>
+                                <input type="number" class="form-control" name="artworkQtt" id="artworkQtt" min=0 max=99 oninput="validity.valid||(value='');" required />
                                 <span class="text-danger error-text quantity-error"></span>
                             </div>
                         </div>
@@ -261,9 +261,9 @@
         var price = document.getElementById$('artworkPrice');
         var quantity = document.getElementById('artworkQtt');
         var desc = document.getElementById('artworkDesc');
-        var image= document.getElementById('FileUpload2');
+        var image = document.getElementById('FileUpload2');
 
-        if(image == "" || name == "" || price == "" || desc == "" || quantity== ""){
+        if (image == "" || name == "" || price == "" || desc == "" || quantity == "") {
             document.getElementById('btnAdd').disabled = true;
         } else {
             document.getElementById('btnAdd').disabled = false;
@@ -313,15 +313,17 @@
             }
         });
 
-        $(document).on('click', '.editBtn', function(){
+        $(document).on('click', '.editBtn', function() {
             var id = $(this).attr("id");
             $.ajax({
                 url: "{{ url('/fetch-artwork') }}",
                 enctype: 'multipart/form-data',
                 method: "POST",
-                data: {id: id},
+                data: {
+                    id: id
+                },
                 dataType: "json",
-                success: function(data){
+                success: function(data) {
 
                     $('.saveBtn').attr("id", data.id);
                     $('#artworkId').val(data.id);
@@ -332,8 +334,8 @@
                     $('#editCategory').val(data.categoryId);
 
                     var baseUrl = "{{ asset('upload/artworks') }}";
-                    var imagePath = baseUrl + '/' +data.image;
-                    $('#productImg').html("<img id='Image2' class='product-pic' src='"+imagePath+"' />");
+                    var imagePath = baseUrl + '/' + data.image;
+                    $('#productImg').html("<img id='Image2' class='product-pic' src='" + imagePath + "' />");
 
                     $("#EditArtwork").modal('show');
                 },
@@ -346,9 +348,9 @@
     });
 
     //Pass artwork id to modal
-    $(document).on('click','.deleteBtn',function(){
-         let id = $(this).attr('data-id');
-         $('#deleteid').val(id);
+    $(document).on('click', '.deleteBtn', function() {
+        let id = $(this).attr('data-id');
+        $('#deleteid').val(id);
     });
 
     /*$('#artForm').on('submit',function() {
@@ -400,7 +402,6 @@
             },
         });
     });*/
-
 </script>
 
 
