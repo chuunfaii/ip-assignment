@@ -63,41 +63,40 @@
 
     //Toast notifications
     @if(Session::has('message'))
-      toastr.options = {
-        "closeButton" : true,
-        "progressBar" : true,
-        "positionClass": "toast-bottom-right",
-        "fadeIn": 300,
-        "fadeOut": 1000,
-        "timeOut": 5000,
-      }
-      toastr.success("{{ session('message') }}");
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true,
+      "positionClass": "toast-bottom-right",
+      "fadeIn": 300,
+      "fadeOut": 1000,
+      "timeOut": 5000,
+    }
+    toastr.success("{{ session('message') }}");
     @endif
 
     @if(Session::has('error'))
-      toastr.options = {
-        "closeButton" : true,
-        "progressBar" : true,
-        "positionClass": "toast-bottom-right",
-        "fadeIn": 300,
-        "fadeOut": 1000,
-        "timeOut": 5000,
-      }
-      toastr.error("{{ session('error') }}");
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true,
+      "positionClass": "toast-bottom-right",
+      "fadeIn": 300,
+      "fadeOut": 1000,
+      "timeOut": 5000,
+    }
+    toastr.error("{{ session('error') }}");
     @endif
 
     @if(Session::has('warning'))
-      toastr.options = {
-        "closeButton" : true,
-        "progressBar" : true,
-        "positionClass": "toast-bottom-right",
-        "fadeIn": 300,
-        "fadeOut": 1000,
-        "timeOut": 5000,
-      }
-      toastr.warning("{{ session('warning') }}");
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true,
+      "positionClass": "toast-bottom-right",
+      "fadeIn": 300,
+      "fadeOut": 1000,
+      "timeOut": 5000,
+    }
+    toastr.warning("{{ session('warning') }}");
     @endif
-
   </script>
   @yield('extra-js')
 </body>
