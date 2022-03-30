@@ -14,8 +14,11 @@
         <div class="profile-header">
             <div class="profile-header-cover"></div>
             <div class="profile-header-content container">
-                <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_URL) }}"/>
-
+                @if(auth()->user()->image_url != '')
+                    <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_url) }}"/>
+                @else
+                    <img id="Image1" class="profile-header-img" src="https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg"/>
+                @endif
                 <div class="profile-header-info">
                     <div class="d-flex justify-content-between mt-3">
                         <div>
@@ -50,9 +53,9 @@
 <div class="row row-cols-4">
     @foreach($artworks as $art)
         <div class="card col ms-5 mb-5 p-0 mt-3" style="width:21% !important;">
-            <a href="">
-                <img src="{{ asset('upload/artworks/'.$art->image).'' }}" class="card-img-top" style="height:250px;" />
-            </a>
+            <span>
+                <img src="{{ asset('upload/artworks/'.$art->image_url).'' }}" class="card-img-top" style="height:250px;" />
+            </span>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
                     <a href="">

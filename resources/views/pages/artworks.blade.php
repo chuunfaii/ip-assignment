@@ -21,11 +21,11 @@
 
         <!-- Sort By -->
         <div class="dropdown position-absolute end-0">
-          <select id="ddlSort" class="btn btn-secondary dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false" AutoPostBack="True" OnSelectedIndexChanged="ddlSort_SelectedIndexChanged">
-            <option value="asc">A-Z</option>
-            <option value="desc">Z-A</option>
-            <option value="low">Lowest Price</option>
-            <option value="high">Highest Price</option>
+          <select id="ddlSort" class="btn btn-secondary dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false" name="sort">
+            <option value="asc" @if(request()->input('sort') === 'asc') selected @endif>A-Z</option>
+            <option value="desc" @if(request()->input('sort') === 'desc') selected @endif>Z-A</option>
+            <option value="low" @if(request()->input('sort') === 'low') selected @endif>Lowest Price</option>
+            <option value="high" @if(request()->input('sort') === 'high') selected @endif>Highest Price</option>
           </select>
         </div>
       </div>
@@ -36,7 +36,7 @@
       <div class="col">
         <div class="card mx-5" style="width: 20rem !important;">
           <a href='/artwork/{{ $artwork->id }}'>
-            <img src="upload/artworks/{{ $artwork->image }}" class="card-img-top">
+            <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
           </a>
           <div class="card-body d-flex flex-column justify-content-between">
             <div>
@@ -51,9 +51,8 @@
             </div>
             <div class="mt-5 d-flex justify-content-between">
               <span class="text-muted">
-                <!-- {{ App\Models\User::all()->find($artwork->artistId)->first_name }}
-                {{ App\Models\User::all()->find($artwork->artistId)->last_name }} -->
-                {{ $artwork }}
+                {{ $artwork->artist->first_name }}
+                {{ $artwork->artist->last_name }}
               </span>
               <span class="fw-bold">$ {{ $artwork->price }}</span>
             </div>
@@ -95,5 +94,15 @@
   </div>
 
 </main>
+
+@endsection
+
+@section('extra-js')
+
+<script>
+  $('#ddlSort').on('change', function(e) {
+    $(this).closest('form').submit();
+  });
+</script>
 
 @endsection

@@ -19,6 +19,10 @@
   <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
+  <!--Toast Notifications-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="{{asset('css/index.css')}}" />
   @yield('css')
@@ -57,7 +61,45 @@
       });
     });
 
+    //Toast notifications
+    @if(Session::has('message'))
+      toastr.options = {
+        "closeButton" : true,
+        "progressBar" : true,
+        "positionClass": "toast-bottom-right",
+        "fadeIn": 300,
+        "fadeOut": 1000,
+        "timeOut": 5000,
+      }
+      toastr.success("{{ session('message') }}");
+    @endif
+
+    @if(Session::has('error'))
+      toastr.options = {
+        "closeButton" : true,
+        "progressBar" : true,
+        "positionClass": "toast-bottom-right",
+        "fadeIn": 300,
+        "fadeOut": 1000,
+        "timeOut": 5000,
+      }
+      toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(Session::has('warning'))
+      toastr.options = {
+        "closeButton" : true,
+        "progressBar" : true,
+        "positionClass": "toast-bottom-right",
+        "fadeIn": 300,
+        "fadeOut": 1000,
+        "timeOut": 5000,
+      }
+      toastr.warning("{{ session('warning') }}");
+    @endif
+
   </script>
+  @yield('extra-js')
 </body>
 
 </html>

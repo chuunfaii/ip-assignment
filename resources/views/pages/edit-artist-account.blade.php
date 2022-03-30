@@ -14,7 +14,7 @@
             <div class="small-12 medium-2 large-2 columns">
                 <div class="circle upload-button mx-auto mb-4">
                     <!--User Profile Image-->
-                    <img id="Image1" class="profile-pic" src="{{ asset('upload/artists/'.$user->image_URL) }}">
+                    <img id="Image1" class="profile-pic" src="{{ asset('upload/artists/'.$user->image_url) }}">
                 </div>
                 <input type="file" id="FileUpload1" class="file-upload" accept="image/*" name="image_URL" />
                 <!--<img src="{{ asset('upload/artists/'.$user->image_URL) }}">-->

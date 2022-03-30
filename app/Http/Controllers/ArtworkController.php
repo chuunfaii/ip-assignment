@@ -14,13 +14,23 @@ class ArtworkController extends Controller
     {
         $artworks = Artwork::all();
 
-        if ($request->input('query')) {
-            $query = $request->input('query');
-
+        if ($query = $request->input('query')) {
             $artworks = Artwork::where('name', 'like', "%$query%")->get();
         }
 
-        return view('pages.artworks')->with('artworks', $artworks);
+        if ($sort = $request->input('sort')) {
+            if ($sort == 'asc') {
+                $artworks = $artworks->sortBy('name');
+            } else if ($sort == 'desc') {
+                $artworks = $artworks->sortByDesc('name');
+            } else if ($sort == 'low') {
+                $artworks = $artworks->sortBy('price');
+            } else if ($sort == 'high') {
+                $artworks = $artworks->sortByDesc('price');
+            }
+        }
+
+        return view('pages.artworks')->with(compact('artworks'));
     }
 
     /**
@@ -45,8 +55,25 @@ class ArtworkController extends Controller
                 //echo ("The id does not exist.");
             //}
         } else {
-            echo ("No such file.");
+            // TODO: Change it to something better.
+            echo "No such file.";
         }
+
+        // //this filled cannot work yet 
+        // if (filled($id)) {
+        //     $artwork = Artwork::find($id);
+        //     if ($id == 'id') {
+        //         $category = Category::all()->find($artwork->categoryId);
+        //         $artist = User::all()->find($artwork->artistId);
+
+        //         return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+        //     } else {
+        //         //Testing purpose
+        //         echo ("The id does not exist.");
+        //     }
+        // } else {
+        //     echo ("No such file.");
+        // }
     }
 
     public function add_wishlist(Request $request,$id){

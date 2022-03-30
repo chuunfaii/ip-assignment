@@ -21,6 +21,8 @@ class ArtistArtworkController extends Controller
     {
         $id = auth()->user()->id;
 
+        // $artworks = Artwork::all();
+
         $artworks = Artist::find($id)->artworks;
 
         $categories = Category::all();
@@ -67,7 +69,7 @@ class ArtistArtworkController extends Controller
 
         if (empty($file) || empty($name) || empty($price) || empty($desc) || empty($qtt) || empty($cat)) {
             $errorMsg = "All fields is required. Please try again.";
-            return redirect('my-artwork')->with('estatus', $errorMsg);
+            return redirect('my-artwork')->with('error', $errorMsg);
         } else {
             $artwork = new Artwork;
             $artwork->user_id = auth()->user()->id;
@@ -83,7 +85,7 @@ class ArtistArtworkController extends Controller
                 $artwork->image_url = $filename;
             }
             $artwork->save();
-            return redirect('my-artwork')->with('status', 'Artwork Added Successfully');
+            return redirect('my-artwork')->with('message', 'Artwork Added Successfully');
         }
     }
 
@@ -114,8 +116,8 @@ class ArtistArtworkController extends Controller
             'quantity' => $getArtwork->quantity,
             'price' => $getArtwork->price,
             'description' => $getArtwork->description,
-            'image' => $getArtwork->image,
-            'categoryId' => $getArtwork->categoryId,
+            'image_url' => $getArtwork->image_url,
+            'category_id' => $getArtwork->category_id,
         );
         return json_encode($artwork);
     }
@@ -144,19 +146,19 @@ class ArtistArtworkController extends Controller
         $artwork->price = $price;
         $artwork->description = $desc;
         $artwork->quantity = $qtt;
-        $artwork->categoryId = $cat;
+        $artwork->category_id = $cat;
         if ($request->hasFile('editImage')) {
-            $imagePath = 'upload/artworks/' . $artwork->image;
+            $imagePath = 'upload/artworks/' . $artwork->image_url;
             if (File::exists($imagePath)) {
                 File::delete($imagePath);
             }
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('upload/artworks/', $filename);
-            $artwork->image = $filename;
+            $artwork->image_url = $filename;
         }
         $artwork->save();
-        return redirect('my-artwork')->with('status', 'Artwork Updated Successfully');
+        return redirect('my-artwork')->with('message', 'Artwork Updated Successfully');
     }
 
     /**
@@ -169,11 +171,11 @@ class ArtistArtworkController extends Controller
     {
         $id = $request->input('deleteid');
         $artwork = Artwork::find($id);
-        $imagePath = 'upload/artworks/' . $artwork->image;
+        $imagePath = 'upload/artworks/' . $artwork->image_url;
         if (File::exists($imagePath)) {
             File::delete($imagePath);
         }
         $artwork->delete();
-        return redirect('/my-artwork')->with('status', 'Artwork Deleted Successfully');
+        return redirect('/my-artwork')->with('message', 'Artwork Deleted Successfully');
     }
 }

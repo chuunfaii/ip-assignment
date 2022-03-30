@@ -24,7 +24,7 @@ class Artwork extends Model
 
     public function artist()
     {
-        return $this->belongsTo(Artist::class);
+        return $this->belongsTo(Artist::class, 'user_id');
     }
 
     public function category()
