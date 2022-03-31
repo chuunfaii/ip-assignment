@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artwork;
 
@@ -38,10 +39,9 @@ Route::get('/order-history', function () {
     return view('pages.order-history');
 });
 
-Route::get('/profile-page', function () {
-    $artworks   = Artwork::all()->where('user_id', auth()->user()->id);
-    return view('pages.profile-page', compact('artworks'));
-})->name('profile-page');
+Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-page');
+
+Route::get('/artist-profile/{id}', [ProfileController::class, 'create']);
 
 Route::get('/wishlist', function () {
     return view('pages.wishlist');
