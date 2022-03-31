@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-between mt-3">
                         <div>
                             <h4 class="mb-4 fw-bold">
-                                <Label id="TxtFName">{{ $artist->first_name.' '.$artist->last_name }}
+                                <Label id="TxtFName">{{ $artist->presentFullName() }}
                             </h4>
                             <p class="mb-5">
                                 <Label id="TxtEmail">{{ $artist->email }}</Label>
