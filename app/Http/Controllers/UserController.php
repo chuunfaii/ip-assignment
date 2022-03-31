@@ -67,7 +67,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('edit-account');
+            return redirect()->route('edit-account')->with('message', 'Edited account details successfully.');
         }
 
         $user->update([
@@ -77,7 +77,6 @@ class UserController extends Controller
             'bio' => $request->bio
 
         ]);
-
 
         if ($request->filled('new_password')) {
             $user->update([
@@ -97,7 +96,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('edit-account');
+        return redirect()->route('edit-account')->with('message', 'Edited account details successfully.');
     }
 
     /**
@@ -112,7 +111,7 @@ class UserController extends Controller
         auth()->logout();
 
         if ($user->delete()) {
-            return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::HOME)->with('message', 'Deactivated account successfully.');
         }
     }
 }
