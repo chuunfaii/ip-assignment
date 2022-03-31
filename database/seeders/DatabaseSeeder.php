@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Artist;
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Customer::factory()->count(5)->create();
+        Artist::factory()->count(5)->create();
+        $this->call(CategorySeeder::class);
+        $this->call(ArtworkSeeder::class);
     }
 }
