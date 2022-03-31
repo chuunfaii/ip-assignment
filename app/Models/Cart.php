@@ -16,4 +16,8 @@ class Cart extends Model
         'artwork_id',
         'quantity',
     ];
+
+    public function artworks(){
+        return $this->belongsTo(Artwork::class, 'artwork_id', 'id');
+    }
 }
