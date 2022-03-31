@@ -10,8 +10,9 @@
             <div class="d-flex justify-content-center align-items-center">
                 <h1 class="navbar-brand fw-bold p-0 php m-0 mt-5">Your Cart</h1>
             </div>
-            @if($cart != ''|| $cart != null)
+            @if($cart->count() > 0)
                 @foreach($cart as $c)
+                <form action="" id="cartForm">
                 <div class="row my-5" id="3">
                     <span id="lblArtworkId" style="display: none;">1</span>
                     <div class="col-2">
@@ -43,6 +44,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 @endforeach
             @else
                 <br><br><br><br>
