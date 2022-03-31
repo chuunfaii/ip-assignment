@@ -82,16 +82,29 @@ class ArtworkController extends Controller
                 break;
             case 'cart':
                 $artwork = Artwork::all()->find($id);
-                $quantity = $request->input('quantity');
+                if(Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->exists()){
+                
+                    $quantity = $request->input('quantity');
 
-                $cart = new Cart();
-                $cart->user_id= auth()->user()->id;
-                $cart->artwork_id= $artwork->id;
-                $cart->quantity = $quantity;
-                
-                $cart->save();
-                
-                return redirect()->back()->with('message','Artwork has been added to cart.');
+                    $cart = Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->first();
+                    $cart->update([
+                        'quantity'=>$quantity + $cart->quantity,
+                    ]);
+
+                    return redirect()->back()->with('message','Artwork has been added to cart.');
+                }else{
+
+                    $quantity = $request->input('quantity');
+
+                    $cart = new Cart();
+                    $cart->user_id= auth()->user()->id;
+                    $cart->artwork_id= $artwork->id;
+                    $cart->quantity = $quantity;
+                    
+                    $cart->save();
+                    
+                    return redirect()->back()->with('message','Artwork has been added to cart.');
+                }
                 break;
         }
     }
