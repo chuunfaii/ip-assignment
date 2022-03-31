@@ -26,7 +26,7 @@
         <div class="col ">
 
             <div class="card m-5" style="width: 15rem;min-height:18rem !important;">
-                <a href=#'>
+                <a href='/artist-profile/{{$artist->id}}'>
                     @if($artist->image_url != '')
                     <img class="card-img-top" src="{{ asset('upload/artists/' . $artist->image_url) }}">
                     @else
@@ -35,7 +35,7 @@
                 </a>
                 <div class="card-body">
                     <div class="card-title">
-                        <a href='profile.php'>
+                        <a href='/artist-profile/{{$artist->id}}'>
                             <label class="fw-bold">{{ $artist->presentFullName() }}</label>
                         </a>
                     </div>
