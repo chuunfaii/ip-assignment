@@ -45,7 +45,7 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        //this filled cannot work yet 
+        //this filled cannot work yet
         if (filled($id)) {
             $artwork = Artwork::all()->find($id);
             //if ($id == 'id') {
@@ -63,6 +63,21 @@ class ArtworkController extends Controller
             echo "No such file.";
         }
 
+        // //this filled cannot work yet
+        // if (filled($id)) {
+        //     $artwork = Artwork::find($id);
+        //     if ($id == 'id') {
+        //         $category = Category::all()->find($artwork->categoryId);
+        //         $artist = User::all()->find($artwork->artistId);
+
+        //         return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+        //     } else {
+        //         //Testing purpose
+        //         echo ("The id does not exist.");
+        //     }
+        // } else {
+        //     echo ("No such file.");
+        // }
     }
 
     public function add_wishlist(Request $request, $id)
@@ -70,16 +85,14 @@ class ArtworkController extends Controller
         switch ($request->input('action')) {
             case 'wishlist':
                 $artwork = Artwork::all()->find($id);
-                $category = Category::all()->find($artwork->category_id);
-                $artist = User::all()->find($artwork->user_id);              
 
                 $wishlist = new Wishlist();
                 $wishlist->user_id = auth()->user()->id;
-                $wishlist->artwork_id = $artwork;
+                $wishlist->artwork_id = $artwork->id;
 
                 $wishlist->save();
 
-                return redirect('artwork')->with('message', 'Artwork has been added to wishlist.');
+                return redirect()->back()->with('message', 'Artwork has been added to wishlist.');
                 break;
             case 'cart':
 
@@ -96,7 +109,7 @@ class ArtworkController extends Controller
      */
     public function edit(Request $request)
     {
-        // 
+        //
     }
 
     /**
