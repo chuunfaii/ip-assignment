@@ -6,6 +6,7 @@ use App\Models\Artwork;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\wishlist;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
@@ -80,7 +81,21 @@ class ArtworkController extends Controller
                 return redirect()->back()->with('message', 'Artwork has been added to wishlist.');
                 break;
             case 'cart':
+                $validated = $request->validate([
+                    'quantity'=>[]
+                ]);
+                
+                $artwork = Artwork::all()->find($id);
+                $quantity = $request->input('quantity');
 
+                $cart = new Cart();
+                $cart->user_id= auth()->user()->id;
+                $cart->artwork_id= $artwork->id;
+                $cart->quantity = $quantity;
+                
+                $cart->save();
+                
+                return redirect()->back()->with('message','Artwork has been added to cart.');
                 break;
         }
     }
