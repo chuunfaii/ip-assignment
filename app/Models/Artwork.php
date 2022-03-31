@@ -22,6 +22,11 @@ class Artwork extends Model
         'category_id',
     ];
 
+    public function presentPrice()
+    {
+        return "$ " . number_format($this->price, 2);
+    }
+
     public function artist()
     {
         return $this->belongsTo(Artist::class, 'user_id');

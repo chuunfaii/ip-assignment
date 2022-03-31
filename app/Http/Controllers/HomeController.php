@@ -9,10 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // TODO: Change to 6 later.
-        $artworks = Artwork::inRandomOrder()->take(3)->get();
-
-        // return view('pages.home', compact('artworks'));
+        $artworks = Artwork::inRandomOrder()->take(6)->get();
 
         return view('pages.home', compact('artworks'));
     }

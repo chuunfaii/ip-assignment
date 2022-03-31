@@ -93,10 +93,9 @@
           </div>
           <div class="mt-5 d-flex justify-content-between">
             <span class="text-muted">
-              {{ $artwork->artist->first_name }}
-              {{ $artwork->artist->last_name }}
+              {{ $artwork->artist->presentFullName() }}
             </span>
-            <span class="fw-bold">$ {{ $artwork->price }}</span>
+            <span class="fw-bold">$ {{ $artwork->presentPrice() }}</span>
           </div>
         </div>
       </div>

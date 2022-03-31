@@ -32,6 +32,11 @@ class User extends Authenticatable
         'artist' => Artist::class,
     ];
 
+    public function presentFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function isCustomer(): bool
     {
         return $this->type === 'customer';
