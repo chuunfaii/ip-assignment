@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Artwork;
 
 class CartController extends Controller
 {
@@ -16,6 +17,10 @@ class CartController extends Controller
     {
         $cart = Cart::all()->where('user_id', auth()->user()->id);
         return view('pages.cart', compact('cart'));
+
+        /*$cart = \Cart::getContent();
+        dd($cart);*/
+        //return view('pages.cart', compact('cart'));
     }
 
     /**

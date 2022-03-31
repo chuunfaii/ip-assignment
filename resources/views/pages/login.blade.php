@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="m-auto" style="min-width: 500px;">
+<div class="m-auto py-5" style="min-width: 550px;">
   <form action="{{ route('login') }}" method="POST">
     @csrf
 
@@ -17,22 +17,22 @@
       <h3 class="text-center fw-light mb-4">Login</h3>
 
       <div class="form-floating mb-4">
-        <input id="email" class="form-control" type="email" name="email" placeholder="name@example.com" required />
+        <input id="email" class="form-control @error('email') error-input @enderror" type="email" name="email" placeholder="name@example.com" required />
         <label for="email">Email address</label>
       </div>
 
       <div class="form-floating mb-4">
-        <input id="password" class="form-control" type="Password" name="password" placeholder="Enter your password" required />
+        <input id="password" class="form-control @error('email') error-input @enderror" type="Password" name="password" placeholder="Enter your password" required />
         <label for="password">Password</label>
       </div>
 
       @error('email')
-      <div class="form-floating mb-4">
-        <p class="error-message">Incorrect email address or password. Please try again.</p>
-      </div>
+        <div class="form-floating mb-4">
+          <p class="error-message">Incorrect email address or password.</p>
+        </div>
       @enderror
 
-      <button ID="btnLoginSubmit" class="btn btn-primary d-block w-100 py-3 mb-4" name="loginBtn">Login</button>
+      <button type="submit" class="btn btn-primary d-block w-100 py-3 mb-4">Login</button>
     </div>
   </form>
 
