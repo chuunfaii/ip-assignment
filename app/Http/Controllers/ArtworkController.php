@@ -63,21 +63,6 @@ class ArtworkController extends Controller
             echo "No such file.";
         }
 
-        // //this filled cannot work yet
-        // if (filled($id)) {
-        //     $artwork = Artwork::find($id);
-        //     if ($id == 'id') {
-        //         $category = Category::all()->find($artwork->categoryId);
-        //         $artist = User::all()->find($artwork->artistId);
-
-        //         return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
-        //     } else {
-        //         //Testing purpose
-        //         echo ("The id does not exist.");
-        //     }
-        // } else {
-        //     echo ("No such file.");
-        // }
     }
 
     public function add_wishlist(Request $request, $id)
