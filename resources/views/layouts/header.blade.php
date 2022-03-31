@@ -97,14 +97,13 @@
         <a class="nav-link" href="{{ route('login') }}">Login</a>
       </li>
       <li class="nav-item px-2">
-        <!-- TODO: Replace the link later -->
-        <a class="nav-link" href="wishlist.php">
+        <a class="nav-link" href="{{ route('wishlist') }}">
           <i class="bi bi-suit-heart"></i>
         </a>
       </li>
+
       <li class="nav-item px-2">
-        <!-- TODO: Replace the link later -->
-        <a class="nav-link" href="cart.php">
+        <a class="nav-link" href="{{ route('cart') }}">
           <i class="bi bi-cart"></i>
         </a>
       </li>
