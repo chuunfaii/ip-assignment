@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="m-auto" style="min-width: 500px;">
+<div class="m-auto py-5" style="min-width: 500px;">
   <form action="{{ route('register') }}" method="POST">
     @csrf
 
@@ -34,9 +34,9 @@
       </div>
 
       @error('email')
-      <div class="form-floating mb-4">
-        <p class="error-message">{{ $message }} Please try again.</p>
-      </div>
+        <div class="form-floating mb-4">
+          <p class="error-message">{{ $message }}</p>
+        </div>
       @enderror
 
       <div class="form-floating mb-4">
@@ -49,28 +49,24 @@
         <label for="passwordConfirmation">Confirm password</label>
       </div>
 
-      @error('password')
       <div class="form-floating mb-4">
-        <p class="error-message">{{ $message }} Please try again.</p>
+      @foreach ($errors->get('password') as $message)
+        <p class="error-message">{{ $message }}</p>
+      @endforeach
       </div>
-      @enderror
 
       <div class="d-flex justify-content-between mb-4">
         <span class="w-100 align-self-center">Would you like to register as:</span>
         <div class="form-radio d-flex justify-content-between w-100">
           <input type="radio" name="type" id="customer" checked value="customer" />
-          <label for="customer" class="option customer">
-            <span>Customer</span>
-          </label>
+          <label for="customer" class="option">Customer</label>
 
           <input type="radio" name="type" id="artist" value="artist" />
-          <label for="artist" class="option artist">
-            <span>Artist</span>
-          </label>
+          <label for="artist" class="option">Artist</label>
         </div>
       </div>
 
-      <button id="btnRegSubmit" class="btn btn-primary d-block w-100 py-3 mb-4">Register</button>
+      <button type="submit" class="btn btn-primary d-block w-100 py-3 mb-4">Register</button>
     </div>
   </form>
 

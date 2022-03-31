@@ -35,11 +35,36 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->whereNull('deleted_at')],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'type' => ['required', Rule::in(['customer', 'artist'])],
+            'first_name' => [
+                'required', 
+                'string', 
+                'max:255'
+            ],
+
+            'last_name' => [
+                'required', 
+                'string', 
+                'max:255'
+            ],
+
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                'max:255', 
+                Rule::unique('users')->whereNull('deleted_at')
+            ],
+
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)->mixedCase()->numbers()->symbols()
+            ],
+
+            'type' => [
+                'required', 
+                Rule::in(['customer', 'artist'])
+            ],
         ]);
 
         if ($request->type == 'customer') {
@@ -50,7 +75,9 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => $request->type,
             ]);
-        } else {
+        }
+        
+        else {
             $user = Artist::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -62,6 +89,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home')->with('message', 'Register & Login Successfully');
+        return redirect()->route('home')->with('message', 'Account has been registered successfully.');
     }
 }
