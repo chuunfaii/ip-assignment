@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artwork;
 use App\Models\Category;
-use App\Models\User;  
+use App\Models\User;
 use App\Models\wishlist;
 use Illuminate\Http\Request;
 
@@ -13,6 +13,10 @@ class ArtworkController extends Controller
     public function index(Request $request)
     {
         $artworks = Artwork::all();
+
+        if ($category = $request->input('category')) {
+            $artworks = Artwork::where('category_id', $category)->get();
+        }
 
         if ($query = $request->input('query')) {
             $artworks = Artwork::where('name', 'like', "%$query%")->get();
@@ -45,14 +49,14 @@ class ArtworkController extends Controller
         if (filled($id)) {
             $artwork = Artwork::all()->find($id);
             //if ($id == 'id') {
-                $category = Category::all()->find($artwork->category_id);
-                $artist = User::all()->find($artwork->user_id);
+            $category = Category::all()->find($artwork->category_id);
+            $artist = User::all()->find($artwork->user_id);
 
-                return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+            return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
 
             //} else {
-                //Testing purpose
-                //echo ("The id does not exist.");
+            //Testing purpose
+            //echo ("The id does not exist.");
             //}
         } else {
             // TODO: Change it to something better.
@@ -76,29 +80,28 @@ class ArtworkController extends Controller
         // }
     }
 
-    public function add_wishlist(Request $request,$id){
-            switch($request->input('action')){
-                    case 'wishlist':
-                        $artwork = Artwork::all()->find($id);
-                        $category = Category::all()->find($artwork->category_id);
-                        $artist = User::all()->find($artwork->user_id);
-                        
-                        return view('pages.wishlist', compact('category', 'artwork', 'artist'));
-                        
-                        $wishlist = new Wishlist();
-                        $wishlist->user_id = auth()->user()->id;
-                        $wishlist->artwork_id = $artworkid;
+    public function add_wishlist(Request $request, $id)
+    {
+        switch ($request->input('action')) {
+            case 'wishlist':
+                $artwork = Artwork::all()->find($id);
+                $category = Category::all()->find($artwork->category_id);
+                $artist = User::all()->find($artwork->user_id);
 
-                        $wishlist->save();
-                
-                    return redirect('artwork')->with('status','Artwork has been added to wishlist.');
-                    break;
-                case 'cart':
-                    
-                    break;
-            }
-        
-        
+                return view('pages.wishlist', compact('category', 'artwork', 'artist'));
+
+                $wishlist = new Wishlist();
+                $wishlist->user_id = auth()->user()->id;
+                $wishlist->artwork_id = $artworkid;
+
+                $wishlist->save();
+
+                return redirect('artwork')->with('status', 'Artwork has been added to wishlist.');
+                break;
+            case 'cart':
+
+                break;
+        }
     }
 
 

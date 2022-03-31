@@ -62,11 +62,9 @@
   <!-- Categories Buttons -->
   <div class="d-flex justify-content-center align-items-center my-5">
     <span>Shops by Category:</span>
-    <!-- TODO: Replace the links later -->
-    <a href="./" class="btn btn-outline-dark py-3 px-5 mx-3">Paintings</a>
-    <a href="./" class="btn btn-outline-dark py-3 px-5 mx-3">Photography</a>
-    <a href="./" class="btn btn-outline-dark py-3 px-5 mx-3">Drawings</a>
-    <a href="./" class="btn btn-outline-dark py-3 px-5 mx-3">Sculpture</a>
+    @foreach ($categories as $category)
+    <a href="{{ route('artworks', ['category' => $category]) }}" class="btn btn-outline-dark py-3 px-5 mx-3">{{ $category->name }}</a>
+    @endforeach
   </div>
 
   <!-- Featured Artworks -->
