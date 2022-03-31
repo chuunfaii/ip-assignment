@@ -49,4 +49,6 @@ Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
 
+Route::get('/wishlist/{id}', [WishlistController::class, 'show'])->name('wishlist');
+
 require __DIR__ . '/auth.php';
