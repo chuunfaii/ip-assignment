@@ -26,8 +26,9 @@
                 <div class="col ">
 
                     <div class="card m-5" style="width: 15rem;min-height:18rem !important;">
-                        <a href=#'>
-                            @if($artist->image_url != '')
+                        <a href='/artist-profile/{{ $artist->id }}'>
+                            <input type="hidden" id="id" name="id" value="{{ $artist->id }}">
+                            @if($artist->image_url != null)
                                 <img class="card-img-top" src="{{ asset('upload/artists/' . $artist->image_url) }}">
                             @else
                                 <img class="card-img-top" src="https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg">

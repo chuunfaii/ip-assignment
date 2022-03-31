@@ -14,8 +14,8 @@
         <div class="profile-header">
             <div class="profile-header-cover"></div>
             <div class="profile-header-content container">
-                @if(auth()->user()->image_url != '')
-                    <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.auth()->user()->image_url) }}"/>
+                @if($artist->image_url != null)
+                    <img id="Image1" class="profile-header-img" src="{{ asset('upload/artists/'.$artist->image_url) }}"/>
                 @else
                     <img id="Image1" class="profile-header-img" src="https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg"/>
                 @endif
@@ -23,17 +23,17 @@
                     <div class="d-flex justify-content-between mt-3">
                         <div>
                             <h4 class="mb-4 fw-bold">
-                                <Label id="TxtFName">{{ auth()->user()->first_name }}</Label>
-                                <Label id="TxtLName">{{ auth()->user()->last_name }}</Label>
+                                <Label id="TxtFName">{{ $artist->first_name }}</Label>
+                                <Label id="TxtLName">{{ $artist->last_name }}</Label>
                             </h4>
                             <p class="mb-5">
-                                <Label id="TxtEmail">{{ auth()->user()->email }}</Label>
+                                <Label id="TxtEmail">{{ $artist->email }}</Label>
                             </p>
                         </div>
                         <div class="w-50">
                             <h5 class="mb-4 fw-bold">Bio</h5>
                             <p>
-                                <label id="TxtBio">{{ auth()->user()->bio }}</label>
+                                <label id="TxtBio">{{ $artist->bio }}</label>
                             </p>
                         </div>
                     </div>
