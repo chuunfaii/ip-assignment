@@ -81,10 +81,6 @@ class ArtworkController extends Controller
                 return redirect()->back()->with('message', 'Artwork has been added to wishlist.');
                 break;
             case 'cart':
-                $validated = $request->validate([
-                    'quantity'=>[]
-                ]);
-                
                 $artwork = Artwork::all()->find($id);
                 $quantity = $request->input('quantity');
 
