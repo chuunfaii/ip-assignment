@@ -53,12 +53,12 @@
 <div class="row row-cols-4">
     @foreach($artworks as $art)
         <div class="card col ms-5 mb-5 p-0 mt-3" style="width:21% !important;">
-            <span>
+            <a href="/artwork/{{ $art->id }}">
                 <img src="{{ asset('upload/artworks/'.$art->image_url).'' }}" class="card-img-top" style="height:250px;" />
-            </span>
+            </a>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                    <a href="">
+                    <a href="/artwork/{{ $art->id }}">
                         <h5 class="card-title" >{{ $art->name }}</h5>
                     </a>
                     <p class="card-text text-muted">{{ $art->description }}</p>
