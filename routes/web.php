@@ -6,7 +6,6 @@ use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\Auth\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artwork;
@@ -46,8 +45,6 @@ Route::get('/artist-profile/{id}', [ProfileController::class, 'create']);
 Route::get('/wishlist', function () {
     return view('pages.wishlist');
 })->name('wishlist');
-
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
 

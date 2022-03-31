@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,4 +26,6 @@ Route::middleware('auth')->group(function () {
   Route::delete('/account/delete', [UserController::class, 'destroy']);
 
   Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+  Route::get('/cart', [CartController::class, 'index'])->name('cart');
 });
