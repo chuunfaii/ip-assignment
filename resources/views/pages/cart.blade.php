@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <h1 class="navbar-brand fw-bold p-0 php m-0 mt-5">Your Cart</h1>
             </div>
-            @if($cart != null)
+            @if($cart != ''|| $cart != null)
                 @foreach($cart as $c)
                 <div class="row my-5" id="3">
                     <span id="lblArtworkId" style="display: none;">1</span>
@@ -45,10 +45,8 @@
                 </div>
                 @endforeach
             @else
+                <br><br><br><br>
                 <div class="d-flex flex-column justify-content-between align-items-center">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <h1 class="display-4">Your Cart</h1>
-                    </div>
                     <div class="d-flex flex-column h-100 justify-content-center align-items-center mb-5">
                         <h1 class="display-6 mb-5">Your cart is empty right now.</h1>
                         <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artwork</a>

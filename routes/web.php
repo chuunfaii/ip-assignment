@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artwork;
 
