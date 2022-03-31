@@ -16,10 +16,11 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::all()->where('user_id', auth()->user()->id);
-        //$id = $cart->artwork_id;
-        $artwork = Artwork::all()->find($cart->artwork_id);
-        dump($artwork);
-        //return view('pages.cart', compact('cart', 'artwork'));
+        return view('pages.cart', compact('cart'));
+
+        /*$cart = \Cart::getContent();
+        dd($cart);*/
+        //return view('pages.cart', compact('cart'));
     }
 
     /**
