@@ -15,4 +15,9 @@ class Wishlist extends Model
         'user_id',
         'artwork_id',
     ];
+
+    public function artwork()
+    {
+        return $this->belongsTo(Artwork::class,'artwork_id','id');
+    }
 }

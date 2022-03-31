@@ -43,7 +43,7 @@
         </ul>
       </li>
       <li class="nav-item px-2">
-        <a class="nav-link" href="{{ route('wishlist') }}">
+        <a class="nav-link" href="{{ route('wishlist')}}">
           <i class="bi bi-suit-heart"></i>
         </a>
       </li>

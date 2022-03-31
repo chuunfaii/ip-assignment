@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,8 +35,13 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
 
-  Route::get('/wishlist', function () {
-    return view('pages.wishlist');
-})->name('wishlist');
+  Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+
+  
+
+//   Route::get('/wishlist', function () {
+//     return view('pages.wishlist');
+// })->name('wishlist');
+
 
 });
