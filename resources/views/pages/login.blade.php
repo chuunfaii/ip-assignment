@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div class="m-auto py-5" style="min-width: 550px;">
+<div class="m-auto py-5" style="min-width: 500px;">
   <form action="{{ route('login') }}" method="POST">
     @csrf
 
