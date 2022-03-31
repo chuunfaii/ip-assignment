@@ -30,7 +30,8 @@
                                 </a>
                             </span>
                             <hr>
-                            <p class="m-0">Artist: {{ $c->artworks->artist->presentFullName() }}</p>
+                            <p class="m-0">Artist: {{ $c->artworks->artist->presentFullName() }}
+                            </p>
                         </div>
                     </div>
                     <div class="col-2">
@@ -56,6 +57,20 @@
                 </div>
             @endif
 
+            <div class="row mb-5">
+                <div class="col-2">
+                </div>
+                <div class="col-6">
+                </div>
+                <div class="col-1">
+                    <div class="h-100 d-flex align-items-center justify-content-end">
+                        <span class="fw-bold text-muted">Total Price:</span>
+                    </div>
+                </div>
+                <div class="col-3 d-flex justify-content-start ps-3">
+                    <span class="fs-4 fw-bold">$ 100000</span>
+                </div>
+            </div>
         </div>
     </div>
 
