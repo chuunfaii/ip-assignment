@@ -36,7 +36,7 @@
                         </a>
                         <div class="card-body">
                             <div class="card-title">
-                                <a href='profile.php'>
+                                <a href='/artist-profile/{{ $artist->id }}'>
                                     <label class="fw-bold">{{ $artist->first_name }}</label>
                                     <label class="fw-bold">{{ $artist->last_name }}</label>
                                 </a>
