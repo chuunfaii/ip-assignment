@@ -43,15 +43,6 @@ Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-
 
 Route::get('/artist-profile/{id}', [ProfileController::class, 'create']);
 
-<<<<<<< HEAD
-
-
-Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist');
-
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-
-=======
->>>>>>> 280a207d60e850173fd05f67fa937972ca8a6bab
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
