@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Artwork;
 
 class CartController extends Controller
 {
@@ -15,7 +16,10 @@ class CartController extends Controller
     public function index()
     {
         $cart = Cart::all()->where('user_id', auth()->user()->id);
-        return view('pages.cart', compact('cart'));
+        //$id = $cart->artwork_id;
+        $artwork = Artwork::all()->find($cart->artwork_id);
+        dump($artwork);
+        //return view('pages.cart', compact('cart', 'artwork'));
     }
 
     /**
