@@ -90,7 +90,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input id="editPrice" class="form-control" name="editPrice" type="number" min=0 max=99999 step="any" oninput="validity.valid||(value='');" required />
+                                <input id="editPrice" class="form-control" name="editPrice" type="number" min=0 max=999999 step="any" oninput="validity.valid||(value='');" required />
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@
                         <div class="form-group row mb-3">
                             <label id="Label6" class="col-sm-3 col-form-label">Product Price</label>
                             <div class="col-sm-9">
-                                <input class="form-control" name="artworkPrice" id="artworkPrice" type="number" min=0 max=99999 step="any" oninput="validity.valid||(value='');" required />
+                                <input class="form-control" name="artworkPrice" id="artworkPrice" type="number" min=0 max=999999 step="any" oninput="validity.valid||(value='');" required />
                                 <span class="text-danger error-text price-error"></span>
                             </div>
                         </div>
