@@ -25,7 +25,7 @@
 
 <div class="container">
     <div class="row">
-        @if($artworks != null)
+        @if($artworks -> count() > 0)
         @foreach($artworks as $artwork)
         <div class="col-4">
             <div class="card m-5" style="min-height:18rem !important;">
