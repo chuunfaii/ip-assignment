@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class ArtworkController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $artworks = Artwork::all();
@@ -26,11 +31,17 @@ class ArtworkController extends Controller
         if ($sort = $request->input('sort')) {
             if ($sort == 'asc') {
                 $artworks = $artworks->sortBy('name');
-            } else if ($sort == 'desc') {
+            }
+            
+            else if ($sort == 'desc') {
                 $artworks = $artworks->sortByDesc('name');
-            } else if ($sort == 'low') {
+            }
+            
+            else if ($sort == 'low') {
                 $artworks = $artworks->sortBy('price');
-            } else if ($sort == 'high') {
+            }
+            
+            else if ($sort == 'high') {
                 $artworks = $artworks->sortByDesc('price');
             }
         }
@@ -46,101 +57,58 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        //this filled cannot work yet
-        if (filled($id)) {
-            $artwork = Artwork::all()->find($id);
-            //if ($id == 'id') {
-            $category = Category::all()->find($artwork->category_id);
-            $artist = User::all()->find($artwork->user_id);
-
-            return view('pages.artwork-details', compact('category', 'artwork', 'artist'));
-
-            //} else {
-            //Testing purpose
-            //echo ("The id does not exist.");
-            //}
-        } else {
-            // TODO: Change it to something better.
-            echo "No such file.";
+        if ($artwork = Artwork::find($id)) {
+            return view('pages.artwork-details', compact('artwork'));
         }
 
+        return view('errors.404');
     }
 
-    public function add_wishlist(Request $request, $id)
+    public function wishlist_cart(Request $request, $artwork_id)
     {
-        switch ($request->input('action')) {
-            case 'wishlist':
-                $artwork = Artwork::all()->find($id);
+        $action = $request->input('action');
+        $user_id = auth()->user()->id;
 
-                $wishlist = new Wishlist();
-                $wishlist->user_id = auth()->user()->id;
-                $wishlist->artwork_id = $artwork->id;
+        if ($action == 'wishlist') {
+            if (Wishlist::where('artwork_id', $artwork_id)->where('user_id', $user_id)->exists()) {
+                return redirect()->back()->with('error', 'Artwork is already in your wishlist.');
+            }
 
-                $wishlist->save();
+            Wishlist::create([
+                'artwork_id' => $artwork_id,
+                'user_id' => $user_id,
+            ]);
 
-                return redirect()->back()->with('message', 'Artwork has been added to wishlist.');
-                break;
-            case 'cart':
-                $artwork = Artwork::all()->find($id);
-                if(Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->exists()){
-
-                    $quantity = $request->input('quantity');
-
-                    $cart = Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->first();
-                    $cart->update([
-                        'quantity'=>$quantity + $cart->quantity,
-                    ]);
-
-                    return redirect()->back()->with('message','Artwork has been added to cart.');
-                }else{
-
-                    $quantity = $request->input('quantity');
-
-                    $cart = new Cart();
-                    $cart->user_id= auth()->user()->id;
-                    $cart->artwork_id= $artwork->id;
-                    $cart->quantity = $quantity;
-
-                    $cart->save();
-
-                    return redirect()->back()->with('message','Artwork has been added to cart.');
-                }
-                break;
+            return redirect()->back()->with('message', 'Artwork has been added to the wishlist.');
         }
-    }
 
+        else if ($action == 'cart') {
+            $artwork = Artwork::find($artwork_id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        //
-    }
+            $request->validate([
+                'quantity' => [
+                    'required',
+                    'numeric',
+                ],
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $quantity = $request->quantity;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            if ($cart = Cart::where('user_id', $user_id)->where('artwork_id', $artwork_id)->first()) {
+                $cart->update([
+                    'quantity' => $quantity + $cart->quantity,
+                ]);
+            }
+
+            else {
+                Cart::create([
+                    'user_id' => $user_id,
+                    'artwork_id' => $artwork_id,
+                    'quantity' => $quantity,
+                ]);
+            }
+
+            return redirect()->back()->with('message', 'Artwork has been added to the cart.');
+        }
     }
 }
