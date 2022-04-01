@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-2 ps-5">
                         <div class="h-100 d-flex align-items-center justify-content-start">
-                            <span class="fw-bold">$ {{ $c->artworks->price * $c->quantity }}</span>
+                            <span class="fw-bold">$ {{ $c->subtotal() }}</span>
                         </div>
                         </div>
                         <div class="col-1">
