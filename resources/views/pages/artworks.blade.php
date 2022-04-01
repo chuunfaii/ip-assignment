@@ -15,83 +15,58 @@
       <div class="mb-5 d-flex position-relative">
         <!-- Search -->
         <div class="input-group w-50 mx-auto">
-          <input class="form-control py-2" placeholder="Search for artwork" name="query" value="{{ request()->input('query') }}" />
+          <input class="form-control py-2" placeholder="Search for artworks" name="query" value="{{ request()->input('query') }}" />
           <button type="submit" class="btn btn-secondary text-muted">Search</button>
         </div>
 
         <!-- Sort By -->
         <div class="dropdown position-absolute end-0">
-          <select id="ddlSort" class="btn btn-secondary dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false" name="sort">
-            <option value="asc" @if(request()->input('sort') === 'asc') selected @endif>A-Z</option>
-            <option value="desc" @if(request()->input('sort') === 'desc') selected @endif>Z-A</option>
-            <option value="low" @if(request()->input('sort') === 'low') selected @endif>Lowest Price</option>
-            <option value="high" @if(request()->input('sort') === 'high') selected @endif>Highest Price</option>
+          <select id="sortDropdown" class="btn btn-secondary dropdown-toggle text-muted" data-bs-toggle="dropdown" aria-expanded="false" name="sort">
+            <option value="asc" @if(request()->input('sort') === 'asc') selected @endif>
+              A-Z
+            </option>
+            <option value="desc" @if(request()->input('sort') === 'desc') selected @endif>
+              Z-A
+            </option>
+            <option value="low" @if(request()->input('sort') === 'low') selected @endif>
+              Lowest Price
+            </option>
+            <option value="high" @if(request()->input('sort') === 'high') selected @endif>
+              Highest Price
+            </option>
           </select>
         </div>
       </div>
     </form>
 
-    <div class="row row-cols-3">
-      @foreach ($artworks as $artwork)
-      <div class="col mb-5">
-        <div class="card mx-5" style="width: 20rem !important;">
-          <a href='/artwork/{{ $artwork->id }}'>
-            <img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
-          </a>
-          <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-              <a href='/artwork/{{ $artwork->id }}'>
-                <h5 class="card-title">
-                  {{ $artwork->name }}
-                </h5>
-              </a>
-              <p class="card-text text-muted">
-                {{ $artwork->description }}
-              </p>
-            </div>
-            <div class="mt-5 d-flex justify-content-between">
-              <span class="text-muted">
-                {{ $artwork->artist->presentFullName() }}
-              </span>
-              <span class="fw-bold">{{ $artwork->presentPrice() }}</span>
+    @if (count($artworks) > 0)
+      <div class="row row-cols-4 mb-5">
+        @foreach($artworks as $artwork)
+          <div class="card col ms-5 p-0 mt-4" style="width: 21% !important;">
+            <a href="/artwork/{{ $artwork->id }}">
+              <img src="{{ asset('upload/artworks/' . $artwork->image_url) }}" class="card-img-top" style="height: 250px;" />
+            </a>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <a href="/artwork/{{ $artwork->id }}">
+                  <h5 class="card-title">{{ $artwork->name }}</h5>
+                </a>
+                <p class="card-text text-muted">{{ $artwork->description }}</p>
+              </div>
+              <div class="mt-5 d-flex justify-content-between">
+                <p class="text-muted">{{ $artwork->artist->presentFullName() }}</p>
+                <p class="fw-bold">{{ $artwork->presentPrice() }}</p>
+              </div>
             </div>
           </div>
-        </div>
+        @endforeach
       </div>
-      @endforeach
-    </div>
-
-    <!-- <%-- If there is no results --%>
-                    <% if (numResults == 0)
-                        { %> -->
-
-
-
-    <!-- <div class="mt-5 d-flex justify-content-center align-items-center flex-grow-1">
-                    <h4 class="display-5">No matched results.</h4>
-                </div> -->
-
-
-
-    <!-- <% } else { %>
-                        <%-- Paging Control --%>
-                        <asp:DataList ID="rptPaging" runat="server"
-                            OnItemCommand="rptPaging_ItemCommand"
-                            OnItemDataBound="rptPaging_ItemDataBound"
-                            RepeatDirection="Horizontal"
-                            CssClass="table-primary mx-auto mb-4">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="lbPaging" runat="server"
-                                    CommandArgument='<%# Eval("PageIndex") %>'
-                                    CommandName="newPage"
-                                    Text='<%# Eval("PageText") %>'
-                                    CssClass="px-3 text-black-50">
-                                </asp:LinkButton>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    <% } %> -->
+    @else
+      <div class="mt-5 d-flex justify-content-center align-items-center flex-grow-1">
+        <h4 class="display-5">No matched results.</h4>
+      </div>
+    @endif
   </div>
-
 </main>
 
 @endsection
@@ -99,7 +74,7 @@
 @section('extra-js')
 
 <script>
-  $('#ddlSort').on('change', function(e) {
+  $('#sortDropdown').on('change', function(e) {
     $(this).closest('form').submit();
   });
 </script>
