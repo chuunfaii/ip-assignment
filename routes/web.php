@@ -39,9 +39,7 @@ Route::get('/order-history', function () {
     return view('pages.order-history');
 });
 
-// Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-page');
-
-Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
+Route::get('/artists', [ArtistController::class, 'index'])->name('artists');
 
 Route::get('/artist/{id}', [ArtistController::class, 'show']);
 
