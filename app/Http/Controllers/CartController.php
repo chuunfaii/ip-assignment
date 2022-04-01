@@ -75,7 +75,7 @@ class CartController extends Controller
             case 'add-to-cart':
                 $id = $request->input('actionId');
                 $cart = Cart::find($id);
-                 $cart->quantity = 1;
+                $cart->quantity = $request->input('quantity');
                 $cart->save();
                 return redirect()->back()->with('message', 'Quantity Updated Successfully');
 
