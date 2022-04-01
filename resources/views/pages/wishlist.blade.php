@@ -52,12 +52,9 @@
                 </form>
                 @endforeach
             @else
-            <br><br><br><br>
-            <div class="d-flex flex-column justify-content-between align-items-center">
-                <div class="d-flex flex-column h-100 justify-content-center align-items-center mb-5">
-                    <h1 class="display-6 mb-5">Your cart is empty right now.</h1>
-                    <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artwork</a>
-                </div>
+            <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
+                <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
+                <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
             </div>
             @endif
 
@@ -76,26 +73,26 @@
                         </div>
                     </div>
                --}}
-                    
 
-             
-        
 
-           
 
-            
 
-        
 
-          
+
+
+
+
+
+
+
                 <!-- Empty Wishlist -->
             {{-- <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
                 <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
                 <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
             </div> --}}
-            
+
         </div>
     </div>
 
-    
+
 @endsection
