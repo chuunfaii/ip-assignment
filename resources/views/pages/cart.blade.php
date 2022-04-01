@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-1">
                         <div class="h-100 d-flex align-items-center justify-content-center">
-                            <input id='quantity' name='quantity' class="form-control" type='number' min='1' max='99' value="{{ $c->quantity }}"/>
+                            <input id='quantity' name='quantity' class="form-control" type='number' min='1' max='99' value="{{ $c->quantity }}" required/>
                         </div>
                         </div>
                         <div class="col-2 ps-5">
