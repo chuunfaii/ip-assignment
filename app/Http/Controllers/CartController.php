@@ -15,8 +15,14 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::all()->where('user_id', auth()->user()->id);
-        return view('pages.cart', compact('cart'));
+        $carts = Cart::all()->where('user_id', auth()->user()->id);
+        $total_price = 0;
+
+        foreach ($carts as $cart) {
+            $total_price += $cart->subtotal();
+        }
+
+        return view('pages.cart', compact('carts', 'total_price'));
     }
 
     /**

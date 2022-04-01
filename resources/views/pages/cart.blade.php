@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <h1 class="navbar-brand fw-bold p-0 php m-0 mt-5">Your Cart</h1>
             </div>
-            @if($cart->count() > 0)
+            @if($carts->count() > 0)
                 <div class="row mt-5 mb-5">
                     <div class="col-2">
                     </div>
@@ -26,7 +26,7 @@
                     <div class="col-1">
                     </div>
                 </div>
-                @foreach($cart as $c)
+                @foreach($carts as $c)
                 <form action="{{ url('/update-cart') }}" id="cartDeleteForm" method="POST">
                 @csrf
                     <div class="item row mb-5" id="">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-2 ps-5">
                         <div class="h-100 d-flex align-items-center justify-content-start">
-                            <span class="fw-bold">$ {{ $c->subtotal() }}</span>
+                            <span class="fw-bold">$ {{ number_format($c->subtotal(), 2) }}</span>
                         </div>
                         </div>
                         <div class="col-1">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-3 d-flex justify-content-start ps-5">
-                        <span class="fs-4 fw-bold">$ 100</span>
+                        <span class="fs-4 fw-bold">$ {{ number_format($total_price, 2) }}</span>
                     </div>
                 </div>
                 <div class="container d-flex align-items-center justify-content-between mb-5">

@@ -37,7 +37,12 @@
                     </div>
                     <div class="col-2 ">
                         <div class="h-100 d-flex align-items-center justify-content-center">
+<<<<<<< HEAD
                             <span class="fw-bold">{{  $w->artworks->price}}</span>
+=======
+                            <span class="fw-bold">{{ $w->artworks->presentPrice()}}</span>
+                            
+>>>>>>> d93abae320f3de9d91e61237f8f15aa9ddba60c6
                         </div>
                     </div>
                     <div class="col-2">
