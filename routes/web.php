@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
-use App\Http\Controllers\Auth\ArtistController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -39,11 +39,11 @@ Route::get('/order-history', function () {
     return view('pages.order-history');
 });
 
-Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-page');
-
-Route::get('/artist-profile/{id}', [ProfileController::class, 'create']);
+// Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-page');
 
 Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
+
+Route::get('/artist/{id}', [ArtistController::class, 'show']);
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 

@@ -65,7 +65,7 @@
                 <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
               </li>
               <li>
-                <a href="{{ route('profile-page') }}" class="dropdown-item text-muted">Profile Page</a>
+                <a href="/artist/{{ auth()->user()->id }}" class="dropdown-item text-muted">Profile Page</a>
               </li>
               <li>
                 <hr class="dropdown-divider" />

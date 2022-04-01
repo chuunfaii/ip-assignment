@@ -3,29 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Artist;
+use App\Models\Artwork;
 
 class ArtistController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request){
-        // $artists = User::all()->where('type','=','artist');
-        // return view('pages.artists',['artists'=>$artists]);
-
-        $artists = User::all()->where('type','=','artist');
+        $artists = Artist::all();
 
         if ($request->input('query')) {
             $query = $request->input('query');
 
-            // $artists = User::where('first_name', 'like', "%$query%")->get();
-            $artists = User::where(User::raw("CONCAT(first_name,' ',last_name)"), 'LIKE', '%' . $query . '%')
-                        ->orWhere(User::raw("CONCAT(last_name,' ',first_name)"), 'LIKE', '%' . $query . '%')
-                        ->get();
-           
-            
+            $artists = Artist::where(Artist::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', '%' . $query . '%')
+                            ->orWhere(Artist::raw("CONCAT(last_name, ' ', first_name)"), 'LIKE', '%' . $query . '%')
+                            ->get();
         }
 
-        return view('pages.artists')->with('artists', $artists);
+        return view('pages.artists', compact('artists'));
     }
 
+    /** 
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $artworks = Artwork::where('user_id', $id)->get();
+        $artist = Artist::find($id);
 
+        return view('pages.artist-profile', compact('artworks', 'artist'));
+    }
 }
