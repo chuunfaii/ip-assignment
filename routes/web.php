@@ -25,7 +25,7 @@ use App\Models\Artwork;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Artist Add, Update, Delete & Retrieve Artworks
-Route::get('/my-artwork', [ArtistArtworkController::class, 'index'])->name('my-artwork');
+Route::get('/my-artwork', [ArtistArtworkController::class, 'index'])->name('my-artworks');
 Route::post('/store-artwork', [ArtistArtworkController::class, 'store']);
 Route::post('/fetch-artwork', [ArtistArtworkController::class, 'edit']);
 Route::post('/update-artwork', [ArtistArtworkController::class, 'update']);

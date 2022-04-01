@@ -9,6 +9,11 @@ class HomeController extends Controller
 {
     public function index()
     {
+        /**
+         * Display a listing of the resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
         $artworks = Artwork::inRandomOrder()->take(6)->get();
         $categories = Category::all();
 

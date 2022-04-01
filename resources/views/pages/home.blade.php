@@ -22,7 +22,7 @@
         <div class="carousel-item position-relative" style="background-image: url({{ asset('images/slide2.jpg') }}); background-position: center;">
           <div class="card-img-overlay overlay-dark">
             <div class="carousel-caption d-none d-md-block position-absolute top-50 start-50 translate-middle">
-              <h1 class="w-100">Browse by Artwork</h1>
+              <h1 class="w-100">Browse by Artworks</h1>
               <p>
                 Curated collections of works ready for purchase, from iconic
                 artist series to emerging trends.
@@ -40,8 +40,7 @@
                 Get competitive offers from the world's galleries to take
                 your works on consignment. It's simple and free to submit.
               </p>
-              <!-- TODO: Replace the link later -->
-              <a href="{{ route('my-artwork') }}" class="mt-3 px-5 btn btn-lg btn-light">Submit Now</a>
+              <a href="{{ route('my-artworks') }}" class="mt-3 px-5 btn btn-lg btn-light">Submit Now</a>
             </div>
           </div>
         </div>
@@ -69,9 +68,8 @@
 
   <!-- Featured Artworks -->
   <h2 class="text-center navbar-brand fs-1 my-5 p-0 m-0">Featured Artworks</h2>
-  <!-- TODO: Dynamically generate random artworks -->
+  <div class="row row-cols-3 mb-5">
 
-  <div class="row row-cols-3">
     @foreach ($artworks as $artwork)
     <div class="col mb-5">
       <div class="card mx-5" style="width: 20rem !important;">
@@ -93,12 +91,13 @@
             <span class="text-muted">
               {{ $artwork->artist->presentFullName() }}
             </span>
-            <span class="fw-bold">$ {{ $artwork->presentPrice() }}</span>
+            <span class="fw-bold">{{ $artwork->presentPrice() }}</span>
           </div>
         </div>
       </div>
     </div>
     @endforeach
+
   </div>
 </div>
 
