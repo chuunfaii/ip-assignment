@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 
+  Route::post('/update-wishlist',[WishlistController::class, 'updateWishlist']);
+
 
 
 //   Route::get('/wishlist', function () {

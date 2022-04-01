@@ -71,11 +71,11 @@ class CartController extends Controller
      */
     public function updateCart(Request $request)
     {
-        switch ($request->input('cartBtn')) {
-            case 'update':
+        switch ($request->input('wishlistBtn')) {
+            case 'add-to-cart':
                 $id = $request->input('actionId');
                 $cart = Cart::find($id);
-                $cart->quantity = $request->input('quantity');
+                 $cart->quantity = 1;
                 $cart->save();
                 return redirect()->back()->with('message', 'Quantity Updated Successfully');
 
