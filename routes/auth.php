@@ -29,13 +29,17 @@ Route::middleware('auth')->group(function () {
   Route::post('/account/delete', [UserController::class, 'destroy'])
             ->name('delete-account');
 
-  Route::get('/cart', [CartController::class, 'index'])->name('cart');
+  Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart');
   
   Route::post('/update-cart', [CartController::class, 'updateCart']);
   
-  Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
+  Route::post('/wishlist-cart/{id}', [ArtworkController::class, 'wishlist_cart'])
+            ->name('wishlist-cart')
+            ->middleware('role:customer');
   
-  Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+  Route::get('/wishlist', [WishlistController::class, 'index'])
+            ->name('wishlist');
   
   Route::post('/update-wishlist',[WishlistController::class, 'updateWishlist']);
   
