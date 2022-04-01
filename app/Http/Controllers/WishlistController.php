@@ -23,21 +23,21 @@ class WishlistController extends Controller
     public function show($id)
     {
         
-        if (filled($id)) {
-            $artwork = Artwork::all()->find($id);
-            //if ($id == 'id') {
-            $artist = User::all()->find($artwork->user_id);
+        // if (filled($id)) {
+        //     $artwork = Artwork::all()->find($id);
+        //     //if ($id == 'id') {
+        //     $artist = User::all()->find($artwork->user_id);
 
-            return view('pages.wishlist', compact('artwork', 'artist'));
+        //     return view('pages.wishlist', compact('artwork', 'artist'));
 
-            //} else {
-            //Testing purpose
-            //echo ("The id does not exist.");
-            //}
-        } else {
-            // TODO: Change it to something better.
-            echo "No such file.";
-        }
+        //     //} else {
+        //     //Testing purpose
+        //     //echo ("The id does not exist.");
+        //     //}
+        // } else {
+        //     // TODO: Change it to something better.
+        //     echo "No such file.";
+        // }
 
     }
 
@@ -53,13 +53,15 @@ class WishlistController extends Controller
     {
         switch ($request->input('wishlistBtn')) {
             case 'add-to-cart':
-                // $artwork = Wishlist::all()->find($id);
-                $id = $request->input('actionId');
-                $artwork = Wishlist::all()->find($id);
+               
+                $artwork_id = $request->input('actionId');
+                $user_id = $request->input('testId');
+
+                
 
                 $cart = new Cart();
-                $cart->user_id = auth()->user()->id;
-                $cart->artwork_id = $artwork->id;
+                $cart->user_id = $user_id;
+                $cart->artwork_id = $artwork_id;
                 $cart->quantity = 1;
                 
                 $cart->save();
@@ -68,21 +70,18 @@ class WishlistController extends Controller
                 break;
 
             case 'remove':
-                $id = $request->input('actionId');
-                // $wishlist = Wishlist::find($id);
-                $wishlist = Wishlist::all()->find($id);
+                $artwork_id = $request->input('actionId');
+                $user_id = $request->input('testId');
+
+                $ids = ['artwork_id'=>$artwork_id,'user_id'=>$user_id];
+
+                $wishlist = Wishlist::where($ids);
+                
                 $wishlist->delete();
                 return redirect()->back()->with('message', 'Wishlist Removed Successfully');
 
                 break;
-            // case 'add-to-cart':
-            //     $id = $request->input('actionId');
-            //     $wishlist = Wishlist::all()->find($id);
-            //     // $wishlist->quantity = 1;
-            //     $wishlist->save();
-            //     return redirect()->back()->with('message', 'Add to Cart Successfully');
-
-            //     break;
+           
         }
     }
 }

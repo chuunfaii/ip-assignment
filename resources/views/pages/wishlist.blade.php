@@ -19,7 +19,7 @@
                     <span id="lblArtworkId" style="display: none;">1</span>
                     <div class="col-2 ">
                         <div class="d-flex justify-content-center">
-                            <a href="./">
+                            <a href="/artwork/{{ $w->artworks->id }}">
                                 <img src="{{ asset('upload/artworks/' . $w->artworks->image_url) }}" alt="" class="card-img-top" style="max-height: 8rem;">
                             </a>
                         </div>
@@ -44,7 +44,7 @@
                     <div class="col-2">
                         <div class="h-100 d-flex align-items-center justify-content-between">
                             <input type="hidden" name="actionId" value="{{ $w->artwork_id }}">
-                            
+                            <input type="hidden" name="testId" value="{{ $w->user_id }}">
                             <button id="btnRemove" class="btn btn-outline-danger" name="wishlistBtn" value="remove">Remove</button>
                             <button id="btnCart" class="btn btn-primary" name="wishlistBtn" value="add-to-cart" >Add to Cart</button>
                         </div>
