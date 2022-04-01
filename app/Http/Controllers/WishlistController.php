@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Artwork;
 use App\Models\User; 
 use App\Models\Wishlist;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -52,12 +53,18 @@ class WishlistController extends Controller
     {
         switch ($request->input('wishlistBtn')) {
             case 'add-to-cart':
+                // $artwork = Wishlist::all()->find($id);
                 $id = $request->input('actionId');
-                $wishlist = Wishlist::all()->find($id);
-                $wishlist->quantity = $request->input('quantity');
-                $wishlist->save();
-                return redirect()->back()->with('message', 'Add to Cart Successfully');
+                $artwork = Wishlist::all()->find($id);
 
+                $cart = new Cart();
+                $cart->user_id = auth()->user()->id;
+                $cart->artwork_id = $artwork->id;
+                $cart->quantity = 1;
+                
+                $cart->save();
+
+                return redirect()->back()->with('message', 'Wishlist has been added to cart.');
                 break;
 
             case 'remove':
@@ -68,6 +75,14 @@ class WishlistController extends Controller
                 return redirect()->back()->with('message', 'Wishlist Removed Successfully');
 
                 break;
+            // case 'add-to-cart':
+            //     $id = $request->input('actionId');
+            //     $wishlist = Wishlist::all()->find($id);
+            //     // $wishlist->quantity = 1;
+            //     $wishlist->save();
+            //     return redirect()->back()->with('message', 'Add to Cart Successfully');
+
+            //     break;
         }
     }
 }

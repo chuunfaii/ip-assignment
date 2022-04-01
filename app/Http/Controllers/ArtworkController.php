@@ -53,7 +53,7 @@ class ArtworkController extends Controller
             $category = Category::all()->find($artwork->category_id);
             $artist = User::all()->find($artwork->user_id);
 
-            return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+            return view('pages.artwork-details', compact('category', 'artwork', 'artist'));
 
             //} else {
             //Testing purpose
