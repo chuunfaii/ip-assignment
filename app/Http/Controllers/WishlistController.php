@@ -12,21 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class WishlistController extends Controller
 {
     public function index(){
-        // $artists = User::all()->where('type','=','artist');
-        // return view('pages.artists',['artists'=>$artists]);
+       
         
-            $wishlist = Wishlist::where('user_id',auth()->user()->id);
+            $wishlist = Wishlist::all()->where('user_id', auth()->user()->id);
             return view('pages.wishlist', compact('wishlist'));
 
-            //} else {
-            //Testing purpose
-            //echo ("The id does not exist.");
-            //}
-        
-         
-        
-
-        //return view('pages.wishlist',compact('wishlist'));
     }
 
     public function show($id)
@@ -48,5 +38,36 @@ class WishlistController extends Controller
             echo "No such file.";
         }
 
+    }
+
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateWishlist(Request $request)
+    {
+        switch ($request->input('wishlistBtn')) {
+            case 'add-to-cart':
+                $id = $request->input('actionId');
+                $wishlist = Wishlist::all()->find($id);
+                $wishlist->quantity = $request->input('quantity');
+                $wishlist->save();
+                return redirect()->back()->with('message', 'Add to Cart Successfully');
+
+                break;
+
+            case 'remove':
+                $id = $request->input('actionId');
+                // $wishlist = Wishlist::find($id);
+                $wishlist = Wishlist::all()->find($id);
+                $wishlist->delete();
+                return redirect()->back()->with('message', 'Wishlist Removed Successfully');
+
+                break;
+        }
     }
 }

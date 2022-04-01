@@ -11,18 +11,16 @@
             <div class="d-flex justify-content-center align-items-center">
                 <h1 class="navbar-brand fw-bold p-0 php m-0 mt-5">Your Wishlist</h1>
             </div>
-
-
-            @if($wishlist->count()>0)
+            @if($wishlist->count() > 0)
                 @foreach ($wishlist as $w)
-                <form action="" id="wishlistForm" >
+                <form action="{{ url('/update-wishlist') }}" id="wishlistForm" method="POST">
                     @csrf
                 <div class="row my-5" id="1">
                     <span id="lblArtworkId" style="display: none;">1</span>
                     <div class="col-2 ">
                         <div class="d-flex justify-content-center">
                             <a href="./">
-                                <img src="{{ asset('upload/artworks/' . $w->$artwork->image_url) }}" alt="" class="card-img-top" style="max-height: 8rem;">
+                                <img src="{{ asset('upload/artworks/' . $w->artworks->image_url) }}" alt="" class="card-img-top" style="max-height: 8rem;">
                             </a>
                         </div>
                     </div>
@@ -30,31 +28,42 @@
                         <div class="h-100 d-flex flex-column justify-content-between">
                             <span>
                                 <a href="./" class="text-decoration-none text-muted fs-4">
-                                    {{ $w->$artwork->name }}
+                                    {{ $w->artworks->name }}
                                 </a>
                             </span>
                             <hr>
-                            <p class="m-0">{{  $w->$artwork->artist->presentFullName() }}</p>
+                            <p class="m-0">{{  $w->artworks->artist->presentFullName() }}</p>
                         </div>
                     </div>
                     <div class="col-2 ">
                         <div class="h-100 d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">{{  $w->$artwork->price}}</span>
+                            <span class="fw-bold">{{  $w->artworks->price}}</span>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="h-100 d-flex align-items-center justify-content-between">
-                            <button id="btnRemove" class="btn btn-outline-danger ">Remove</button>
-                            <button id="btnCart" class="btn btn-primary ">Add to Cart</button>
+                            <input type="hidden" name="actionId" value="{{ $w->id }}">
+                            
+                            <button id="btnRemove" class="btn btn-outline-danger" name="wishlistBtn" value="remove">Remove</button>
+                            <button id="btnCart" class="btn btn-primary" name="wishlistBtn" value="add-to-cart" >Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 </form>
                 @endforeach
             @else
+<<<<<<< HEAD
+            <br><br><br><br>
+            <div class="d-flex flex-column justify-content-between align-items-center">
+                <div class="d-flex flex-column h-100 justify-content-center align-items-center mb-5">
+                    <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
+                    <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artwork</a>
+                </div>
+=======
             <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
                 <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
                 <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
+>>>>>>> 1fc6ef22b65909308f7726eb83e3892a784d1cc3
             </div>
             @endif
 
