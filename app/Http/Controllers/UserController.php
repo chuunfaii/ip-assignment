@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Artwork;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -13,16 +14,15 @@ use Illuminate\Validation\Rules\Password;
 class UserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         $id = auth()->user()->id;
 
         $user = User::find($id);
-
 
         if (auth()->user()->isCustomer()) {
             return view('pages.edit-customer-account', ['user' => $user]);
@@ -44,11 +44,37 @@ class UserController extends Controller
         $user = User::find($id);
 
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => ['required', 'current_password'],
-            'new_password' => ['nullable', 'confirmed', 'required_with:new_password_confirmation', Password::defaults()],
+            'first_name' => [
+                'required', 
+                'string', 
+                'max:255'
+            ],
+
+            'last_name' => [
+                'required', 
+                'string', 
+                'max:255'
+            ],
+
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                'max:255', 
+                Rule::unique('users')->ignore($user->id)
+            ],
+
+            'password' => [
+                'required',
+                'current_password',
+            ],
+
+            'new_password' => [
+                'nullable', 
+                'confirmed',
+                'required_with:new_password_confirmation',
+                Password::min(8)->mixedCase()->numbers()->symbols()
+            ],
         ]);
 
         if (auth()->user()->isCustomer()) {
@@ -56,7 +82,6 @@ class UserController extends Controller
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-
             ]);
 
             if ($request->filled('new_password')) {
@@ -67,7 +92,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('edit-account')->with('message', 'Edited account details successfully.');
+            return redirect()->route('edit-account')->with('message', 'Account details have been edited successfully.');
         }
 
         $user->update([
@@ -75,7 +100,6 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'bio' => $request->bio
-
         ]);
 
         if ($request->filled('new_password')) {
@@ -84,19 +108,19 @@ class UserController extends Controller
             ]);
         }
 
-        $file = $request->file('image_URL');
+        $file = $request->file('image_url');
 
         if (!empty($file)) {
-            if ($request->hasFile('image_URL')) {
-                $filename = $request->file('image_URL')->getClientOriginalName();
+            if ($request->hasFile('image_url')) {
+                $filename = $request->file('image_url')->getClientOriginalName();
                 $file->move('upload/artists/', $filename);
-                $user->image_URL = $filename;
+                $user->image_url = $filename;
             }
         }
 
         $user->save();
 
-        return redirect()->route('edit-account')->with('message', 'Edited account details successfully.');
+        return redirect()->route('edit-account')->with('message', 'Account details have been edited successfully.');
     }
 
     /**
@@ -106,12 +130,14 @@ class UserController extends Controller
      */
     public function destroy()
     {
-        $user = User::find(auth()->user()->id);
+        $id = auth()->user()->id;
+
+        $user = User::find($id);
 
         auth()->logout();
 
-        if ($user->delete()) {
-            return redirect(RouteServiceProvider::HOME)->with('message', 'Deactivated account successfully.');
+        if (Artwork::where('user_id', $id)->delete() && $user->delete()) {
+            return redirect()->route('home')->with('message', 'Deactivated account successfully.');
         }
     }
 }
