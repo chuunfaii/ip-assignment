@@ -69,9 +69,26 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateCart(Request $request)
     {
-        //
+        switch ($request->input('cartBtn')) {
+            case 'update':
+                $id = $request->input('actionId');
+                $cart = Cart::find($id);
+                $cart->quantity = $request->input('quantity');
+                $cart->save();
+                return redirect()->back()->with('message', 'Quantity Updated Successfully');
+
+                break;
+
+            case 'remove':
+                $id = $request->input('actionId');
+                $cart = Cart::find($id);
+                $cart->delete();
+                return redirect()->back()->with('message', 'Cart Removed Successfully');
+
+                break;
+        }
     }
 
     /**
@@ -82,9 +99,6 @@ class CartController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->input('removeId');
-        $cart = Cart::find($id);
-        $cart->delete();
-        return redirect()->back()->with('message', 'Cart Removed Successfully');
+
     }
 }

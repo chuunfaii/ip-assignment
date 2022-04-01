@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
-  Route::post('/remove-cart', [CartController::class, 'destroy']);
+  Route::post('/update-cart', [CartController::class, 'updateCart']);
 
   Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
 

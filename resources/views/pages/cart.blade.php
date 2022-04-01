@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 @foreach($cart as $c)
-                <form action="{{ url('/remove-cart') }}" id="cartForm" method="POST">
-                    @csrf
+                <form action="{{ url('/update-cart') }}" id="cartDeleteForm" method="POST">
+                @csrf
                     <div class="item row mb-5" id="">
                         <span id="lblArtworkId" runat="server" style="display: none;"></span>
                         <div class="col-2">
@@ -54,13 +54,14 @@
                         </div>
                         <div class="col-2 ps-5">
                         <div class="h-100 d-flex align-items-center justify-content-start">
-                            <span class="fw-bold">$ {{ $c->artworks->price }}</span>
+                            <span class="fw-bold">$ {{ $c->artworks->price * $c->quantity }}</span>
                         </div>
                         </div>
                         <div class="col-1">
                             <div class="h-100 d-flex align-items-center justify-content-center">
-                                <input type="hidden" name="removeId" value="{{ $c->id }}">
-                                <button id="removeBtn" class="btn btn-outline-danger" type="submit" name="removeBtn">Remove</button>
+                                <input type="hidden" name="actionId" value="{{ $c->id }}">
+                                <button id="removeBtn" class="btn btn-outline-danger" type="submit" name="cartBtn" value="remove">Remove</button>
+                                <button id="updateBtn" class="btn btn-primary ms-1" type="submit" name="cartBtn" value="update">Update</button>
                             </div>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-3 d-flex justify-content-start ps-5">
-                        <span class="fs-4 fw-bold">$ 1000</span>
+                        <span class="fs-4 fw-bold">$ 100</span>
                     </div>
                 </div>
                 <div class="container d-flex align-items-center justify-content-between mb-5">

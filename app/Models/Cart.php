@@ -21,9 +21,4 @@ class Cart extends Model
         return $this->belongsTo(Artwork::class, 'artwork_id', 'id');
     }
 
-    public function total()
-    {
-        return $this->artworks()->sum('price');
-    }
-
 }
