@@ -53,7 +53,7 @@ class ArtworkController extends Controller
             $category = Category::all()->find($artwork->category_id);
             $artist = User::all()->find($artwork->user_id);
 
-            return view('pages.artwork-detail', compact('category', 'artwork', 'artist'));
+            return view('pages.artwork-details', compact('category', 'artwork', 'artist'));
 
             //} else {
             //Testing purpose
@@ -83,7 +83,7 @@ class ArtworkController extends Controller
             case 'cart':
                 $artwork = Artwork::all()->find($id);
                 if(Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->exists()){
-                
+
                     $quantity = $request->input('quantity');
 
                     $cart = Cart::where('user_id', auth()->user()->id)->where('artwork_id',$id)->first();
@@ -100,9 +100,9 @@ class ArtworkController extends Controller
                     $cart->user_id= auth()->user()->id;
                     $cart->artwork_id= $artwork->id;
                     $cart->quantity = $quantity;
-                    
+
                     $cart->save();
-                    
+
                     return redirect()->back()->with('message','Artwork has been added to cart.');
                 }
                 break;

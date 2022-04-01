@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-2 ">
                         <div class="h-100 d-flex align-items-center justify-content-center">
-                            <span class="fw-bold">{{  $w->artworks->price}}</span>
+                            <span class="fw-bold">$ {{  $w->artworks->price}}</span>
                         </div>
                     </div>
                     <div class="col-2">
