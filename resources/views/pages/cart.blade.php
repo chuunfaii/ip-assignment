@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-3 d-flex justify-content-start ps-5">
-                        <span class="fs-4 fw-bold">$ {{  }}</span>
+                        <span class="fs-4 fw-bold">$ 1000</span>
                     </div>
                 </div>
                 <div class="container d-flex align-items-center justify-content-between mb-5">
