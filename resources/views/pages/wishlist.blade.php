@@ -43,7 +43,7 @@
                     <div class="col-2">
                         <div class="h-100 d-flex align-items-center justify-content-between">
                             <input type="hidden" name="actionId" value="{{ $w->id }}">
-                            
+
                             <button id="btnRemove" class="btn btn-outline-danger" name="wishlistBtn" value="remove">Remove</button>
                             <button id="btnCart" class="btn btn-primary" name="wishlistBtn" value="add-to-cart" >Add to Cart</button>
                         </div>
@@ -52,54 +52,11 @@
                 </form>
                 @endforeach
             @else
-<<<<<<< HEAD
-            <br><br><br><br>
-            <div class="d-flex flex-column justify-content-between align-items-center">
-                <div class="d-flex flex-column h-100 justify-content-center align-items-center mb-5">
-                    <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
-                    <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artwork</a>
-                </div>
-=======
             <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
                 <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
                 <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
->>>>>>> 1fc6ef22b65909308f7726eb83e3892a784d1cc3
             </div>
             @endif
-
-                    {{-- <div class="row mb-5">
-                        <div class="col-2">
-                        </div>
-                        <div class="col-6">
-                        </div>
-                        <div class="col-1">
-                            <div class="h-100 d-flex align-items-center justify-content-end">
-                                <span class="fw-bold text-muted">Total Price:</span>
-                            </div>
-                        </div>
-                        <div class="col-3 d-flex justify-content-start ps-3">
-                            <span class="fs-4 fw-bold">$ 100000</span>
-                        </div>
-                    </div>
-               --}}
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- Empty Wishlist -->
-            {{-- <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
-                <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
-                <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
-            </div> --}}
-
         </div>
     </div>
 
