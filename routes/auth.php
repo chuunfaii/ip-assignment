@@ -33,11 +33,13 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
+  Route::post('/remove-cart', [CartController::class, 'destroy']);
+
   Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
 
   Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
 
-  
+
 
 //   Route::get('/wishlist', function () {
 //     return view('pages.wishlist');

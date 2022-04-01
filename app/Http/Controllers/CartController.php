@@ -17,10 +17,6 @@ class CartController extends Controller
     {
         $cart = Cart::all()->where('user_id', auth()->user()->id);
         return view('pages.cart', compact('cart'));
-
-        /*$cart = \Cart::getContent();
-        dd($cart);*/
-        //return view('pages.cart', compact('cart'));
     }
 
     /**
@@ -84,8 +80,11 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('removeId');
+        $cart = Cart::find($id);
+        $cart->delete();
+        return redirect()->back()->with('message', 'Cart Removed Successfully');
     }
 }
