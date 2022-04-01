@@ -16,19 +16,19 @@
 
     <div class="input-group justify-content-between">
       <div class="form-floating mb-4" style="min-width: 230px;">
-        <input type="text" id="txtFName" class="form-control @error('first_name') error-input @enderror" placeholder="John" value="{{ old('first_name')? : $user->first_name }}" name="first_name" />
-        <label for="txtEmail">First name</label>
+        <input type="text" id="firstName" class="form-control @error('first_name') error-input @enderror" placeholder="John" value="{{ old('first_name')? : $user->first_name }}" name="first_name" />
+        <label for="firstName">First name</label>
       </div>
 
       <div class="form-floating mb-4" style="min-width: 230px;">
-        <input type="text" id="txtLName" class="form-control @error('last_name') error-input @enderror" placeholder="Doe" value="{{ old('last_name')? : $user->last_name }}" name="last_name" />
-        <label for="txtEmail">Last name</label>
+        <input type="text" id="lastName" class="form-control @error('last_name') error-input @enderror" placeholder="Doe" value="{{ old('last_name')? : $user->last_name }}" name="last_name" />
+        <label for="lastName">Last name</label>
       </div>
     </div>
 
     <div class="form-floating mb-4">
-      <input id="txtEmail" type="email" class="form-control @error('email') error-input @enderror" placeholder="name@example.com" value="{{ old('email')? : $user->email }}" name="email" />
-      <label for="txtEmail">Email address</label>
+      <input id="email" type="email" class="form-control @error('email') error-input @enderror" placeholder="name@example.com" value="{{ old('email')? : $user->email }}" name="email" />
+      <label for="email">Email address</label>
     </div>
 
     @error('email')
@@ -38,8 +38,8 @@
     @enderror
 
     <div class="form-floating mb-4">
-      <input id="txtCurrPassword" class="form-control @error('password') error-input @enderror" type="password" placeholder="Enter your current password" name="password" />
-      <label for="txtPassword">Current password</label>
+      <input id="password" class="form-control @error('password') error-input @enderror" type="password" placeholder="Enter your current password" name="password" />
+      <label for="password">Current password</label>
     </div>
 
     @error('password')
@@ -49,32 +49,32 @@
     @enderror
 
     <div class="form-floating mb-4">
-      <input id="txtNewPassword" class="form-control @error('new_password') error-input @enderror" type="password" placeholder="Enter your new password" name="new_password" />
-      <label for="txtPassword">New password</label>
+      <input id="newPassword" class="form-control @error('new_password') error-input @enderror" type="password" placeholder="Enter your new password" name="new_password" />
+      <label for="newPassword">New password</label>
     </div>
 
     <div class="form-floating mb-4">
-      <input id="txtConfirmNewPass" class="form-control @error('new_password') error-input @enderror" type="Password" placeholder="Enter your new password again" name="new_password_confirmation" />
-      <label for="txtPassword">Confirm new password</label>
+      <input id="newPasswordConfirmation" class="form-control @error('new_password') error-input @enderror" type="Password" placeholder="Enter your new password again" name="new_password_confirmation" />
+      <label for="newPasswordConfirmation">Confirm new password</label>
     </div>
 
-    @error('new_password')
     <div class="form-floating mb-4">
-      <p class="error-message">{{ $message }}</p>
+      @foreach ($errors->get('new_password') as $message)
+        <p class="error-message">{{ $message }}</p>
+      @endforeach
     </div>
-    @enderror
 
     <div class="d-grid gap-2 d-md-block mb-4">
-      <button type="button" class="btn btn-outline-danger py-3 mb-4 px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Deactivate Account</button>
-      <button type="submit" id="btnSave" class="btn btn-primary py-3 float-end px-5">Save</button>
+      <button type="button" class="btn btn-outline-danger py-3 mb-4 px-4" data-bs-toggle="modal" data-bs-target="#deactivateModal">Deactivate Account</button>
+      <button type="submit" class="btn btn-primary py-3 float-end px-5">Save</button>
     </div>
   </form>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Deactivate Account Confirmation</h5>
+          <h5 class="modal-title" id="deactivateModalLabel">Deactivate Account Confirmation</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -82,10 +82,9 @@
         </div>
         <form action="/account/delete" method="POST">
           @csrf
-          @method('delete')
           <div class="modal-footer justify-content-between">
-            <button id="btnCancel" class="btn btn-outline-danger px-4">Cancel</button>
-            <button type="submit" id="btnConfirm" class="btn btn-primary px-4">Confirm</button>
+            <button class="btn btn-outline-danger px-4">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4">Confirm</button>
           </div>
         </form>
       </div>
