@@ -17,10 +17,6 @@ class CartController extends Controller
     {
         $cart = Cart::all()->where('user_id', auth()->user()->id);
         return view('pages.cart', compact('cart'));
-
-        /*$cart = \Cart::getContent();
-        dd($cart);*/
-        //return view('pages.cart', compact('cart'));
     }
 
     /**
@@ -73,9 +69,26 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateCart(Request $request)
     {
-        //
+        switch ($request->input('cartBtn')) {
+            case 'update':
+                $id = $request->input('actionId');
+                $cart = Cart::find($id);
+                $cart->quantity = $request->input('quantity');
+                $cart->save();
+                return redirect()->back()->with('message', 'Quantity Updated Successfully');
+
+                break;
+
+            case 'remove':
+                $id = $request->input('actionId');
+                $cart = Cart::find($id);
+                $cart->delete();
+                return redirect()->back()->with('message', 'Cart Removed Successfully');
+
+                break;
+        }
     }
 
     /**
@@ -84,8 +97,8 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
     }
 }

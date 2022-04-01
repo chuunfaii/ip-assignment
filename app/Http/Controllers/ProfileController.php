@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Artwork;
 use App\Models\User;
 
-class ProfileController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
-use App\Http\Controllers\Auth\ArtistController;
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -25,7 +25,7 @@ use App\Models\Artwork;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //Artist Add, Update, Delete & Retrieve Artworks
-Route::get('/my-artwork', [ArtistArtworkController::class, 'index'])->name('my-artwork');
+Route::get('/my-artwork', [ArtistArtworkController::class, 'index'])->name('my-artworks');
 Route::post('/store-artwork', [ArtistArtworkController::class, 'store']);
 Route::post('/fetch-artwork', [ArtistArtworkController::class, 'edit']);
 Route::post('/update-artwork', [ArtistArtworkController::class, 'update']);
@@ -39,14 +39,14 @@ Route::get('/order-history', function () {
     return view('pages.order-history');
 });
 
-Route::get('/profile-page', [ProfileController::class, 'index'])->name('profile-page');
+Route::get('/artists', [ArtistController::class, 'index'])->name('artists');
 
-Route::get('/artist-profile/{id}', [ProfileController::class, 'create']);
-
-Route::get('/artists', 'App\Http\Controllers\ArtistController@index')->name('artists');
+Route::get('/artist/{id}', [ArtistController::class, 'show']);
 
 Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
+
+Route::get('/wishlist/{id}', [WishlistController::class, 'show'])->name('wishlist');
 
 require __DIR__ . '/auth.php';

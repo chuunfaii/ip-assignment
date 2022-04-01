@@ -4,92 +4,91 @@
 
     <ul class="navbar-nav position-absolute top-50 start-50 translate-middle">
       <li class="nav-item px-4">
-        <!-- TODO: Replace the link later -->
-        {{-- <a href="artist.php" class="nav-link">Artist</a> --}}
         <a href="{{ route('artists') }}" class="nav-link">Artists</a>
       </li>
       <li class="nav-item px-4">
-        <a href="{{ route('artworks') }}" class="nav-link">Artwork</a>
+        <a href="{{ route('artworks') }}" class="nav-link">Artworks</a>
       </li>
     </ul>
 
     @if (auth()->check())
-    @if (auth()->user()->isCustomer())
-    <!--Customer Navbar-->
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown px-2">
-        <a class="nav-link dropdown-toggle" id="customerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="customerDropdown">
-          <li>
-            <a class="dropdown-item text-muted" href="{{ route('edit-account') }}">Edit Account</a>
-          </li>
-          <li>
-            <a class="dropdown-item text-muted" href="orderHistory.php">Order History</a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <form method="POST" action="{{ route('logout') }}">
-              @csrf
+      @if (auth()->user()->isCustomer())
+        <!--Customer Navbar-->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown px-2">
+            <a class="nav-link dropdown-toggle" id="customerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ auth()->user()->presentFullName() }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="customerDropdown">
+              <li>
+                <a class="dropdown-item text-muted" href="{{ route('edit-account') }}">Edit Account</a>
+              </li>
+              <li>
+                <!-- TODO: Replace the link later -->
+                <a class="dropdown-item text-muted" href="orderHistory.php">Order History</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
 
-              <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
-                Log Out
-              </a>
-            </form>
+                  <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
+                    Log Out
+                  </a>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item px-2">
+            <a class="nav-link" href="{{ route('wishlist')}}">
+              <i class="bi bi-suit-heart"></i>
+            </a>
+          </li>
+
+          <li class="nav-item px-2">
+            <a class="nav-link" href="{{ route('cart') }}">
+              <i class="bi bi-cart"></i>
+            </a>
           </li>
         </ul>
-      </li>
-      <li class="nav-item px-2">
-        <a class="nav-link" href="{{ route('wishlist') }}">
-          <i class="bi bi-suit-heart"></i>
-        </a>
-      </li>
+      @else
+        <!--Artist Navbar-->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown px-2">
+            <a class="nav-link dropdown-toggle" id="artistDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ auth()->user()->presentFullName() }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="artistDropdown">
+              <li>
+                <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
+              </li>
+              <li>
+                <a href="/artist/{{ auth()->user()->id }}" class="dropdown-item text-muted">Profile Page</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
 
-      <li class="nav-item px-2">
-        <a class="nav-link" href="{{ route('cart') }}">
-          <i class="bi bi-cart"></i>
-        </a>
-      </li>
-    </ul>
-    @else
-    <!--Artist Navbar-->
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown px-2">
-        <a class="nav-link dropdown-toggle" id="artistDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="artistDropdown">
-          <li>
-            <a href="{{ route('edit-account') }}" class="dropdown-item text-muted">Edit Account</a>
+                  <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
+                    Log Out
+                  </a>
+                </form>
+              </li>
+            </ul>
           </li>
-          <li>
-            <a href="{{ route('profile-page') }}" class="dropdown-item text-muted">Profile Page</a>
+          <li class="nav-item px-2">
+            <a href="{{ url('my-artworks') }}" class="nav-link">My Artworks</a>
           </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li>
-            <form method="POST" action="{{ route('logout') }}">
-              @csrf
-
-              <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
-                Log Out
-              </a>
-            </form>
+          <li class="nav-item px-2">
+            <a href="{{ route('my-sales') }}" class="nav-link">My Sales</a>
           </li>
         </ul>
-      </li>
-      <li class="nav-item px-2">
-        <a href="{{ url('my-artwork') }}" class="nav-link">My Artwork</a>
-      </li>
-      <li class="nav-item px-2">
-        <a href="{{ route('my-sales') }}" class="nav-link">My Sales</a>
-      </li>
-    </ul>
-    @endif
+      @endif
     @else
     <!--Navbar without login-->
     <ul class="navbar-nav">
