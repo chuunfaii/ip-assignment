@@ -46,12 +46,4 @@ class User extends Authenticatable
     {
         return $this->type === 'artist';
     }
-
-    public function totalPrice(){
-        return $this->hasMany(Cart::class)
-                    ->join('artworks', 'carts.artwork_id', 'artworks.id')
-                    ->select('artworks.*',
-                             \DB::raw('carts.quantity * artworks.price as price')
-                            );
-       }
 }
