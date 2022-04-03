@@ -55,6 +55,12 @@
             </table>
         </div>
     </div>
+
+    {{-- <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
+        <h1 class="display-6 mb-5">Your Sales is empty right now.</h1>
+        <a href="{{ url('my-artwork') }}" class="btn btn-primary mt-3 py-3 px-4">Add Artworks</a>
+    </div> --}}
+
 </div>
 
 @endsection

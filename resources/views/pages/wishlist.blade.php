@@ -57,9 +57,6 @@
                 <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
                 <a href="{{ url('artworks') }}" class="btn btn-primary mt-3 py-3 px-4">Browse Artworks</a>
             </div>
-<<<<<<< HEAD
-            
-=======
             @endif
 
                     {{-- <div class="row mb-5">
@@ -89,7 +86,6 @@
 
 
 
->>>>>>> ac43ff91ab07e3459edacac34b11066ff4e8d28f
                 <!-- Empty Wishlist -->
             {{-- <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
                 <h1 class="display-6 mb-5">Your wishlist is empty right now.</h1>
