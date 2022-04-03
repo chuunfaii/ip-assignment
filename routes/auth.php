@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderHistoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -53,4 +54,7 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/thanks', [OrderController::class, 'index'])
             ->name('thanks');
+
+  Route::get('/orderHistory',[OrderHistoryController::class,'index'])
+            ->name('orderHistory');
 });

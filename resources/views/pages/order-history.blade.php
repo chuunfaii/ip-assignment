@@ -31,30 +31,19 @@
                         <th>Ordered At</th>
                     </tr>
                 </thead>
+                @foreach ($order as $history)
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Artwork 1</td>
-                        <td>1</td>
-                        <td>$ 999.00</td>
-                        <td>$ 999.00</td>
-                        <td>6/2/2022 10:35:06 PM</td>
+                        <td>{{ $history->order_id }}</td>
+                        {{-- <td>{{ $history->artwork->name}}</td> --}}
+                        <td>{{ $history->quantity}}</td>
+                        {{-- <td>{{ $history->artwork_id->price }}</td>
+                        <td>{{ $history->artwork_id->price }}</td> --}}
+                        <td>{{ $history->created_at}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Artwork 1</td>
-                        <td>1</td>
-                        <td>$ 999.00</td>
-                        <td>$ 999.00</td>
-                        <td>6/2/2022 10:35:06 PM</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Artwork 1</td>
-                        <td>1</td>
-                        <td>$ 999.00</td>
-                        <td>$ 999.00</td>
-                        <td>6/2/2022 10:35:06 PM</td>
+
+                @endforeach
+                    
                     </tr>
                 </tbody>
             </table>
