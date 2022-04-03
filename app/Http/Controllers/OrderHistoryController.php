@@ -16,7 +16,7 @@ class OrderHistoryController extends Controller
 
         // $orderHistory = Cart::all()->where('user_id', $customer_id);
         
-        $order = DB::table('order_items')->select('order_id','artwork_id','quantity','created_at','updated_at')->get();
+        $sales = DB::table('order_items')->select('order_id','artwork_id','quantity','created_at','updated_at')->get();
         
         return view('pages.order-history',compact('order'));
 

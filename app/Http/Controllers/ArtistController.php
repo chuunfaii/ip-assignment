@@ -20,8 +20,8 @@ class ArtistController extends Controller
             $query = $request->input('query');
 
             $artists = Artist::where(Artist::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', '%' . $query . '%')
-                            ->orWhere(Artist::raw("CONCAT(last_name, ' ', first_name)"), 'LIKE', '%' . $query . '%')
-                            ->get();
+                                ->orWhere(Artist::raw("CONCAT(last_name, ' ', first_name)"), 'LIKE', '%' . $query . '%')
+                                ->get();
         }
 
         return view('pages.artists', compact('artists'));
