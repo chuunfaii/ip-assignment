@@ -15,6 +15,8 @@ class CreateArtworksTable extends Migration
     {
         Schema::create('artworks', function (Blueprint $table) {
             $table->id();
+            $table->string('stripe_product_id');
+            $table->string('stripe_price_id');
             $table->string('name');
             $table->double('price', 10, 2);
             $table->integer('quantity');

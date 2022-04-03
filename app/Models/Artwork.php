@@ -14,6 +14,8 @@ class Artwork extends Model
 
     protected $fillable = [
         'name',
+        'stripe_product_id',
+        'stripe_price_id',
         'quantity',
         'price',
         'description',
