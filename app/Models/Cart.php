@@ -17,12 +17,13 @@ class Cart extends Model
         'quantity',
     ];
 
-    public function artwork() {
+    public function artwork()
+    {
         return $this->belongsTo(Artwork::class, 'artwork_id', 'id');
     }
 
-    public function subtotal() {
+    public function subtotal()
+    {
         return $this->artwork->price * $this->quantity;
     }
-
 }
