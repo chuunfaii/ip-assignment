@@ -8,6 +8,7 @@ use App\Http\Controllers\ArtistArtworkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\MySalesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Artwork;
 
@@ -48,5 +49,7 @@ Route::get('/artworks', [ArtworkController::class, 'index'])->name('artworks');
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
 
 Route::get('/wishlist/{id}', [WishlistController::class, 'show'])->name('wishlist');
+
+Route::get('/my-sales',[MySalesController::class,'index'])->name('my-sales');
 
 require __DIR__ . '/auth.php';

@@ -46,6 +46,7 @@
     $(document).ready(function() {
       $('#dataTable').DataTable();
     });
+ 
     //Prevent Content Move while Modal Pop Up
     $(document).ready(function() {
       $('.modal').on('show.bs.modal', function() {
