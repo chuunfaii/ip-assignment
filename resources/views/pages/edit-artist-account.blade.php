@@ -92,7 +92,7 @@
                 <div class="modal-body">
                     <span>Are you sure want to deactivate your account?</span>
                 </div>
-                <form action="/account/delete" method="POST">
+                <form action="{{ route('delete-account') }}" method="POST">
                     @csrf
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-outline-danger px-4">Cancel</button>

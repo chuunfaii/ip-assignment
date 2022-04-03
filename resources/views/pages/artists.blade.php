@@ -13,7 +13,7 @@
 <form action="{{ route('artists') }}" method="GET">
     <div class="mb-5 d-flex position-relative">
         <div class="input-group w-50 mx-auto">
-            <input class="form-control py-2" placeholder="Enter your search query here" name="query" value="{{ request()->input('query') }}" />
+            <input class="form-control py-2" placeholder="Search for artists" name="query" value="{{ request()->input('query') }}" />
             <button type="submit" class="btn btn-secondary text-muted">Search</button>
         </div>
     </div>

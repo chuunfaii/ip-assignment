@@ -82,7 +82,7 @@
             </ul>
           </li>
           <li class="nav-item px-2">
-            <a href="{{ url('my-artworks') }}" class="nav-link">My Artworks</a>
+            <a href="{{ route('my-artworks') }}" class="nav-link">My Artworks</a>
           </li>
           <li class="nav-item px-2">
             <a href="{{ route('my-sales') }}" class="nav-link">My Sales</a>

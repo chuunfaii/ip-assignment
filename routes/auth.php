@@ -8,7 +8,6 @@ use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware('guest')->group(function () {
   Route::get('/register', [RegisterController::class, 'create'])
             ->name('register');
@@ -27,23 +26,23 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/account/edit', [UserController::class, 'store']);
 
-  Route::post('/account/delete', [UserController::class, 'destroy']);
+  Route::post('/account/delete', [UserController::class, 'destroy'])
+            ->name('delete-account');
 
-  Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-
-  Route::get('/cart', [CartController::class, 'index'])->name('cart');
-
+  Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart');
+  
   Route::post('/update-cart', [CartController::class, 'updateCart']);
-
-  Route::post('/add-to-wishlist/{id}',[ArtworkController::class,'add_wishlist'])->name('wishlist_and_cart');
-
-  Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
-
-
-
-//   Route::get('/wishlist', function () {
-//     return view('pages.wishlist');
-// })->name('wishlist');
-
-
+  
+  Route::post('/wishlist-cart/{id}', [ArtworkController::class, 'wishlist_cart'])
+            ->name('wishlist-cart')
+            ->middleware('role:customer');
+  
+  Route::get('/wishlist', [WishlistController::class, 'index'])
+            ->name('wishlist');
+  
+  Route::post('/update-wishlist',[WishlistController::class, 'updateWishlist']);
+  
+  Route::post('/logout', [LoginController::class, 'destroy'])
+            ->name('logout');
 });

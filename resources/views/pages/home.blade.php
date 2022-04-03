@@ -62,39 +62,33 @@
 	<div class="d-flex justify-content-center align-items-center my-5">
 		<span>Shops by Category:</span>
 		@foreach ($categories as $category)
-		<a href="{{ route('artworks', ['category' => $category]) }}" class="btn btn-outline-dark py-3 px-5 mx-3">{{ $category->name }}</a>
+			<a href="{{ route('artworks', ['category' => $category]) }}" class="btn btn-outline-dark py-3 px-5 mx-3">
+				{{ $category->name }}
+			</a>
 		@endforeach
 	</div>
 
 	<!-- Featured Artworks -->
 	<h2 class="text-center navbar-brand fs-1 my-5 p-0 m-0">Featured Artworks</h2>
-	<div class="row row-cols-3 mb-5">
-		@foreach ($artworks as $artwork)
-		<div class="col mb-5">
-			<div class="card mx-5" style="width: 20rem !important;">
-				<a href='/artwork/{{ $artwork->id }}'>
-					<img src="upload/artworks/{{ $artwork->image_url }}" class="card-img-top">
+	<div class="row row-cols-4 mb-5">
+		@foreach($artworks as $artwork)
+			<div class="card col ms-5 p-0 mt-4" style="width: 21% !important;">
+				<a href="/artwork/{{ $artwork->id }}">
+					<img src="{{ asset('upload/artworks/' . $artwork->image_url) }}" class="card-img-top" style="height: 250px;" />
 				</a>
 				<div class="card-body d-flex flex-column justify-content-between">
 					<div>
-						<a href='/artwork/{{ $artwork->id }}'>
-							<h5 class="card-title">
-								{{ $artwork->name }}
-							</h5>
+						<a href="/artwork/{{ $artwork->id }}">
+							<h5 class="card-title">{{ $artwork->name }}</h5>
 						</a>
-						<p class="card-text text-muted">
-							{{ $artwork->description }}
-						</p>
+						<p class="card-text text-muted">{{ $artwork->description }}</p>
 					</div>
 					<div class="mt-5 d-flex justify-content-between">
-						<span class="text-muted">
-							{{ $artwork->artist->presentFullName() }}
-						</span>
-						<span class="fw-bold">{{ $artwork->presentPrice() }}</span>
+						<p class="text-muted">{{ $artwork->artist->presentFullName() }}</p>
+						<p class="fw-bold">{{ $artwork->presentPrice() }}</p>
 					</div>
 				</div>
 			</div>
-		</div>
 		@endforeach
 	</div>
 </div>
