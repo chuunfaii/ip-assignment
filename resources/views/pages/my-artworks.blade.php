@@ -15,7 +15,7 @@
 
     <div class="d-flex justify-content-between">
         <div class="d-flex justify-content-center align-items-center">
-            <h1 class="navbar-brand fw-bold p-0 m-0">My Artwork</h1>
+            <h1 class="navbar-brand fw-bold p-0 m-0">My Artworks</h1>
         </div>
         <button type="button" class="float-end btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#UploadArt" onclick="setImageSrc(false);">
             Upload An Artwork
@@ -24,45 +24,45 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        @if($artworks -> count() > 0)
-        @foreach($artworks as $artwork)
-        <div class="col-4">
-            <div class="card m-5" style="min-height:18rem !important;">
-                <span>
-                    <img class="card-img-top" src="{{ asset('upload/artworks/' . $artwork->image_url) }}">
-                </span>
-                <div class="card-body">
-                    <div class="card-title">
-                        <span class="card-text h5">
-                            <label class="fw-bold">{{ $artwork->name }}</label>
-                        </span>
-                        <div class="mt-5 d-flex justify-content-between">
-                            <p class="text-muted">Quantity : {{ $artwork->quantity }}</p>
-                            <p class="fw-bold">{{ $artwork->presentPrice() }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-danger py-2 mb-4 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
-                                <button type="button" class="btn btn-primary py-2 mb-4 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
+    @if($artworks -> count() > 0)
+        <div class="row row-cols-4 mb-5 mt-3">
+            @foreach($artworks as $artwork)
+                <div class="card col ms-5 p-0 mt-5" style="width: 21% !important; min-height: 18rem !important;">
+                    <div>
+                        <img src="{{ asset('upload/artworks/' . $artwork->image_url) }}" class="card-img-top" style="height: 250px;" />
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">
+                            <span class="card-text h5">
+                                <label class="fw-bold">{{ $artwork->name }}</label>
+                            </span>
+                            <div class="mt-3 d-flex justify-content-between">
+                                <p class="text-muted">{{ $artwork->artist->presentFullName() }}</p>
+                                <p class="fw-bold">{{ $artwork->presentPrice() }}</p>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-between">
+                                <button class="btn btn-outline-danger py-2 px-3 deleteBtn" data-id="{{ $artwork->id }}" data-bs-toggle="modal" data-bs-target="#DeleteArtwork">Delete</buton>
+                                <button type="button" class="btn btn-primary py-2 px-4 editBtn" id="{{ $artwork->id }}">Edit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
-        @else
+    @else
         <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
             <h1 class="display-6 mb-5">Your artwork is empty right now.</h1>
         </div>
-        @endif
+    @endif
     </div>
+</div>
 
     <!--Modal Edit Artwork-->
     <div class="modal fade" id="EditArtwork" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" artwork-image="https://i.pinimg.com/564x/0a/c4/fb/0ac4fb61950219470da3d4eaf555a710.jpg">
-        <div class="modal-dialog modal-lg" style="max-width:50%;">
+        <div class="modal-dialog" style="max-width: 50%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="titleEdit">Edit An Artwork</h5>
+                    <h5 class="modal-title">Edit Artwork</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="Close"></button>
                 </div>
                 <form action="{{ url('/update-artwork') }}" method="post" enctype="multipart/form-data">
@@ -234,10 +234,9 @@
     </div>
 </div>
 
+@endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+@section('extra-js')
 
 <script>
     function success() {
@@ -274,21 +273,6 @@
         $("#upload-button2").on('click', function() {
             $("#FileUpload2").click();
         });
-
-        /*$("#artForm").on('submit', function(e){
-            e.preventDefault();
-            var name = $('#artworkName').val()
-            var price = $('#artworkPrice').val();
-            var quantity = $('#artworkQtt').val();
-            var desc = $('#artworkDesc').val();
-            var image=$('#FileUpload2').val();
-
-            if(image == "" || name == "" || price == "" || desc == "" || quantity== ""){
-                $(".btnAdd").prop('disabled', true);
-            }else{
-                $(".btnAdd").prop('disabled', false);
-            }
-        });*/
 
         //AJAX code
         $.ajaxSetup({
@@ -336,57 +320,6 @@
         let id = $(this).attr('data-id');
         $('#deleteid').val(id);
     });
-
-    /*$('#artForm').on('submit',function() {
-        $(this).validate({
-            rules: {
-                artworkImage:{
-                    required: true,
-                }
-                artworkName: {
-                    required: true,
-                },
-                artworkPrice: {
-                    required: true,
-                },
-                artworkDesc: {
-                    required: true,
-                },
-                artworkQtt: {
-                    required: true,
-                },
-            },
-            messages: {
-                artworkImage:{
-                    required: "Image is required",
-                }
-                artworkName: {
-                    required: "Name is required",
-                },
-                artworkPrice: {
-                    required: "Price is required",
-                },
-                artworkDesc: {
-                    required: "Description is required",
-                },
-                artworkQtt: {
-                    required: "Quantity is required",
-                },
-            },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            },
-        });
-    });*/
 </script>
-
 
 @endsection
