@@ -35,9 +35,9 @@ Route::get('/my-sales', function () {
     return view('pages.my-sales');
 })->name('my-sales');
 
-Route::get('/order-history', function () {
-    return view('pages.order-history');
-});
+// Route::get('/order-history', function () {
+//     return view('pages.order-history');
+// });
 
 Route::get('/artists', [ArtistController::class, 'index'])->name('artists');
 

@@ -73,8 +73,8 @@ Route::middleware('auth')->group(function () {
   Route::get('/thanks', [OrderController::class, 'index'])
             ->name('thanks');
 
-  Route::get('/orderHistory',[OrderHistoryController::class,'index'])
-            ->name('orderHistory');
+  Route::get('/order-history',[OrderHistoryController::class,'index'])
+            ->name('order-history');
             
   // Customer & Artist - Logout
 

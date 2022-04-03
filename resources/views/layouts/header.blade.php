@@ -25,7 +25,7 @@
               </li>
               <li>
                 <!-- TODO: Replace the link later -->
-                <a class="dropdown-item text-muted" href="{{ route('orderHistory') }}">Order History</a>
+                <a class="dropdown-item text-muted" href="{{ route('order-history') }}">Order History</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
