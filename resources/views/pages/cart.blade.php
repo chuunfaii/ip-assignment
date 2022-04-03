@@ -33,18 +33,18 @@
                         <span id="lblArtworkId" runat="server" style="display: none;"></span>
                         <div class="col-2">
                         <div class="d-flex justify-content-center">
-                            <img style="max-height: 8rem;" src="{{ asset('upload/artworks/'.$c->artworks->image_url) }}" class="card-img-top">
+                            <img style="max-height: 8rem;" src="{{ asset('upload/artworks/'.$c->artwork->image_url) }}" class="card-img-top">
                         </div>
                         </div>
                         <div class="col-6">
                         <div class="h-100 d-flex flex-column justify-content-between">
                             <span>
                                 <span class="text-decoration-none text-muted fs-4">
-                                    {{ $c->artworks->name }}
+                                    {{ $c->artwork->name }}
                                 </span>
                             </span>
                             <hr />
-                            <p class="m-0">Artist: {{ $c->artworks->artist->presentFullName() }}</p>
+                            <p class="m-0">Artist: {{ $c->artwork->artist->presentFullName() }}</p>
                         </div>
                         </div>
                         <div class="col-1">
@@ -85,7 +85,12 @@
                     <a class="fs-5 text-muted text-decoration-none" href="{{ url('/artworks') }}">
                         <i class="bi bi-caret-left-fill"></i> Back to Artworks
                     </a>
-                    <button id="checkout" name="checkout" class="btn btn-primary py-3 px-4">Checkout with Stripe</button>
+                    <form action="{{ route('checkout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary py-3 px-4">
+                            Checkout with Stripe
+                        </button>
+                    </form>
                 </div>
             @else
             <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
