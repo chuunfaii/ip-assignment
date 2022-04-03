@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,13 @@ Route::middleware('auth')->group(function () {
   
   Route::post('/update-wishlist',[WishlistController::class, 'updateWishlist']);
   
+  Route::post('/checkout', [OrderController::class, 'checkout'])
+            ->name('checkout')
+            ->middleware('role:customer');
+
   Route::post('/logout', [LoginController::class, 'destroy'])
             ->name('logout');
+
+  Route::get('/thanks', [OrderController::class, 'index'])
+            ->name('thanks');
 });
