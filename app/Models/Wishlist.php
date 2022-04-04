@@ -16,12 +16,14 @@ class Wishlist extends Model
         'artwork_id',
     ];
 
-    public function artworks(){
-        return $this->belongsTo(Artwork::class,'artwork_id');
+    public function artwork()
+    {
+        return $this->belongsTo(Artwork::class);
     }
 
 
-    public function users(){
-        return $this->belongsTo(User::class,'user_id');
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'user_id');
     }
 }
