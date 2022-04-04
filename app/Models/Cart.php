@@ -19,7 +19,7 @@ class Cart extends Model
 
     public function artwork()
     {
-        return $this->belongsTo(Artwork::class, 'artwork_id', 'id');
+        return $this->belongsTo(Artwork::class);
     }
 
     public function subtotal()
