@@ -47,7 +47,11 @@
 
   <script>
     $(document).ready(function() {
-      $('#dataTable').DataTable();
+      $('#dataTable').DataTable({
+        "columnDefs":[
+          {"targets":[1,2,3,4,5],"searchable":false}
+        ]
+      });
     });
  
     //Prevent Content Move while Modal Pop Up

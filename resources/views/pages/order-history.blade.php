@@ -2,7 +2,7 @@
 
 @section('css')
 
-<link rel="stylesheet" href="{{ asset('css/mySales.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/my-sales.css') }}" />
 
 @endsection
 
@@ -14,10 +14,10 @@
             <h1 class="navbar-brand fw-bold p-0 m-0">Order History</h1>
         </div>
         <div class="input-group w-50 mx-auto mb-5">
-            <div class="input-group">
+            {{-- <div class="input-group">
                 <input id="txtSearch" class="form-control py-2" placeholder="Enter order id here..." />
                 <button id="btnSearch" class="btn btn-secondary text-muted">Search</button>
-            </div>
+            </div> --}}
         </div>
         @if ($sales_exist == true)
         <div class="table-responsive">
@@ -33,8 +33,8 @@
                     </tr>
                 </thead> 
                 <tbody>
-                @foreach ($order_item as $history)
-              
+                @foreach ($order_arr as $history)
+
                     <tr>
                         <td>{{ $history->order_id }}</td>
                         <td>{{ $history->artwork_name }}</td>
@@ -47,17 +47,17 @@
                 @endforeach
                     
                
-                </tbody>
-                 @else
-                <div
-                class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
-                <h1 class="display-6 mb-5">Your History is empty right now.</h1>
-                
-            </div>
-            @endif
-            </table>
-        </div>
-    </div>
+            </tbody>
+            @else
+           <div
+           class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
+           <h1 class="display-6 mb-5">Your History is empty right now.</h1>
+
+       </div>
+       @endif
+       </table>
+   </div>
+</div>
 </div>
 
 @endsection
