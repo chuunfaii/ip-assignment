@@ -8,25 +8,34 @@ use App\Models\Artwork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class MySalesController extends Controller{
-
-    public function index(){
+class MySalesController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $user_id = auth()->user()->id;
+
         $sales_exist = false;
-        $order_item = DB::table('order_items')->select('order_id','artwork_id','quantity','created_at')->get();
 
-        //$artworks = Artist::find($user_id)->artworks;
+        $order_items = DB::table('order_items')->select('order_id', 'artwork_id', 'quantity', 'created_at')->get();
 
-        foreach ($order_item as $item) {
-            $artwork = Artwork::where('user_id',$user_id)->where('id',$item->artwork_id)->first();
+        foreach ($order_items as $order_item) {
+            $ids = ['user_id' => $user_id, 'id' => $order_item->artwork_id];
+
+            $artwork = Artwork::where($ids)->first();
+
             if ($artwork) {
-                    $item->artwork_name = $artwork->name;
-                    $item->price = $artwork->price;
-                    $item->subtotal = $item->quantity * $artwork->price;
-                    $sales_exist = true;
+                $order_item->artwork_name = $artwork->name;
+                $order_item->price = $artwork->price;
+                $order_item->subtotal = $order_item->quantity * $artwork->price;
+                $sales_exist = true;
             }
         }
 
-        return view('pages.my-sales',compact('order_item','artwork', 'sales_exist'));
+        return view('pages.my-sales', compact('order_items', 'artwork', 'sales_exist'));
     }
 }
