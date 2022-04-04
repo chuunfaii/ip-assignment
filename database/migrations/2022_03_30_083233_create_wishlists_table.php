@@ -14,10 +14,10 @@ class CreateWishlistsTable extends Migration
     public function up()
     {
         Schema::create('wishlists', function (Blueprint $table) {
+            $table->id();
             $table->integer('artwork_id');
             $table->integer('user_id');
             $table->timestamps();
-            
         });
     }
 
