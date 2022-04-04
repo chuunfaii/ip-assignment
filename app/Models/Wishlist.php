@@ -21,7 +21,6 @@ class Wishlist extends Model
         return $this->belongsTo(Artwork::class);
     }
 
-
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'user_id');
