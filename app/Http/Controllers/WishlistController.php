@@ -2,45 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Artwork;
-use App\Models\User; 
-use App\Models\Wishlist;
 use App\Models\Cart;
+use App\Models\Wishlist;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class WishlistController extends Controller
 {
-    public function index(){
-       
-        
-            $wishlist = Wishlist::all()->where('user_id', auth()->user()->id);
-            return view('pages.wishlist', compact('wishlist'));
-
-    }
-
-    public function show($id)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        
-        // if (filled($id)) {
-        //     $artwork = Artwork::all()->find($id);
-        //     //if ($id == 'id') {
-        //     $artist = User::all()->find($artwork->user_id);
+        $user_id = auth()->user()->id;
 
-        //     return view('pages.wishlist', compact('artwork', 'artist'));
+        $wishlists = Wishlist::where('user_id', $user_id)->get();
 
-        //     //} else {
-        //     //Testing purpose
-        //     //echo ("The id does not exist.");
-        //     //}
-        // } else {
-        //     // TODO: Change it to something better.
-        //     echo "No such file.";
-        // }
-
+        return view('pages.wishlist', compact('wishlists'));
     }
-
 
      /**
      * Update the specified resource in storage.
@@ -49,39 +30,38 @@ class WishlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateWishlist(Request $request)
+    public function update(Request $request)
     {
-        switch ($request->input('wishlistBtn')) {
-            case 'add-to-cart':
-               
-                $artwork_id = $request->input('actionId');
-                $user_id = $request->input('testId');
+        switch ($request->input('action')) {
+            case 'add-to-cart':              
+                $user_id = $request->input('user_id');
+                $artwork_id = $request->input('artwork_id');
 
-                
+                $ids = ['user_id' => $user_id, 'artwork_id' => $artwork_id];
 
-                $cart = new Cart();
-                $cart->user_id = $user_id;
-                $cart->artwork_id = $artwork_id;
-                $cart->quantity = 1;
-                
-                $cart->save();
+                if (Cart::where($ids)->exists()) {
+                    return redirect()->back()->with('error', 'Item already exists in your cart.');
+                }
 
-                return redirect()->back()->with('message', 'Wishlist has been added to cart.');
-                break;
+                Cart::create([
+                    'user_id' => $user_id,
+                    'artwork_id' => $artwork_id,
+                    'quantity' => 1,
+                ]);
+
+                Wishlist::where($ids)->delete();
+
+                return redirect()->back()->with('message', 'Wishlisted item has been added to cart.');
 
             case 'remove':
-                $artwork_id = $request->input('actionId');
-                $user_id = $request->input('testId');
+                $user_id = $request->input('user_id');
+                $artwork_id = $request->input('artwork_id');
 
-                $ids = ['artwork_id'=>$artwork_id,'user_id'=>$user_id];
+                $ids = ['user_id' => $user_id, 'artwork_id' => $artwork_id];
 
-                $wishlist = Wishlist::where($ids);
-                
-                $wishlist->delete();
-                return redirect()->back()->with('message', 'Wishlist Removed Successfully');
+                $wishlist = Wishlist::where($ids)->delete();
 
-                break;
-           
+                return redirect()->back()->with('message', 'Wishlisted item has been removed successfully.');
         }
     }
 }
