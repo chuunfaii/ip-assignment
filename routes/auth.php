@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function() {
             ->name('cart')
             ->middleware('role:customer');
 
-    Route::post('/update-cart', [CartController::class, 'updateCart']);
+    Route::post('/update-cart', [CartController::class, 'update']);
 
     Route::post('/wishlist-cart/{id}', [ArtworkController::class, 'wishlist_cart'])
             ->name('wishlist-cart')
