@@ -20,3 +20,19 @@ Route::get('/xml/customers/raw', function(){
 Route::get('/xml/wishlist/raw', function(){
     return ArtistiqueXML::showWishlist();
 });
+
+Route::get('/xml/artworks', function(){
+    return ArtistiqueXML::showArtworksXSLT();
+});
+
+Route::get('/xml/artists', function(){
+    return ArtistiqueXML::showArtistsXSLT();
+});
+
+Route::get('/xml/customers', function(){
+    return ArtistiqueXML::showCustomersXSLT();
+});
+
+Route::get('/xml/wishlist', function(){
+    return ArtistiqueXML::showWishlistXSLT();
+});
