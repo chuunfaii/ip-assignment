@@ -37,3 +37,5 @@ Route::get('/artworks', [ArtworkController::class, 'index'])
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
 
 require __DIR__ . '/auth.php';
+
+require __DIR__ . '/internals/xml.php';
