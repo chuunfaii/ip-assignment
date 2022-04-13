@@ -6,6 +6,8 @@ use App\Models\Artwork;
 use App\Models\Artist;
 use App\Models\Customer;
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\Hash;
+use Stripe\StripeClient;
 
 class ArtistiqueXML {
 
@@ -173,6 +175,139 @@ class ArtistiqueXML {
         $proc->importStyleSheet($xsl);
 
         return $proc->transformToXML($xml);
+    }
+
+    public function insertArtwork($file) {
+        try {
+            $xml = new \SimpleXMLElement(file_get_contents($file));
+        } catch (Exception $e) {
+            return false;
+        }
+
+        $count = 0;
+
+        $xp = '//artwork';
+        $artworksArray = $xml->xpath($xp) ?? [];
+
+        if (!empty($artworksArray)) {
+            foreach ($artworksArray as $value) {
+                $stripe = new StripeClient('sk_test_51KkOjTJC2EY2ixMBbB9tD5XbwSDydaBRzB7i6gAvlOdbWbfT1dT3KgLYj6LFp6xwq7MsUw6XyPaPHChjdV3tBmqg00NopvLdXY');
+
+                $artwork = new Artwork;
+                $artwork->user_id = $value->user_id;
+                $artwork->name = $value->name;
+                $artwork->price = $value->price;
+                $artwork->description = $value->description;
+                $artwork->quantity = $value->quantity;
+                $artwork->category_id = $value->category_id;
+                $artwork->image_url = $value->image_url;
+
+                $stripe_product = $stripe->products->create([
+                    'name' => $artwork->name,
+                    'description' => $artwork->description,
+                ]);
+
+                $stripe_price = $stripe->prices->create([
+                    'unit_amount' => $artwork->price * 100,
+                    'currency' => 'usd',
+                    'product' => $stripe_product->id,
+                ]);
+
+                $artwork->stripe_product_id = $stripe_product->id;
+                $artwork->stripe_price_id = $stripe_price->id;
+
+                $artwork->save();
+
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+    
+    public function insertArtist($file) {
+        try {
+            $xml = new \SimpleXMLElement(file_get_contents($file));
+        } catch (Exception $e) {
+            return false;
+        }
+
+        $count = 0;
+
+        $xp = '//artist';
+        $artistsArray = $xml->xpath($xp) ?? [];
+
+        if (!empty($artistsArray)) {
+            foreach ($artistsArray as $value) {
+                Artist::create([
+                    'first_name' => $value->first_name,
+                    'last_name' => $value->last_name,
+                    'email' => $value->email,
+                    'password' => Hash::make($value->password),
+                    'type' => 'artist',
+                ]);
+
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function insertCustomer($file) {
+        try {
+            $xml = new \SimpleXMLElement(file_get_contents($file));
+        } catch (Exception $e) {
+            return false;
+        }
+
+        $count = 0;
+
+        $xp = '//customer';
+        $customersArray = $xml->xpath($xp) ?? [];
+
+        if (!empty($customersArray)) {
+            foreach ($customersArray as $value) {
+                Customer::create([
+                    'first_name' => $value->first_name,
+                    'last_name' => $value->last_name,
+                    'email' => $value->email,
+                    'password' => Hash::make($value->password),
+                    'type' => 'customer',
+                ]);
+
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function insertWishlist($file) {
+        try {
+            $xml = new \SimpleXMLElement(file_get_contents($file));
+        } catch (Exception $e) {
+            return false;
+        }
+
+        $count = 0;
+        $user_id = auth()->user()->id;
+
+        $xp = '//item';
+        $wishlistArray = $xml->xpath($xp) ?? [];
+
+        if (!empty($wishlistArray)) {
+            foreach ($wishlistArray as $value) {
+                Wishlist::create([
+                    'artwork_id' => $value->artwork_id,
+                    'user_id' => $user_id,
+                ]);
+
+                $count++;
+            }
+        }
+
+        return $count;
     }
 
 }

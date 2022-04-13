@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artists>
+    <artist>
+        <first_name>Vallie</first_name>
+        <last_name>Hyatt</last_name>
+        <email>Vallie@email.com</email>
+        <password>password</password>
+    </artist>
+    <artist>
+        <first_name>Josephine</first_name>
+        <last_name>Stark</last_name>
+        <email>Josephine@email.com</email>
+        <password>password</password>
+    </artist>
+</artists>

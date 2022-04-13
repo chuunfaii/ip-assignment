@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers>
+    <customer>
+        <first_name>Chun Fai</first_name>
+        <last_name>Lee</last_name>
+        <email>chunfai@email.com</email>
+        <password>password</password>
+    </customer>
+    <customer>
+        <first_name>Khai Gene</first_name>
+        <last_name>Quah</last_name>
+        <email>khaigene@email.com</email>
+        <password>password</password>
+    </customer>
+</customers>

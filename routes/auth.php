@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\OrderHistoryController;
+use App\Http\Controllers\XMLController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function() {
@@ -94,4 +95,8 @@ Route::middleware('auth')->group(function() {
     // Customer & Artist - Logout
     Route::post('/logout', [LoginController::class, 'destroy'])
             ->name('logout');
+
+    // Customer - Add Wishlist XML
+    Route::post('/xml/add-wishlist', [XMLController::class, 'add_wishlist'])
+            ->middleware('role:customer');
 });

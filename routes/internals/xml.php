@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\XMLController;
 use App\Http\Internals\ArtistiqueXML;
 
 Route::get('/xml/artworks/raw', function(){
@@ -36,3 +37,11 @@ Route::get('/xml/customers', function(){
 Route::get('/xml/wishlist', function(){
     return ArtistiqueXML::showWishlistXSLT();
 });
+
+Route::get('/xml/add', [XMLController::class, 'index']);
+
+Route::post('/xml/add-artwork', [XMLController::class, 'add_artwork']);
+
+Route::post('/xml/add-artist', [XMLController::class, 'add_artist']);
+
+Route::post('/xml/add-customer', [XMLController::class, 'add_customer']);

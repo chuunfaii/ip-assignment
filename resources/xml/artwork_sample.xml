@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artworks>
+    <artwork>
+        <user_id>8</user_id>
+        <name>Painting 8</name>
+        <price>17500</price>
+        <description>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, recusandae.</description>
+        <quantity>22</quantity>
+        <category_id>1</category_id>
+        <image_url>artwork-xml-29</image_url>
+    </artwork>
+    <artwork>
+        <user_id>9</user_id>
+        <name>Photography 8</name>
+        <price>25000</price>
+        <description>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, labore?</description>
+        <quantity>33</quantity>
+        <category_id>2</category_id>
+        <image_url>artwork-xml-30</image_url>
+    </artwork>
+</artworks>
