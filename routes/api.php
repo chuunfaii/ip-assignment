@@ -3,6 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\Artwork;
+use App\Http\Controllers\API\Artist;
+use App\Http\Controllers\API\Customer;
+use App\Http\Controllers\API\Wishlist;
+
+use App\Http\Models\Artwork as ArtworkModel;
+use App\Http\Resources\TestCollection;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +25,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/swagger.json', function(){
+    return response()->file(resource_path('api/swagger.json'));
+});
+
+Route::apiResources([
+    'artworks' => Artwork::class,
+    'artists' => Artist::class,
+    'customers' => Customer::class,
+    'wishlist' => Wishlist::class,
+]);

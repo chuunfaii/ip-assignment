@@ -14,8 +14,6 @@ class ArtistiqueXML {
     public function getArtworks() {
         $artworksArray = [];
         foreach (Artwork::all() as $artwork) {
-            http://127.0.0.1:8000/upload/artworks/artwork-1.jpg
-
             $artwork =
                 [
                     '_attributes' => [
