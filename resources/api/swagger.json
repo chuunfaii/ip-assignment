@@ -1,0 +1,794 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Welcome to Artistique API. This api endpoint contains various sub-endpoints that allows you to retrieve different metadata from artistique database. For further enquiries, kindly contact us at api_support@artistique.io.",
+        "version": "v1.0",
+        "title": "Artistique API",
+        "contact": {
+            "email": "api_support@artistique.io"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "artworks",
+            "description": "Access to all available artworks"
+        },
+        {
+            "name": "artists",
+            "description": "Access to all available artists"
+        },
+        {
+            "name": "customers",
+            "description": "Access to all available customers"
+        },
+        {
+            "name": "wishlist",
+            "description": "Access to all available wishlist"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/artworks": {
+            "get": {
+                "tags": [
+                    "artworks"
+                ],
+                "summary": "List all artworks.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "artworks"
+                ],
+                "summary": "Add a new artwork.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Artwork object that needs to be added.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Artwork"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/artworks/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artwork ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "artworks"
+                ],
+                "summary": "Get specific artwork.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "artworks"
+                ],
+                "summary": "Update an existing artwork.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artwork ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Artwork object that needs to be updated.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Artwork"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artwork ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "artworks"
+                ],
+                "summary": "Delete specific artwork.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/artists": {
+            "get": {
+                "tags": [
+                    "artists"
+                ],
+                "summary": "List all artists.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "artists"
+                ],
+                "summary": "Add a new artist.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Artist object that needs to be added.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/artists/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artist ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "artists"
+                ],
+                "summary": "Get specific artist.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "artists"
+                ],
+                "summary": "Update an existing artist.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artist ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Artist object that needs to be updated.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Artist"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Artist ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "artists"
+                ],
+                "summary": "Delete specific artist.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customers": {
+            "get": {
+                "tags": [
+                    "customers"
+                ],
+                "summary": "List all customers.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "customers"
+                ],
+                "summary": "Add a new customer.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Customer object that needs to be added.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customers/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Customer ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "customers"
+                ],
+                "summary": "Get specific customer.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "customers"
+                ],
+                "summary": "Update an existing customer.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Customer ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Customer object that needs to be updated.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Customer ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "customers"
+                ],
+                "summary": "Delete specific customer.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wishlist": {
+            "get": {
+                "tags": [
+                    "wishlist"
+                ],
+                "summary": "List all wishlist items.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "wishlist"
+                ],
+                "summary": "Add a new wishlist for a specified user.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Wishlist object that needs to be added.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Wishlist"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wishlist/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Customer ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "wishlist"
+                ],
+                "summary": "Get wishlist of a specific customer.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "wishlist"
+                ],
+                "summary": "Update an existing wishlist item.",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Wishlist ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Wishlist object that needs to be updated.",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Wishlist"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Customer ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    }
+                ],
+                "tags": [
+                    "wishlist"
+                ],
+                "summary": "Delete wishlist of a specific customer.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DefaultResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "DefaultResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            }
+        },
+        "Artwork": {
+            "required": [
+                "user_id",
+                "name",
+                "price",
+                "description",
+                "quantity",
+                "category_id",
+                "image_url"
+            ],
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "image_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "required": [
+                "first_name",
+                "last_name",
+                "email",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Doe"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "john@doe.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Wishlist": {
+            "required": [
+                "artwork_id",
+                "user_id"
+            ],
+            "type": "object",
+            "properties": {
+                "artwork_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        }
+    }
+}
