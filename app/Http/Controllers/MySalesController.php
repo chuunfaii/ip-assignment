@@ -36,6 +36,6 @@ class MySalesController extends Controller
             }
         }
 
-        return view('pages.my-sales', compact('order_items', 'artwork', 'sales_exist'));
+        return view('pages.my-sales', compact('order_items', 'sales_exist'));
     }
 }
