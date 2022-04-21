@@ -1,3 +1,5 @@
+<!-- Author:    Chiam Yee Hang -->
+
 @extends('layouts.app')
 
 @section('css')
@@ -10,7 +12,7 @@
 
 <form class="m-auto" action="{{ route('wishlist-cart', $artwork->id) }}" method="POST">
     @csrf
-    <div class="container d-flex" style="min-height: 500px;"> 
+    <div class="container d-flex" style="min-height: 500px;">
         <div class="d-flex justify-content-center" style="flex: 1;">
             <img style="max-width: 70%;" src="{{ asset('upload/artworks/' . $artwork->image_url) }}" />
         </div>
@@ -41,7 +43,7 @@
                             <span class="me-3">Quantity:</span>
                             <input name="quantity" type='number' min='1' max='{{ $artwork->quantity }}' value='1' />
                             @error('quantity')
-                                <p class="m-0 mt-3 error-message">{{ $message }}</p>
+                            <p class="m-0 mt-3 error-message">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="my-auto display-6">{{ $artwork->presentPrice() }}</div>

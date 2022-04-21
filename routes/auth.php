@@ -1,5 +1,7 @@
 <?php
 
+// Authors: Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
@@ -13,90 +15,90 @@ use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\XMLController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
     // Register
     Route::get('/register', [RegisterController::class, 'create'])
-            ->name('register');
+        ->name('register');
 
     Route::post('/register', [RegisterController::class, 'store']);
 
     // Login
     Route::get('/login', [LoginController::class, 'create'])
-            ->name('login');
+        ->name('login');
 
     Route::post('/login', [LoginController::class, 'store']);
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     // Customer & Artist - Edit Account
     Route::get('/account/edit', [UserController::class, 'create'])
-            ->name('edit-account');
+        ->name('edit-account');
 
     Route::post('/account/edit', [UserController::class, 'store']);
 
     Route::post('/account/delete', [UserController::class, 'destroy'])
-            ->name('delete-account');
+        ->name('delete-account');
 
     // Artist - My Artworks
     Route::get('/my-artworks', [ArtistArtworkController::class, 'index'])
-            ->name('my-artworks')
-            ->middleware('role:artist');
+        ->name('my-artworks')
+        ->middleware('role:artist');
 
     Route::post('/store-artwork', [ArtistArtworkController::class, 'store'])
-            ->middleware('role:artist');
+        ->middleware('role:artist');
 
     Route::post('/fetch-artwork', [ArtistArtworkController::class, 'edit'])
-            ->middleware('role:artist');
+        ->middleware('role:artist');
 
     Route::post('/update-artwork', [ArtistArtworkController::class, 'update'])
-            ->middleware('role:artist');
+        ->middleware('role:artist');
 
     Route::post('/delete-artwork', [ArtistArtworkController::class, 'destroy'])
-            ->middleware('role:artist');
+        ->middleware('role:artist');
 
     // Artist - My Sales
-    Route::get('/my-sales',[MySalesController::class, 'index'])
-            ->name('my-sales')
-            ->middleware('role:artist');
+    Route::get('/my-sales', [MySalesController::class, 'index'])
+        ->name('my-sales')
+        ->middleware('role:artist');
 
     // Customer - Cart & Wishlist-Cart
     Route::get('/cart', [CartController::class, 'index'])
-            ->name('cart')
-            ->middleware('role:customer');
+        ->name('cart')
+        ->middleware('role:customer');
 
     Route::post('/update-cart', [CartController::class, 'update']);
 
     Route::post('/wishlist-cart/{id}', [ArtworkController::class, 'wishlist_cart'])
-            ->name('wishlist-cart')
-            ->middleware('role:customer');
+        ->name('wishlist-cart')
+        ->middleware('role:customer');
 
     // Customer - Wishlist
     Route::get('/wishlist', [WishlistController::class, 'index'])
-            ->name('wishlist')
-            ->middleware('role:customer');
+        ->name('wishlist')
+        ->middleware('role:customer');
 
-    Route::post('/update-wishlist',[WishlistController::class, 'update'])
-            ->middleware('role:customer');
+    Route::post('/update-wishlist', [WishlistController::class, 'update'])
+        ->middleware('role:customer');
 
     // Customer - Checkout
     Route::post('/checkout', [OrderController::class, 'checkout'])
-            ->name('checkout')
-            ->middleware('role:customer');
-                
+        ->name('checkout')
+        ->middleware('role:customer');
+
     // Customer - Thanks
     Route::get('/thanks', [OrderController::class, 'index'])
-            ->name('thanks')
-            ->middleware('role:customer');
+        ->name('thanks')
+        ->middleware('role:customer');
 
-    Route::get('/order-history',[OrderHistoryController::class, 'index'])
-            ->name('order-history')
-            ->middleware('role:customer');
-                
+    Route::get('/order-history', [OrderHistoryController::class, 'index'])
+        ->name('order-history')
+        ->middleware('role:customer');
+
     // Customer & Artist - Logout
     Route::post('/logout', [LoginController::class, 'destroy'])
-            ->name('logout');
+        ->name('logout');
 
     // Customer - Add Wishlist XML
     Route::post('/xml/add-wishlist', [XMLController::class, 'add_wishlist'])
-            ->middleware('role:customer');
+        ->middleware('role:customer');
 });

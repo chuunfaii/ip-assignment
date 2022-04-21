@@ -1,5 +1,7 @@
 <?php
 
+// Authors: Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/swagger.json', function(){
+Route::get('/swagger.json', function () {
     return response()->file(resource_path('api/swagger.json'));
 });
 

@@ -1,3 +1,5 @@
+<!-- Author:    Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene -->
+
 <!DOCTYPE html>
 <html lang="en">
 

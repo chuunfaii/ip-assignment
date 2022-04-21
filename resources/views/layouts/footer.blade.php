@@ -1,3 +1,5 @@
+<!-- Author:    Lee Chun Fai -->
+
 <div class="container d-flex justify-content-between">
     <p class="fs-6 m-0 text-muted">&copy; <?php echo date('Y') ?> Artistique</p>
     <div class="d-flex">

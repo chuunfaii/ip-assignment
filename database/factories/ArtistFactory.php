@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Quah Khai Gene
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;

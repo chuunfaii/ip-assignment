@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene
+
 namespace Database\Seeders;
 
 use App\Models\Artist;

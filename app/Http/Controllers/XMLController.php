@@ -1,5 +1,7 @@
 <?php
 
+// Authors:  Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene
+
 namespace App\Http\Controllers;
 
 use App\Http\Internals\ArtistiqueXML;
@@ -20,7 +22,7 @@ class XMLController extends Controller
     public function add_artwork(Request $request)
     {
         $file = $request->file('xmlFile');
-        
+
         $success = ArtistiqueXML::insertArtwork($file);
 
         if ($success) {
@@ -33,7 +35,7 @@ class XMLController extends Controller
     public function add_artist(Request $request)
     {
         $file = $request->file('xmlFile');
-        
+
         $success = ArtistiqueXML::insertArtist($file);
 
         if ($success) {
@@ -46,7 +48,7 @@ class XMLController extends Controller
     public function add_customer(Request $request)
     {
         $file = $request->file('xmlFile');
-        
+
         $success = ArtistiqueXML::insertCustomer($file);
 
         if ($success) {
@@ -59,7 +61,7 @@ class XMLController extends Controller
     public function add_wishlist(Request $request)
     {
         $file = $request->file('xmlFile');
-        
+
         $success = ArtistiqueXML::insertWishlist($file);
 
         if ($success) {

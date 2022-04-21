@@ -1,5 +1,7 @@
 <?php
 
+// Authors: Chiam Yee Hang, Lee Chun Fai, Lee Jun Xian & Quah Khai Gene
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ArtworkController;
@@ -24,15 +26,15 @@ use App\Models\Artwork;
 */
 
 Route::get('/', [HomeController::class, 'index'])
-        ->name('home');
+    ->name('home');
 
 Route::get('/artists', [ArtistController::class, 'index'])
-        ->name('artists');
+    ->name('artists');
 
 Route::get('/artist/{id}', [ArtistController::class, 'show']);
 
 Route::get('/artworks', [ArtworkController::class, 'index'])
-        ->name('artworks');
+    ->name('artworks');
 
 Route::get('/artwork/{id}', [ArtworkController::class, 'show']);
 

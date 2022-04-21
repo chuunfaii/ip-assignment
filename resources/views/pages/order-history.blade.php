@@ -1,3 +1,5 @@
+<!-- Author:    Chiam Yee Hang -->
+
 @extends('layouts.app')
 
 @section('css')
@@ -31,9 +33,9 @@
                         <th>Subtotal Price</th>
                         <th>Ordered At</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
-                @foreach ($order_arr as $history)
+                    @foreach ($order_arr as $history)
 
                     <tr>
                         <td>{{ $history->order_id }}</td>
@@ -44,20 +46,19 @@
                         <td>{{ $history->created_at }}</td>
                     </tr>
 
-                @endforeach
-                    
-               
-            </tbody>
-            @else
-           <div
-           class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
-           <h1 class="display-6 mb-5">Your History is empty right now.</h1>
+                    @endforeach
 
-       </div>
-       @endif
-       </table>
-   </div>
-</div>
+
+                </tbody>
+                @else
+                <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column justify-content-center align-items-center mb-5">
+                    <h1 class="display-6 mb-5">Your History is empty right now.</h1>
+
+                </div>
+                @endif
+            </table>
+        </div>
+    </div>
 </div>
 
 @endsection

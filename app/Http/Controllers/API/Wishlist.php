@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Lee Chun Fai
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +16,7 @@ class Wishlist extends Controller
         'data' => [],
         'timestamp' => null,
     ];
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -112,7 +114,7 @@ class Wishlist extends Controller
     public function destroy($id)
     {
         WishlistModel::where('user_id', $id)->delete();
-        
+
         $this->ret['timestamp'] = now();
         $this->ret['status'] = 'OK';
 

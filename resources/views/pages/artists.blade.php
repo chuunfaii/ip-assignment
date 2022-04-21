@@ -1,3 +1,5 @@
+<!-- Author:    Quah Khai Gene -->
+
 @extends('layouts.app')
 
 @section('css')
@@ -21,30 +23,30 @@
 
 <div class="container">
     @if (count($artists) > 0)
-        <div class="row row-cols-4 mb-5">
-            @foreach ($artists as $artist)
-                <div class="card col ms-5 mb-5 p-0 mt-3" style="width: 21% !important; min-height: 18rem !important;">
+    <div class="row row-cols-4 mb-5">
+        @foreach ($artists as $artist)
+        <div class="card col ms-5 mb-5 p-0 mt-3" style="width: 21% !important; min-height: 18rem !important;">
+            <a href='/artist/{{ $artist->id }}'>
+                @if ($artist->image_url != '')
+                <img class="card-img-top" src="{{ asset('upload/artists/' . $artist->image_url) }}">
+                @else
+                <img class="card-img-top" src="https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg">
+                @endif
+            </a>
+            <div class="card-body">
+                <div class="card-title">
                     <a href='/artist/{{ $artist->id }}'>
-                        @if ($artist->image_url != '')
-                            <img class="card-img-top" src="{{ asset('upload/artists/' . $artist->image_url) }}">
-                        @else
-                            <img class="card-img-top" src="https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg">
-                        @endif
+                        <label class="fw-bold">{{ $artist->presentFullName() }}</label>
                     </a>
-                    <div class="card-body">
-                        <div class="card-title">
-                            <a href='/artist/{{ $artist->id }}'>
-                                <label class="fw-bold">{{ $artist->presentFullName() }}</label>
-                            </a>
-                        </div>
-                    </div>
                 </div>
-            @endforeach
+            </div>
         </div>
+        @endforeach
+    </div>
     @else
-        <div class="mt-5 d-flex justify-content-center align-items-center flex-grow-1">
-            <h4 class="display-5">No matched results.</h4>
-        </div>
+    <div class="mt-5 d-flex justify-content-center align-items-center flex-grow-1">
+        <h4 class="display-5">No matched results.</h4>
+    </div>
     @endif
 </div>
 

@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Quah Khai Gene
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

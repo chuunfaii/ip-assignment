@@ -1,5 +1,7 @@
 <?php
 
+// Authors:  Chiam Yee Hang, Lee Chun Fai, Lee Jun Xia & Quah Khai Gene
+
 namespace App\Http\Internals;
 
 use App\Models\Artwork;
@@ -9,9 +11,11 @@ use App\Models\Wishlist;
 use Illuminate\Support\Facades\Hash;
 use Stripe\StripeClient;
 
-class ArtistiqueXML {
+class ArtistiqueXML
+{
 
-    public function getArtworks() {
+    public function getArtworks()
+    {
         $artworksArray = [];
         foreach (Artwork::all() as $artwork) {
             $artwork =
@@ -32,7 +36,8 @@ class ArtistiqueXML {
         return ['artworks' => ['artwork' => $artworksArray]];
     }
 
-    public function getArtists() {
+    public function getArtists()
+    {
         $artistsArray = [];
         foreach (Artist::all() as $artist) {
             $image_url = $artist->image_url;
@@ -56,7 +61,8 @@ class ArtistiqueXML {
         return ['artists' => ['artist' => $artistsArray]];
     }
 
-    public function getCustomers() {
+    public function getCustomers()
+    {
         $customersArray = [];
         foreach (Customer::all() as $customer) {
             $customer =
@@ -74,7 +80,8 @@ class ArtistiqueXML {
         return ['customers' => ['customer' => $customersArray]];
     }
 
-    public function getWishlist() {
+    public function getWishlist()
+    {
         $wishlistArray = [];
         $user_id = auth()->user()->id;
         $wishlist = Wishlist::where('user_id', $user_id)->get();
@@ -94,19 +101,23 @@ class ArtistiqueXML {
         return ['wishlist' => ['item' => $wishlistArray]];
     }
 
-    public function showArtworks() {
+    public function showArtworks()
+    {
         return response()->xml(self::getArtworks(), 200, [], ['root' => 'artistique']);
     }
 
-    public function showArtists() {
+    public function showArtists()
+    {
         return response()->xml(self::getArtists(), 200, [], ['root' => 'artistique']);
     }
 
-    public function showCustomers() {
+    public function showCustomers()
+    {
         return response()->xml(self::getCustomers(), 200, [], ['root' => 'artistique']);
     }
 
-    public function showWishlist() {
+    public function showWishlist()
+    {
         if (!auth()->user()) {
             return abort(404);
         }
@@ -116,7 +127,8 @@ class ArtistiqueXML {
         return response()->xml(self::getWishlist(), 200, [], ['root' => 'artistique']);
     }
 
-    public function showArtworksXSLT() {
+    public function showArtworksXSLT()
+    {
         $xml = new \DOMDocument;
         $xml->loadXML(xml_encode(self::getArtworks(), 'artistique'));
 
@@ -129,7 +141,8 @@ class ArtistiqueXML {
         return $proc->transformToXML($xml);
     }
 
-    public function showArtistsXSLT() {
+    public function showArtistsXSLT()
+    {
         $xml = new \DOMDocument;
         $xml->loadXML(xml_encode(self::getArtists(), 'artistique'));
 
@@ -142,7 +155,8 @@ class ArtistiqueXML {
         return $proc->transformToXML($xml);
     }
 
-    public function showCustomersXSLT() {
+    public function showCustomersXSLT()
+    {
         $xml = new \DOMDocument;
         $xml->loadXML(xml_encode(self::getCustomers(), 'artistique'));
 
@@ -155,7 +169,8 @@ class ArtistiqueXML {
         return $proc->transformToXML($xml);
     }
 
-    public function showWishlistXSLT() {
+    public function showWishlistXSLT()
+    {
         if (!auth()->user()) {
             return abort(404);
         }
@@ -175,7 +190,8 @@ class ArtistiqueXML {
         return $proc->transformToXML($xml);
     }
 
-    public function insertArtwork($file) {
+    public function insertArtwork($file)
+    {
         try {
             $xml = new \SimpleXMLElement(file_get_contents($file));
         } catch (Exception $e) {
@@ -222,8 +238,9 @@ class ArtistiqueXML {
 
         return $count;
     }
-    
-    public function insertArtist($file) {
+
+    public function insertArtist($file)
+    {
         try {
             $xml = new \SimpleXMLElement(file_get_contents($file));
         } catch (Exception $e) {
@@ -252,7 +269,8 @@ class ArtistiqueXML {
         return $count;
     }
 
-    public function insertCustomer($file) {
+    public function insertCustomer($file)
+    {
         try {
             $xml = new \SimpleXMLElement(file_get_contents($file));
         } catch (Exception $e) {
@@ -281,7 +299,8 @@ class ArtistiqueXML {
         return $count;
     }
 
-    public function insertWishlist($file) {
+    public function insertWishlist($file)
+    {
         try {
             $xml = new \SimpleXMLElement(file_get_contents($file));
         } catch (Exception $e) {
@@ -307,5 +326,4 @@ class ArtistiqueXML {
 
         return $count;
     }
-
 }

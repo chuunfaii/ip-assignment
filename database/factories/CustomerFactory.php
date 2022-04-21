@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Chiam Yee Hang
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;

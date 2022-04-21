@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Chiam Yee Hang & Quah Khai Gene
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Lee Jun Xian
+
 namespace Database\Seeders;
 
 use App\Models\Category;

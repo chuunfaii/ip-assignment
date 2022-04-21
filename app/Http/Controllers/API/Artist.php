@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Quah Khai Gene
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;

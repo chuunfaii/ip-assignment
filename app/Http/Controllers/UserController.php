@@ -1,5 +1,7 @@
 <?php
 
+// Authors:  Quah Khai Gene & Chiam Yee Hang
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -45,22 +47,22 @@ class UserController extends Controller
 
         $request->validate([
             'first_name' => [
-                'required', 
-                'string', 
+                'required',
+                'string',
                 'max:255'
             ],
 
             'last_name' => [
-                'required', 
-                'string', 
+                'required',
+                'string',
                 'max:255'
             ],
 
             'email' => [
-                'required', 
-                'string', 
-                'email', 
-                'max:255', 
+                'required',
+                'string',
+                'email',
+                'max:255',
                 Rule::unique('users')->ignore($user->id)
             ],
 
@@ -70,7 +72,7 @@ class UserController extends Controller
             ],
 
             'new_password' => [
-                'nullable', 
+                'nullable',
                 'confirmed',
                 'required_with:new_password_confirmation',
                 Password::min(8)->mixedCase()->numbers()->symbols()

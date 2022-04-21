@@ -1,3 +1,5 @@
+<!-- Author:    Quah Khai Gene -->
+
 @extends('layouts.app')
 
 @section('css')
@@ -72,7 +74,7 @@
 
         <div class="form-floating mb-4">
             @foreach ($errors->get('new_password') as $message)
-                <p class="error-message">{{ $message }}</p>
+            <p class="error-message">{{ $message }}</p>
             @endforeach
         </div>
 

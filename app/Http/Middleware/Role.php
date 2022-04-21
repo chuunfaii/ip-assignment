@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Lee Chun Fai
+
 namespace App\Http\Middleware;
 
 use Closure;

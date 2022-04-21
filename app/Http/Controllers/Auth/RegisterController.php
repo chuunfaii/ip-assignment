@@ -1,5 +1,7 @@
 <?php
 
+// Authors:  Quah Khai Gene & Chiam Yee Hang
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -36,22 +38,22 @@ class RegisterController extends Controller
     {
         $request->validate([
             'first_name' => [
-                'required', 
-                'string', 
+                'required',
+                'string',
                 'max:255'
             ],
 
             'last_name' => [
-                'required', 
-                'string', 
+                'required',
+                'string',
                 'max:255'
             ],
 
             'email' => [
-                'required', 
-                'string', 
-                'email', 
-                'max:255', 
+                'required',
+                'string',
+                'email',
+                'max:255',
                 Rule::unique('users')->whereNull('deleted_at')
             ],
 
@@ -62,7 +64,7 @@ class RegisterController extends Controller
             ],
 
             'type' => [
-                'required', 
+                'required',
                 Rule::in(['customer', 'artist'])
             ],
         ]);
@@ -75,9 +77,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($request->password),
                 'type' => $request->type,
             ]);
-        }
-        
-        else {
+        } else {
             $user = Artist::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,

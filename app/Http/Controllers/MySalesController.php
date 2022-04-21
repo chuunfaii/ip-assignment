@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Quah Khai Gene
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

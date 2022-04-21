@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Lee Jun Xian
+
 namespace App\Http\Controllers;
 
 use Stripe\StripeClient;

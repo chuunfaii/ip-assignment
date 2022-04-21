@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Quah Khai Gene
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,15 +15,16 @@ class ArtistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $artists = Artist::all();
 
         if ($request->input('query')) {
             $query = $request->input('query');
 
             $artists = Artist::where(Artist::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', '%' . $query . '%')
-                                ->orWhere(Artist::raw("CONCAT(last_name, ' ', first_name)"), 'LIKE', '%' . $query . '%')
-                                ->get();
+                ->orWhere(Artist::raw("CONCAT(last_name, ' ', first_name)"), 'LIKE', '%' . $query . '%')
+                ->get();
         }
 
         return view('pages.artists', compact('artists'));

@@ -1,5 +1,7 @@
 <?php
 
+// Author:  Lee Chun Fai
+
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
@@ -23,7 +25,7 @@ class WishlistController extends Controller
         return view('pages.wishlist', compact('wishlists'));
     }
 
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -33,7 +35,7 @@ class WishlistController extends Controller
     public function update(Request $request)
     {
         switch ($request->input('action')) {
-            case 'add-to-cart':              
+            case 'add-to-cart':
                 $user_id = $request->input('user_id');
                 $artwork_id = $request->input('artwork_id');
 

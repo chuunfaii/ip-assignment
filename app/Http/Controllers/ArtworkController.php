@@ -1,5 +1,7 @@
 <?php
 
+// Authors:  Chiam Yee Hang & Lee Chun Fai
+
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
@@ -31,17 +33,11 @@ class ArtworkController extends Controller
         if ($sort = $request->input('sort')) {
             if ($sort == 'asc') {
                 $artworks = $artworks->sortBy('name');
-            }
-            
-            else if ($sort == 'desc') {
+            } else if ($sort == 'desc') {
                 $artworks = $artworks->sortByDesc('name');
-            }
-            
-            else if ($sort == 'low') {
+            } else if ($sort == 'low') {
                 $artworks = $artworks->sortBy('price');
-            }
-            
-            else if ($sort == 'high') {
+            } else if ($sort == 'high') {
                 $artworks = $artworks->sortByDesc('price');
             }
         }
@@ -80,9 +76,7 @@ class ArtworkController extends Controller
             ]);
 
             return redirect()->back()->with('message', 'Artwork has been added to the wishlist.');
-        }
-
-        else if ($action == 'cart') {
+        } else if ($action == 'cart') {
             $artwork = Artwork::find($artwork_id);
 
             $request->validate([
@@ -98,9 +92,7 @@ class ArtworkController extends Controller
                 $cart->update([
                     'quantity' => $quantity + $cart->quantity,
                 ]);
-            }
-
-            else {
+            } else {
                 Cart::create([
                     'user_id' => $user_id,
                     'artwork_id' => $artwork_id,
