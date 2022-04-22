@@ -43,6 +43,8 @@ class ArtistiqueXML
             $image_url = $artist->image_url;
             if ($artist->image_url == '') {
                 $image_url = 'https://i.pinimg.com/564x/26/cf/3c/26cf3c80b7b5923f89fba8fe140dd660.jpg';
+            }else{
+                $image_url = asset('upload/artists/' . $image_url);
             }
             $artist =
                 [
